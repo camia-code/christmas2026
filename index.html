@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>聖誕知識王</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- 分享圖：將成績卡片 DOM 轉成 PNG -->
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  </head>
+  <body>
+    <!-- 開發用：mock 身份切換 -->
+    <button id="mock-toggle" class="mock-toggle" type="button">身份: app</button>
+
+    <main id="app" class="app">
+      <!-- 步驟1 歡迎頁 -->
+      <section id="screen-welcome" class="screen"></section>
+
+      <!-- 步驟2 答題頁 -->
+      <section id="screen-play" class="screen hidden"></section>
+
+      <!-- 步驟4 答題紀錄頁 -->
+      <section id="screen-history" class="screen hidden"></section>
+    </main>
+
+    <!-- 步驟3 成績 modal -->
+    <div id="result-modal" class="modal-overlay hidden"></div>
+
+    <!-- 分享卡片預覽 modal -->
+    <div id="share-modal" class="modal-overlay hidden"></div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

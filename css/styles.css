@@ -1,0 +1,570 @@
+/* 聖誕知識王 — wireframe 樣式
+   以灰階線框為主，正式視覺之後再套。 */
+
+:root {
+  /* 取自主視覺配色：奶油米白 / 粉藍 / 磚紅 / 金黃 */
+  --bg: #faf1dd; /* 奶油米白底 */
+  --card: #fffdf7; /* 暖白卡片 */
+  --line: #e6dcc6; /* 暖色線框 */
+  --line-strong: #c2b193; /* 較深暖線/邊框 */
+  --text: #3a2e26; /* 暖褐文字 */
+  --muted: #8a7d6b; /* 暖灰次要文字 */
+  --accent: #5ec272; /* 主色（綠，含挑戰按鈕） */
+  --accent-2: #5e94a3; /* 粉藍加深（次要按鈕，配白字） */
+  --blue-soft: #c7dde4; /* 粉藍（區塊底/裝飾） */
+  --gold: #dda22c; /* 金黃（星星/點綴） */
+  --correct: #4c8c5a; /* 答對（綠，語意用） */
+  --wrong: #c5523b; /* 答錯（磚紅） */
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 16px;
+}
+
+/* 首頁（大廳）藍色背景 */
+body.on-welcome {
+  background: #75d3ff;
+}
+body.on-welcome .app {
+  background: #75d3ff;
+}
+
+/* 答題頁滿版背景（每題一張，由 JS 設 background-image） */
+body.on-play {
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+body.on-play .app {
+  background: transparent;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- 通用線框元件 ---------- */
+.placeholder {
+  background: repeating-linear-gradient(
+    45deg,
+    #d7e6ec,
+    #d7e6ec 10px,
+    #c7dde4 10px,
+    #c7dde4 20px
+  );
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5e7a84;
+  font-size: 13px;
+  text-align: center;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn:last-child {
+  margin-bottom: 0;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-secondary {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  color: #fff;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+/* ---------- mock 切換鈕 ---------- */
+.mock-toggle {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 50;
+  font-size: 11px;
+  padding: 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+/* ---------- 步驟1 歡迎頁 ---------- */
+.lobby {
+  text-align: center;
+}
+
+.welcome-logo {
+  height: 40px;
+  margin: 8px auto 16px;
+  width: 130px;
+  border-radius: 999px;
+  background: #fff; /* 藍底上的白色膠囊 */
+}
+
+/* 整合主視覺（含標題、貓咪、主標、副標） */
+.lobby-kv {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0 0 20px;
+}
+/* 圖片未放入時的佔位外觀 */
+.lobby-kv.kv-missing {
+  min-height: 260px;
+  background: repeating-linear-gradient(
+    45deg,
+    #8fd9ff,
+    #8fd9ff 10px,
+    #7cd0ff 10px,
+    #7cd0ff 20px
+  );
+  border: 1px dashed #ffffff;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+/* 禮包卡片（純白底、黃框） */
+.gift-card {
+  background: #ffffff;
+  border: 2px solid #fff07b;
+  border-radius: 8px;
+  padding: 18px 16px 16px;
+  margin-bottom: 18px;
+}
+.gift-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 12px 0 4px;
+}
+.gift-desc {
+  font-size: 14px;
+  color: var(--text);
+  margin: 0;
+}
+
+.attempt-count {
+  font-size: 14px;
+  color: #656565;
+  margin: 0 0 12px;
+}
+
+.lobby-start {
+  font-size: 18px;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #3f9a55;
+}
+
+/* 禮包貼圖：可左右滑動輪播 */
+.gift-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.gift-carousel::-webkit-scrollbar {
+  display: none;
+}
+.gift-item {
+  flex: 0 0 120px;
+  height: 120px;
+  scroll-snap-align: center;
+}
+.gift-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+.gift-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.gift-dot.active {
+  background: var(--accent);
+}
+
+/* 上次紀錄卡（返回大廳/已挑戰過時，置於按鈕下方） */
+.last-record {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+.last-record:active {
+  background: #f6efe0;
+}
+.last-record .lr-left {
+  display: flex;
+  flex-direction: column;
+}
+.last-record .lr-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+.last-record .lr-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+.last-record .lr-score {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.last-record .lr-title {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.nickname-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+}
+
+.user-greeting {
+  font-size: 15px;
+}
+.user-greeting strong {
+  color: var(--accent);
+}
+
+/* ---------- 步驟2 答題頁 ---------- */
+.progress {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 6px;
+}
+.progress-wrap {
+  position: relative;
+  margin: 0 0 24px;
+}
+.progress-bar {
+  height: 6px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar > span {
+  display: block;
+  height: 100%;
+  background: #fff07b;
+  transition: width 0.25s ease;
+}
+/* 進度條蘋果標記（跟著填色末端移動） */
+.progress-apple {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+  transition: left 0.25s ease;
+}
+.question-text {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.option {
+  text-align: left;
+  position: relative;
+}
+/* 「正解」文字標記（答錯時，標在正解選項右側） */
+.tag-text {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--correct);
+}
+/* 答題結果的貓咪標記 */
+.cat-mark {
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+.cat-right {
+  right: 6px;
+  transform: translateY(-50%) rotate(10deg);
+}
+.cat-wrong {
+  left: 6px;
+  transform: translateY(-50%) rotate(-10deg);
+}
+.option.correct {
+  border-color: var(--correct);
+  background: #e7f4ec;
+  color: var(--correct);
+}
+.option.wrong {
+  border-color: var(--wrong);
+  background: #fbeae8;
+  color: var(--wrong);
+}
+.option.disabled {
+  pointer-events: none;
+  opacity: 0.95;
+}
+/* 底部框：解析 + 下一題，固定於畫面底部（白底、圓角 8） */
+.next-bar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 448px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  z-index: 30;
+}
+.next-bar .btn {
+  margin-bottom: 0;
+}
+/* 解析（在底部框內，不需自己的底色/邊框） */
+.explain-box {
+  margin-bottom: 12px;
+}
+.explain-head {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.explain-box.ok .explain-head {
+  color: var(--correct);
+}
+.explain-box.no .explain-head {
+  color: var(--wrong);
+}
+.explain-text {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 40;
+}
+.modal {
+  background: var(--card);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px 20px;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--card);
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* 成績卡片（也是分享圖內容） */
+.result-card {
+  text-align: center;
+  background: linear-gradient(160deg, var(--blue-soft), #fdf6e8);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px 16px;
+  margin-bottom: 16px;
+}
+.result-card .rc-name {
+  font-size: 15px;
+  color: var(--muted);
+}
+.result-card .rc-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 8px 0;
+}
+.result-card .rc-score {
+  font-size: 16px;
+}
+.result-card .rc-score b {
+  font-size: 30px;
+  color: var(--accent-2);
+}
+.result-card .rc-brand {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* 分享預覽 */
+.share-preview {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* ---------- 步驟4 答題紀錄頁 ---------- */
+.history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+/* 右上小字按鈕（分享結果） */
+.link-btn {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 2px 0;
+}
+.hist-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.hist-q {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hist-q .idx {
+  color: var(--muted);
+  margin-right: 4px;
+}
+.hist-opt {
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+.hist-opt.correct {
+  background: #e7f4ec;
+  color: var(--correct);
+  border-color: var(--correct);
+}
+.hist-opt.your-wrong {
+  background: #fbeae8;
+  color: var(--wrong);
+  border-color: var(--wrong);
+}
+.hist-exp {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+.badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+.badge.ok {
+  background: var(--correct);
+  color: #fff;
+}
+.badge.no {
+  background: var(--wrong);
+  color: #fff;
+}
