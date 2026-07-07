@@ -404,6 +404,12 @@ body.on-history .app {
   pointer-events: none;
   z-index: 2;
 }
+/* 小於 400px 的手機：答對/答錯貓咪縮小 20%（60→48） */
+@media (max-width: 399px) {
+  .cat-mark {
+    width: 48px;
+  }
+}
 /* 答對：釘在右上角 */
 .cat-right {
   right: -8px;
@@ -577,7 +583,8 @@ body.on-history .app {
   border-radius: 8px;
   padding: 18px; /* 元件離卡片邊至少 16px */
   margin: 0 0 16px;
-  overflow: hidden;
+  /* 不設 overflow:hidden，讓 flex 容器在內容較高時自動撐高、不裁切，
+     確保名字/貓咪/稱號/答對幾題/logo 一律都顯示；放得下時維持正方形 */
 }
 /* 依稱號分級的背景 */
 .result-card.rc-tier-1 { background-image: url("../assets/result/result_bg_1.png"); }

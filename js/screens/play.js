@@ -11,8 +11,8 @@ import {
 const LETTERS = ["A", "B", "C", "D"];
 
 // 答題音效（用 Web Audio，可放大到原始音量以上）
-// 兩者再一起小 15%（0.33→0.28、0.70→0.60）；第 6 題起改用 correct2/wrong2
-const SFX_GAIN = { correct: 0.28, wrong: 0.6, correct2: 0.28, wrong2: 0.42 };
+// 全部再放大 20%（correct 0.28→0.34、wrong 0.60→0.72、correct2 0.28→0.34、wrong2 0.42→0.50）
+const SFX_GAIN = { correct: 0.34, wrong: 0.72, correct2: 0.34, wrong2: 0.5 };
 let sfxCtx = null;
 const sfxBuffers = {};
 function initSfx() {

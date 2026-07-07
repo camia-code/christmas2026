@@ -20,7 +20,7 @@ export function resultCardHTML(record) {
       ? "一題都沒答對"
       : `答對 ${record.score} / ${record.total} 題`;
   return `
-    <div class="rc-username">${record.name}</div>
+    <div class="rc-username">${record.name || "神秘挑戰者"}</div>
     <div class="rc-mid">
       <img class="rc-cat" src="assets/result/result_cat_${title.idx}.png" alt=""
         onerror="this.classList.add('rc-cat-missing')" />
