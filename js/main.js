@@ -1,7 +1,7 @@
 // 進入點：screen 路由與導頁 API。
 
 import { getMockMode, toggleMockMode, getDisplayName } from "./user.js";
-import { addRecord } from "./storage.js";
+import { addRecord, resetAll } from "./storage.js";
 import { state, startRound } from "./state.js";
 import { pickQuestions, pickBackgrounds, buildRecord } from "./quiz.js";
 import { renderWelcome } from "./screens/welcome.js";
@@ -93,8 +93,8 @@ mockBtn.addEventListener("click", () => {
 const bgm = document.getElementById("bgm");
 const bgmToggle = document.getElementById("bgm-toggle");
 const BGM_TRACKS = [
-  "assets/audio/bg_music.wav",
-  "assets/audio/bg_music_2.mp3",
+  "assets/audio/bg_music.m4a",
+  "assets/audio/bg_music_2.m4a",
 ];
 // 每首各自音量（第一首 0.14；bg_music_2 為 0.40）
 const BGM_VOLUMES = [0.14, 0.4];
@@ -118,6 +118,7 @@ bgm.addEventListener("error", () => {
   playBgm();
 });
 let bgmOn = true;
+window.__soundOn = true; // 全域聲音開關（背景音樂 + 音效共用）
 function refreshBgmIcon() {
   bgmToggle.textContent = bgmOn ? "🔊" : "🔇";
 }
@@ -133,6 +134,7 @@ document.addEventListener("pointerdown", startBgmOnce);
 bgmToggle.addEventListener("click", (e) => {
   e.stopPropagation();
   bgmOn = !bgmOn;
+  window.__soundOn = bgmOn; // 音效跟著一起開關
   if (bgmOn) playBgm();
   else bgm.pause();
   refreshBgmIcon();
@@ -143,6 +145,7 @@ refreshBgmIcon();
 const clickSfx = new Audio("assets/audio/click.mp3");
 clickSfx.volume = 0.5;
 document.addEventListener("click", (e) => {
+  if (!window.__soundOn) return; // 靜音時不播點擊音效
   const btn = e.target.closest("button");
   if (!btn || btn.classList.contains("option")) return;
   const a = clickSfx.cloneNode();
@@ -154,6 +157,7 @@ document.addEventListener("click", (e) => {
   a.play().catch(() => {});
 });
 
-// 啟動
+// 啟動：每次重整都清掉本機紀錄，回到 default 狀態
+resetAll();
 refreshMockLabel();
 nav.welcome();

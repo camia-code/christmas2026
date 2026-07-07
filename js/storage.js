@@ -3,6 +3,18 @@
 
 const RECORDS_KEY = "christmas_quiz_records";
 const NICKNAME_KEY = "christmas_quiz_nickname";
+const STORAGE_PREFIX = "christmas_quiz_";
+
+// 開發用：清掉所有本遊戲的 localStorage 資料，讓每次重整都回到 default 狀態。
+export function resetAll() {
+  try {
+    Object.keys(localStorage)
+      .filter((k) => k.startsWith(STORAGE_PREFIX))
+      .forEach((k) => localStorage.removeItem(k));
+  } catch (e) {
+    /* ignore */
+  }
+}
 
 // 讀取所有遊戲紀錄（陣列，最後一筆為最新）。
 export function getRecords() {

@@ -7,8 +7,8 @@
 // idx ：對應的貓咪與背景圖編號（assets/result/result_cat_{idx}.png、result_bg_{idx}.png）。
 
 export const TITLES = [
-  { id: "t1", min: 0, max: 2, idx: 1, name: "知識蘋困" },
-  { id: "t2", min: 3, max: 4, idx: 2, name: "腦袋開開" },
+  { id: "t1", min: 0, max: 2, idx: 1, name: "腦袋開開" },
+  { id: "t2", min: 3, max: 4, idx: 2, name: "知識蘋困" },
   { id: "t3", min: 5, max: 6, idx: 3, name: "小試伸手" },
   { id: "t4", min: 7, max: 8, idx: 4, name: "如魚得水" },
   { id: "t5", min: 9, max: 9, idx: 5, name: "融會貫喵" },

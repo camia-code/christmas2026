@@ -38,10 +38,10 @@ export function renderWelcome(nav) {
                maxlength="12" placeholder="輸入你的暱稱" value="${user.name || ""}" />`
       }
 
-      <p class="attempt-count">第 ${attemptNo} 次挑戰</p>
+      <p class="attempt-count">第${attemptNo}次挑戰</p>
 
       <button id="start-btn" class="btn btn-primary lobby-start">
-        ${hasPlayed ? "再次挑戰" : "挑戰開始"}
+        開始挑戰
       </button>
 
       ${

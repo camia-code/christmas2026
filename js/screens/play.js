@@ -35,6 +35,7 @@ function initSfx() {
 let winwinTimer = null;
 
 function playSfx(name) {
+  if (window.__soundOn === false) return; // 靜音時不播答題音效
   if (!sfxCtx || !sfxBuffers[name]) return;
   if (sfxCtx.state === "suspended") sfxCtx.resume();
   const src = sfxCtx.createBufferSource();
