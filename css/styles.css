@@ -54,7 +54,7 @@ body.on-welcome .app {
 /* 答題頁滿版背景（每題一張，由 JS 設 background-image） */
 body.on-play {
   background-size: cover;
-  background-position: center top;
+  background-position: center center; /* center crop */
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -62,8 +62,28 @@ body.on-play .app {
   background: transparent;
 }
 
+/* 答題紀錄頁：底色全白 */
+body.on-history,
+body.on-history .app {
+  background: #ffffff;
+}
+
 .hidden {
   display: none !important;
+}
+
+/* 答錯時畫面震動 */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-9px); }
+  30% { transform: translateX(9px); }
+  45% { transform: translateX(-7px); }
+  60% { transform: translateX(7px); }
+  75% { transform: translateX(-4px); }
+  90% { transform: translateX(4px); }
+}
+.shake {
+  animation: shake 0.4s ease;
 }
 
 /* ---------- 通用線框元件 ---------- */
@@ -133,6 +153,23 @@ body.on-play .app {
   margin: 0 0 8px;
 }
 
+/* ---------- 背景音樂開關 ---------- */
+.bgm-toggle {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 50;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
 /* ---------- mock 切換鈕 ---------- */
 .mock-toggle {
   position: fixed;
@@ -154,9 +191,11 @@ body.on-play .app {
 }
 
 .welcome-logo {
-  height: 40px;
+  display: block;
+  height: 24px; /* 與右上身份鈕差不多高 */
+  width: auto;
   margin: 8px auto 16px;
-  width: 130px;
+  padding: 5px 10px;
   border-radius: 999px;
   background: #fff; /* 藍底上的白色膠囊 */
 }
@@ -339,11 +378,13 @@ body.on-play .app {
 .question-text {
   font-size: 18px;
   font-weight: 700;
+  color: #3a2f26;
   margin-bottom: 16px;
 }
 .option {
   text-align: left;
   position: relative;
+  color: #3a2f26;
 }
 /* 「正解」文字標記（答錯時，標在正解選項右側） */
 .tag-text {
@@ -355,22 +396,40 @@ body.on-play .app {
   font-weight: 700;
   color: var(--correct);
 }
-/* 答題結果的貓咪標記 */
+/* 答題結果的貓咪標記（可超出選項框） */
 .cat-mark {
   position: absolute;
-  top: 50%;
   width: 60px;
   height: auto;
   pointer-events: none;
   z-index: 2;
 }
+/* 答對：釘在右上角 */
 .cat-right {
-  right: 6px;
-  transform: translateY(-50%) rotate(10deg);
+  right: -8px;
+  top: -10px;
+  transform: rotate(10deg);
 }
+/* 答對且正解選項超過兩行：改釘右下角 */
+.cat-right.cat-corner-br {
+  top: auto;
+  bottom: -10px;
+}
+/* 答錯：釘在左下角 */
 .cat-wrong {
-  left: 6px;
-  transform: translateY(-50%) rotate(-10deg);
+  left: -8px;
+  bottom: -10px;
+  transform: rotate(-10deg);
+}
+/* 「正解」圈圈（答錯時，壓在正解選項右下角） */
+.tag-correct {
+  position: absolute;
+  right: -6px;
+  bottom: -8px;
+  width: 34px;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
 }
 .option.correct {
   border-color: var(--correct);
@@ -386,30 +445,69 @@ body.on-play .app {
   pointer-events: none;
   opacity: 0.95;
 }
-/* 底部框：解析 + 下一題，固定於畫面底部（白底、圓角 8） */
-.next-bar {
-  position: fixed;
-  left: 50%;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 448px;
-  background: #ffffff;
+/* 答題大框：題目 + 選項 + 解析 + 下一題（實心底色、圓角 8） */
+.quiz-box {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 140px); /* 固定框高，讓按鈕位置穩定 */
+  background: var(--card);
+  border: 3px solid #fff07b;
   border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-  z-index: 30;
+  padding: 24px 20px;
 }
-.next-bar .btn {
+/* quiz_bg_3 背景時，外框線用橘色 */
+.quiz-box.bg3 {
+  border-color: #ffcba6;
+}
+
+/* 答對：換慶祝背景 + 太陽發光環繞動畫 */
+.quiz-box.is-right {
+  background-image: url("../assets/quiz-bg/quiz_bg_right.png");
+  background-size: cover;
+  background-position: center;
+  animation: sun-glow 2.2s linear infinite;
+}
+@keyframes sun-glow {
+  0% {
+    box-shadow: 0 0 12px 2px #ffe680, 0 -10px 24px 3px #ffd23d;
+  }
+  25% {
+    box-shadow: 0 0 12px 2px #ffe680, 10px 0 24px 3px #ffd23d;
+  }
+  50% {
+    box-shadow: 0 0 12px 2px #ffe680, 0 10px 24px 3px #ffd23d;
+  }
+  75% {
+    box-shadow: 0 0 12px 2px #ffe680, -10px 0 24px 3px #ffd23d;
+  }
+  100% {
+    box-shadow: 0 0 12px 2px #ffe680, 0 -10px 24px 3px #ffd23d;
+  }
+}
+.quiz-box .question-text {
+  margin-bottom: 20px;
+}
+/* 下一題永遠壓在框底部，不隨題目/解析字數多寡跳動 */
+.quiz-box #next-btn {
+  margin-top: auto;
   margin-bottom: 0;
 }
-/* 解析（在底部框內，不需自己的底色/邊框） */
+/* 解析（在大框內，不需自己的底色/邊框）
+   與上方選項再多拉開 16px（原 4px → 20px） */
 .explain-box {
-  margin-bottom: 12px;
+  margin: 20px 0 16px;
 }
 .explain-head {
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.explain-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 .explain-box.ok .explain-head {
   color: var(--correct);
@@ -418,8 +516,9 @@ body.on-play .app {
   color: var(--wrong);
 }
 .explain-text {
-  font-size: 14px;
-  color: var(--muted);
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.6;
 }
 
 /* ---------- modal ---------- */
@@ -438,8 +537,6 @@ body.on-play .app {
   border-radius: 8px;
   width: 100%;
   max-width: 420px;
-  max-height: 90vh;
-  overflow-y: auto;
   padding: 24px 20px;
   position: relative;
 }
@@ -447,6 +544,7 @@ body.on-play .app {
   position: absolute;
   top: 12px;
   right: 12px;
+  z-index: 5; /* 確保在成績卡片之上 */
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -457,36 +555,159 @@ body.on-play .app {
   line-height: 1;
 }
 
-/* 成績卡片（也是分享圖內容） */
+/* 粉圓體 jf-openhuninn（只用於結果卡片） */
+@font-face {
+  font-family: "Huninn";
+  src: url("../assets/jf-openhuninn-2.1.ttf") format("truetype");
+  font-weight: normal;
+  font-display: swap;
+}
+
+/* 成績卡片（也是分享圖內容）— 正方形 1:1 */
 .result-card {
+  font-family: "Huninn", -apple-system, "PingFang TC", sans-serif;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   text-align: center;
-  background: linear-gradient(160deg, var(--blue-soft), #fdf6e8);
-  border: 1px solid var(--line);
+  background: #d8f0dc center / cover no-repeat;
   border-radius: 8px;
-  padding: 24px 16px;
-  margin-bottom: 16px;
+  padding: 18px; /* 元件離卡片邊至少 16px */
+  margin: 0 0 16px;
+  overflow: hidden;
 }
-.result-card .rc-name {
-  font-size: 15px;
-  color: var(--muted);
+/* 依稱號分級的背景 */
+.result-card.rc-tier-1 { background-image: url("../assets/result/result_bg_1.png"); }
+.result-card.rc-tier-2 { background-image: url("../assets/result/result_bg_2.png"); }
+.result-card.rc-tier-3 { background-image: url("../assets/result/result_bg_3.png"); }
+.result-card.rc-tier-4 { background-image: url("../assets/result/result_bg_4.png"); }
+.result-card.rc-tier-5 { background-image: url("../assets/result/result_bg_5.png"); }
+.result-card.rc-tier-6 { background-image: url("../assets/result/result_bg_6.png"); }
+
+/* 使用者名稱（暱稱 / Letstalk 姓名，過長截斷；最大寬度 = 框的 70%） */
+.result-card .rc-username {
+  font-size: 14px;
+  color: rgba(58, 47, 38, 0.72); /* 加深，確保清楚可見 */
+  max-width: 70%;
+  margin: 0 auto 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.result-card .rc-title {
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--accent);
-  margin: 8px 0;
+/* 中間群組（貓咪+稱號+描述）置中，暱稱貼上緣、logo 貼下緣 */
+.result-card .rc-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.result-card .rc-score {
+/* 貓咪主圖（由使用者提供 assets/result/result_cat_1.png） */
+.result-card .rc-cat {
+  display: block;
+  width: 70%;
+  max-width: 260px;
+  height: auto;
+  margin: 0 auto;
+}
+.result-card .rc-cat-missing {
+  width: 70%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  background: repeating-linear-gradient(
+    45deg,
+    #bfe6c6,
+    #bfe6c6 10px,
+    #b2ddb9 10px,
+    #b2ddb9 20px
+  );
+  border: 1px dashed #6fae7c;
+}
+/* 稱號黑色膠囊（與貓咪底部略重疊） */
+.result-card .rc-title-pill {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  margin-top: -24px; /* 上移蓋住貓咪下緣 */
+  background: #1d1d1d;
+  color: #ffffff;
   font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 6px 22px;
+  border: 4px solid #75d3ff; /* 藍色外框線 */
+  border-radius: 999px;
 }
-.result-card .rc-score b {
-  font-size: 30px;
+.result-card .rc-sub {
+  font-size: 14px;
+  color: #3a2f26;
+  margin-top: 16px;
+}
+.result-card .rc-result {
+  font-size: 18px; /* = 在智慧測驗中(14px) + 4 */
+  font-weight: 700;
   color: var(--accent-2);
+  margin-top: 2px;
 }
-.result-card .rc-brand {
-  margin-top: 14px;
+/* 藍底（idx3 小試伸手）：答對幾題改咖啡色 */
+.result-card.rc-tier-3 .rc-result {
+  color: #754d13;
+}
+/* Letstalk logo 放白色膠囊中，高約 24 */
+.result-card .rc-logo {
+  display: block;
+  height: 21px; /* 比原本再小約 10% */
+  width: auto;
+  margin: 14px auto 0;
+  padding: 4px 9px;
+  background: #ffffff; /* 純白底 */
+  border-radius: 999px;
+}
+
+/* 【開發用】稱號預覽切換（正式發佈前移除） */
+.dev-tier-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
   font-size: 12px;
   color: var(--muted);
+}
+.dev-tier-nav button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px dashed var(--line-strong);
+  background: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* 分享動作：下載 / 分享 圖示鈕 */
+.share-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.icon-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--card);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.icon-btn:active {
+  background: #f0ece0;
 }
 
 /* 分享預覽 */
@@ -515,19 +736,67 @@ body.on-play .app {
   cursor: pointer;
   padding: 2px 0;
 }
+/* 折疊式題目卡 */
 .hist-item {
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 14px;
   margin-bottom: 12px;
+  overflow: hidden;
+  background: #ffffff;
 }
-.hist-q {
+/* 收合狀態：答對淡綠、答錯淡紅 */
+.hist-item.correct {
+  border-color: #b8e0c3;
+  background: #eef8f1;
+}
+.hist-item.wrong {
+  border-color: #f0c3bb;
+  background: #fbeeeb;
+}
+/* 展開狀態：回到中性框線/底色 */
+.hist-item.open {
+  border-color: var(--line);
+  background: #ffffff;
+}
+.hist-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+.hist-head .hist-q {
   font-weight: 700;
-  margin-bottom: 8px;
 }
-.hist-q .idx {
+.hist-head .hist-q .idx {
   color: var(--muted);
   margin-right: 4px;
+}
+.hist-right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hist-mark {
+  height: 24px; /* 與原本答對/答錯 tag 差不多尺寸 */
+  width: auto;
+}
+/* 展開箭頭：收合朝下、展開朝上 */
+.hist-chevron {
+  color: var(--muted);
+  transition: transform 0.2s ease;
+}
+.hist-item.open .hist-chevron {
+  transform: rotate(180deg);
+}
+.hist-body {
+  padding: 0 14px 14px;
 }
 .hist-opt {
   font-size: 14px;
@@ -535,6 +804,9 @@ body.on-play .app {
   border-radius: 8px;
   margin-bottom: 4px;
   border: 1px solid transparent;
+}
+.hist-opt-mark {
+  margin-left: 4px; /* 選項文字與（正解/你的選擇）間距 ≥2px */
 }
 .hist-opt.correct {
   background: #e7f4ec;

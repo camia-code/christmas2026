@@ -8,10 +8,14 @@
     />
     <title>聖誕知識王</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <!-- 分享圖：將成績卡片 DOM 轉成 PNG -->
-    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+    <!-- 分享圖：將成績卡片 DOM 轉成 PNG（本地引入，不依賴 CDN） -->
+    <script src="js/vendor/html-to-image.js"></script>
   </head>
   <body>
+    <!-- 背景音樂 -->
+    <audio id="bgm" preload="auto"></audio>
+    <button id="bgm-toggle" class="bgm-toggle" type="button" aria-label="背景音樂">🔊</button>
+
     <!-- 開發用：mock 身份切換 -->
     <button id="mock-toggle" class="mock-toggle" type="button">身份: app</button>
 

@@ -14,7 +14,7 @@ export function renderWelcome(nav) {
 
   el.innerHTML = `
     <div class="lobby">
-      <div class="placeholder welcome-logo">Letstalk Logo</div>
+      <img class="welcome-logo" src="assets/logo.png" alt="Letstalk" />
 
       <img class="lobby-kv" src="assets/2026mainpage_kv.png?v=2" alt="好誕哩就來！聖你最會，還是剩你不會"
         onerror="this.classList.add('kv-missing');this.alt='活動主視覺 kv-main.png（待放入 assets/）'" />
