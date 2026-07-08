@@ -385,6 +385,9 @@ body.on-history .app {
   text-align: left;
   position: relative;
   color: #3a2f26;
+  /* 兩側預留貓咪空間，答題後貓咪出現時文字不會跳位 */
+  padding-left: 36px;
+  padding-right: 36px;
 }
 /* 「正解」文字標記（答錯時，標在正解選項右側） */
 .tag-text {
@@ -399,7 +402,7 @@ body.on-history .app {
 /* 答題結果的貓咪標記（可超出選項框） */
 .cat-mark {
   position: absolute;
-  width: 60px;
+  width: 54px;
   height: auto;
   pointer-events: none;
   z-index: 2;
@@ -412,19 +415,19 @@ body.on-history .app {
 }
 /* 答對：釘在右上角 */
 .cat-right {
-  right: -8px;
-  top: -10px;
+  right: -18px;
+  top: -16px;
   transform: rotate(10deg);
 }
 /* 答對且正解選項超過兩行：改釘右下角 */
 .cat-right.cat-corner-br {
   top: auto;
-  bottom: -10px;
+  bottom: -16px;
 }
 /* 答錯：釘在左下角 */
 .cat-wrong {
-  left: -8px;
-  bottom: -10px;
+  left: -18px;
+  bottom: -16px;
   transform: rotate(-10deg);
 }
 /* 「正解」圈圈（答錯時，壓在正解選項右下角） */
