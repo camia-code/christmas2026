@@ -1,9 +1,16 @@
 // 步驟3 成績 modal
 
 import { resultCardHTML, resultCardClass, openShareModal } from "../share.js";
+import { isAppUser } from "../user.js";
+import { getRecords } from "../storage.js";
+import { getTitle } from "../../data/titles.js";
 
-// 【開發用】各稱號分級的代表分數，供左右切換預覽（正式發佈前整段移除）
-const PREVIEW_SCORES = [0, 3, 5, 7, 9, 10];
+// 彩帶底色 + 同色系深色文字（依稱號分級輪流）
+const RIBBON_COLORS = [
+  { bg: "#75d3ff", text: "#10567a" }, // 藍
+  { bg: "#5ec272", text: "#1f6b39" }, // 綠
+  { bg: "#fff07b", text: "#7a6a12" }, // 黃
+];
 
 // 開啟成績 modal。
 // record：要顯示的那一輪結果。
@@ -11,46 +18,86 @@ const PREVIEW_SCORES = [0, 3, 5, 7, 9, 10];
 export function openResultModal(record, nav) {
   const overlay = document.getElementById("result-modal");
   overlay.classList.remove("hidden");
+
+  // 訪客（非 app 用戶）顯示貼圖領取序號；001 為第幾位玩的人
+  // （目前為本機計數的 demo，正式版需由後端配發全域唯一序號）
+  const guest = !isAppUser();
+  const playerNo = getRecords().length || 1;
+  const stickerCode = `merrychristmas${String(playerNo).padStart(3, "0")}`;
+
+  // 左上角彩帶：答對題數在所有人中的百分位（前 X%）
+  // （目前為分數換算的 demo，正式版需由後端統計所有玩家答對數）
+  const total = record.total || 10;
+  const topPercent = Math.max(
+    1,
+    Math.min(99, Math.round(((total - record.score) / total) * 40) + 1)
+  );
+  const ribbon =
+    RIBBON_COLORS[(getTitle(record.score).idx - 1) % RIBBON_COLORS.length];
+
   overlay.innerHTML = `
     <div class="modal">
       <button class="modal-close" id="result-close" type="button">×</button>
 
-      <div id="result-card-slot" class="${resultCardClass(record)}">${resultCardHTML(record)}</div>
-
-      <!-- 【開發用】稱號預覽切換，正式發佈前移除 -->
-      <div class="dev-tier-nav">
-        <button id="dev-prev" type="button">‹</button>
-        <span>稱號預覽（開發用）</span>
-        <button id="dev-next" type="button">›</button>
+      <div class="result-card-wrap">
+        <div id="result-card-slot" class="${resultCardClass(record)}">${resultCardHTML(record)}</div>
+        <!-- 左上角彩帶：答對數的百分位 -->
+        <div class="result-ribbon">
+          <div class="ribbon-inner" style="background:${ribbon.bg};color:${ribbon.text}">
+            <span class="r2">前${topPercent}%</span>
+          </div>
+        </div>
+        <!-- 蓋章：只顯示在畫面上，不會進分享/下載的 PNG（PNG 由 share.js 另外產生，不含此章） -->
+        <img class="result-stamp" src="assets/result/stamp.png" alt="" />
       </div>
 
-      <button id="btn-app" class="btn btn-secondary">快去聊天室查看貼圖</button>
+      ${
+        guest
+          ? `<div class="sticker-code">你的貼圖序號
+               <span class="sticker-code-row">
+                 <b>${stickerCode}</b>
+                 <button class="copy-btn" id="sticker-copy" type="button" aria-label="複製序號">
+                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <rect x="9" y="9" width="11" height="11" rx="2" />
+                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                   </svg>
+                 </button>
+               </span>
+             </div>`
+          : ""
+      }
+
+      <button id="btn-app" class="btn btn-secondary">領取貼圖</button>
       <button id="btn-share" class="btn btn-primary">分享結果</button>
       <button id="btn-history" class="btn">查看答題紀錄</button>
     </div>
   `;
 
-  // 【開發用】以指定分數重繪成績卡片
-  const slot = overlay.querySelector("#result-card-slot");
-  let previewIdx = PREVIEW_SCORES.indexOf(record.score);
-  if (previewIdx < 0) previewIdx = 0;
-  const renderPreview = () => {
-    const mock = {
-      ...record,
-      score: PREVIEW_SCORES[previewIdx],
-      total: record.total || 10,
-    };
-    slot.className = resultCardClass(mock);
-    slot.innerHTML = resultCardHTML(mock);
-  };
-  overlay.querySelector("#dev-prev").addEventListener("click", () => {
-    previewIdx = (previewIdx - 1 + PREVIEW_SCORES.length) % PREVIEW_SCORES.length;
-    renderPreview();
-  });
-  overlay.querySelector("#dev-next").addEventListener("click", () => {
-    previewIdx = (previewIdx + 1) % PREVIEW_SCORES.length;
-    renderPreview();
-  });
+  // 複製貼圖序號
+  const copyBtn = overlay.querySelector("#sticker-copy");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      try {
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(stickerCode);
+        } else {
+          const ta = document.createElement("textarea");
+          ta.value = stickerCode;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+        }
+        copyBtn.classList.add("copied");
+        setTimeout(() => copyBtn.classList.remove("copied"), 1200);
+      } catch (e) {
+        /* ignore */
+      }
+    });
+  }
 
   // ✕：關閉並回到步驟1（歡迎頁會顯示本次紀錄）
   overlay.querySelector("#result-close").addEventListener("click", () => {

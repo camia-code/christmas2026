@@ -334,6 +334,7 @@ body.on-history .app {
   font-size: 16px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
+  margin-bottom: 8px; /* 與「第 N 次挑戰」間隔 8px */
 }
 
 .user-greeting {
@@ -382,12 +383,16 @@ body.on-history .app {
   margin-bottom: 16px;
 }
 .option {
+  /* 蟲的尺寸與露出量（改這裡即可，文字留白會自動跟著算，蟲永遠不會蓋到字） */
+  --worm: 56px; /* 蟲圖寬度 */
+  --worm-out: 18px; /* 往外露出選項框的量 */
+  --worm-gap: -2px; /* 蟲與文字的最小間距（負值＝文字更靠近蟲） */
   text-align: left;
   position: relative;
   color: #3a2f26;
-  /* 兩側預留貓咪空間，答題後貓咪出現時文字不會跳位 */
-  padding-left: 36px;
-  padding-right: 36px;
+  /* 兩側預留 = 蟲侵入選項的寬度(--worm − --worm-out) + 間距；答題後不跳位、蟲不壓字 */
+  padding-left: calc(var(--worm) - var(--worm-out) + var(--worm-gap));
+  padding-right: calc(var(--worm) - var(--worm-out) + var(--worm-gap));
 }
 /* 「正解」文字標記（答錯時，標在正解選項右側） */
 .tag-text {
@@ -402,20 +407,20 @@ body.on-history .app {
 /* 答題結果的貓咪標記（可超出選項框） */
 .cat-mark {
   position: absolute;
-  width: 54px;
+  width: var(--worm); /* 跟著 .option 的 --worm */
   height: auto;
   pointer-events: none;
   z-index: 2;
 }
-/* 小於 400px 的手機：答對/答錯貓咪縮小 20%（60→48） */
+/* 小於 400px 的手機：把蟲縮小，留白會自動跟著縮（改 --worm 即可） */
 @media (max-width: 399px) {
-  .cat-mark {
-    width: 48px;
+  .option {
+    --worm: 50px;
   }
 }
-/* 答對：釘在右上角 */
+/* 答對：釘在右上角（露出量 = --worm-out） */
 .cat-right {
-  right: -18px;
+  right: calc(-1 * var(--worm-out));
   top: -16px;
   transform: rotate(10deg);
 }
@@ -424,9 +429,9 @@ body.on-history .app {
   top: auto;
   bottom: -16px;
 }
-/* 答錯：釘在左下角 */
+/* 答錯：釘在左下角（露出量 = --worm-out） */
 .cat-wrong {
-  left: -18px;
+  left: calc(-1 * var(--worm-out));
   bottom: -16px;
   transform: rotate(-10deg);
 }
@@ -589,6 +594,73 @@ body.on-history .app {
   /* 不設 overflow:hidden，讓 flex 容器在內容較高時自動撐高、不裁切，
      確保名字/貓咪/稱號/答對幾題/logo 一律都顯示；放得下時維持正方形 */
 }
+/* 成績卡外層（放蓋章 / 彩帶用；不進分享 PNG） */
+.result-card-wrap {
+  position: relative;
+}
+/* 左上角彩帶：顯示答對數百分位 */
+.result-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 132px;
+  height: 132px;
+  overflow: hidden;
+  z-index: 9;
+  pointer-events: none;
+  border-top-left-radius: 8px; /* 跟卡片圓角一致 */
+}
+.result-ribbon .ribbon-inner {
+  position: absolute;
+  top: 30px;
+  left: -46px;
+  width: 190px;
+  transform: rotate(-45deg);
+  /* 底色與文字色由 JS 依分級套（藍/綠/黃三色 + 同色系深色字） */
+  background: #75d3ff;
+  color: #10567a;
+  text-align: center;
+  padding: 6px 0; /* 帶寬加高 2px */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.05;
+}
+.ribbon-inner .r1 {
+  font-size: 10px;
+}
+.ribbon-inner .r2 {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+/* 蓋章：卡片出現後才「蓋」下來，壓在右下角最上層 */
+.result-stamp {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 120px; /* 比原本大 30%（92→120） */
+  height: auto;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  animation: stamp-in 0.45s ease-out 0.6s forwards; /* 0.6s 後才蓋 */
+}
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(2.4) rotate(-28deg);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-12deg);
+  }
+}
+
 /* 依稱號分級的背景 */
 .result-card.rc-tier-1 { background-image: url("../assets/result/result_bg_1.png"); }
 .result-card.rc-tier-2 { background-image: url("../assets/result/result_bg_2.png"); }
@@ -675,6 +747,56 @@ body.on-history .app {
   padding: 4px 9px;
   background: #ffffff; /* 純白底 */
   border-radius: 999px;
+}
+
+/* 訪客的貼圖領取序號 */
+.sticker-code {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.sticker-code-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+.sticker-code b {
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+/* 複製按鈕 */
+.copy-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+}
+.copy-btn:active {
+  background: #f0ece0;
+}
+/* 複製成功提示 */
+.copy-btn.copied::after {
+  content: "已複製";
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 /* 【開發用】稱號預覽切換（正式發佈前移除） */
