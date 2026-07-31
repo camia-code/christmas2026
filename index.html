@@ -19,12 +19,20 @@
     <!-- 開發用：mock 身份切換 -->
     <button id="mock-toggle" class="mock-toggle" type="button">身份: app</button>
 
+    <!-- 兌換序號入口（僅 app 用戶且未兌換時顯示，由 JS 控制） -->
+    <button id="redeem-entry" class="redeem-entry hidden" type="button" aria-label="兌換序號">
+      <img src="assets/changesticker.png" alt="兌換貼圖" />
+    </button>
+
     <main id="app" class="app">
       <!-- 步驟1 歡迎頁 -->
       <section id="screen-welcome" class="screen"></section>
 
       <!-- 步驟2 答題頁 -->
       <section id="screen-play" class="screen hidden"></section>
+
+      <!-- 步驟3.5 兌換序號頁 -->
+      <section id="screen-redeem" class="screen hidden"></section>
 
       <!-- 步驟4 答題紀錄頁 -->
       <section id="screen-history" class="screen hidden"></section>

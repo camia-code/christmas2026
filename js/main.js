@@ -7,9 +7,10 @@ import { pickQuestions, pickBackgrounds, buildRecord } from "./quiz.js";
 import { renderWelcome } from "./screens/welcome.js";
 import { renderPlay } from "./screens/play.js";
 import { renderHistory } from "./screens/history.js";
+import { renderRedeem } from "./screens/redeem.js";
 import { openResultModal, closeResultModal } from "./screens/result.js";
 
-const SCREENS = ["screen-welcome", "screen-play", "screen-history"];
+const SCREENS = ["screen-welcome", "screen-play", "screen-redeem", "screen-history"];
 
 function showScreen(id) {
   SCREENS.forEach((s) =>
@@ -19,6 +20,7 @@ function showScreen(id) {
   document.body.classList.toggle("on-welcome", id === "screen-welcome");
   document.body.classList.toggle("on-play", id === "screen-play");
   document.body.classList.toggle("on-history", id === "screen-history");
+  document.body.classList.toggle("on-redeem", id === "screen-redeem");
   // 離開答題頁時清掉滿版背景圖
   if (id !== "screen-play") document.body.style.backgroundImage = "";
   window.scrollTo(0, 0);
@@ -71,11 +73,19 @@ const nav = {
     showScreen("screen-history");
   },
 
+  redeem() {
+    renderRedeem(nav);
+    showScreen("screen-redeem");
+  },
+
   // 導回 app（wireframe 佔位）
   backToApp() {
     alert("（示意）導回 Letstalk app 聊天室領取貼圖。\n之後接 deep link / app bridge。");
   },
 };
+
+// 兌換入口按鈕點擊
+document.getElementById("redeem-entry").addEventListener("click", () => nav.redeem());
 
 // mock 身份切換鈕
 const mockBtn = document.getElementById("mock-toggle");

@@ -3,6 +3,7 @@
 
 const RECORDS_KEY = "christmas_quiz_records";
 const NICKNAME_KEY = "christmas_quiz_nickname";
+const REDEEMED_KEY = "christmas_quiz_redeemed";
 const STORAGE_PREFIX = "christmas_quiz_";
 
 // 開發用：清掉所有本遊戲的 localStorage 資料，讓每次重整都回到 default 狀態。
@@ -11,6 +12,24 @@ export function resetAll() {
     Object.keys(localStorage)
       .filter((k) => k.startsWith(STORAGE_PREFIX))
       .forEach((k) => localStorage.removeItem(k));
+  } catch (e) {
+    /* ignore */
+  }
+}
+
+// 是否已成功兌換過（兌換過一次就永久藏起入口）。
+export function hasRedeemed() {
+  try {
+    return !!localStorage.getItem(REDEEMED_KEY);
+  } catch (e) {
+    return false;
+  }
+}
+
+// 標記已兌換，存入使用的序號方便除錯。
+export function setRedeemed(code) {
+  try {
+    localStorage.setItem(REDEEMED_KEY, code);
   } catch (e) {
     /* ignore */
   }

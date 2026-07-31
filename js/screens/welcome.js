@@ -1,7 +1,8 @@
 // 步驟1 歡迎頁
 
 import { getUser, isAppUser, setNickname } from "../user.js";
-import { getLastRecord, getRecords } from "../storage.js";
+import { getLastRecord, getRecords, hasRedeemed } from "../storage.js";
+import { getLang } from "../lang.js";
 
 const GIFT_COUNT = 8;
 
@@ -11,13 +12,14 @@ export function renderWelcome(nav) {
   const last = getLastRecord();
   const hasPlayed = !!last;
   const attemptNo = getRecords().length + 1; // 第幾次挑戰
+  const lang = getLang(); // 依語系載入 KV 主視覺（tch/sch/en）
 
   el.innerHTML = `
     <div class="lobby">
       <img class="welcome-logo" src="assets/logo.png" alt="Letstalk" />
 
-      <img class="lobby-kv" src="assets/2026mainpage_kv.png?v=2" alt="好誕哩就來！聖你最會，還是剩你不會"
-        onerror="this.classList.add('kv-missing');this.alt='活動主視覺 kv-main.png（待放入 assets/）'" />
+      <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.png" alt="活動主視覺"
+        onerror="this.onerror=null;this.src='assets/2026mainpage_kv.png'" />
 
       <div class="gift-card">
         <div class="gift-carousel" id="gift-carousel">
@@ -69,6 +71,13 @@ export function renderWelcome(nav) {
         openLast();
       }
     });
+  }
+
+  // 兌換入口：只有 app 用戶且未兌換過才顯示
+  const redeemEntry = document.getElementById("redeem-entry");
+  if (redeemEntry) {
+    const showRedeem = isAppUser() && !hasRedeemed();
+    redeemEntry.classList.toggle("hidden", !showRedeem);
   }
 
   el.querySelector("#start-btn").addEventListener("click", () => {

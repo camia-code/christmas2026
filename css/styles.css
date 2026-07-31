@@ -972,3 +972,113 @@ body.on-history .app {
   background: var(--wrong);
   color: #fff;
 }
+
+/* ---------- 兌換序號入口按鈕（固定左側，距頂部 20%） ---------- */
+.redeem-entry {
+  position: fixed;
+  right: 0;
+  top: 20%;
+  z-index: 50;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.redeem-entry img {
+  display: block;
+  width: 56px;
+  height: auto;
+}
+
+/* ---------- 兌換序號頁 ---------- */
+body.on-redeem,
+body.on-redeem .app {
+  background: #ffffff;
+}
+
+.redeem-page {
+  padding: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.redeem-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.redeem-back {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--card);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.redeem-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+.redeem-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0 0 28px;
+}
+
+/* 輸入框區塊 */
+.redeem-field {
+  margin-bottom: 20px;
+}
+
+.redeem-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  letter-spacing: 0.05em;
+}
+
+/* 輸入中（focus / typing） */
+.redeem-input.is-typing,
+.redeem-input:focus {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(94, 148, 163, 0.18);
+}
+
+/* 輸入錯誤 */
+.redeem-input.is-error {
+  border-color: var(--wrong);
+  box-shadow: 0 0 0 3px rgba(197, 82, 59, 0.15);
+}
+
+.redeem-error-msg {
+  min-height: 18px;
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--wrong);
+  font-weight: 500;
+}
+
+.redeem-btn {
+  font-size: 17px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #3f9a55;
+}
