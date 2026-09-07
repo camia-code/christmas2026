@@ -46,24 +46,25 @@ body {
 /* 首頁（大廳）背景：底色 + 飄移無縫圖案 */
 body.on-welcome {
   position: relative;
-  overflow: hidden;
   background: #ffe7a5;
 }
 body.on-welcome::before {
   content: "";
-  position: absolute;
+  position: fixed;
   top: -399px;
   left: -808px;
-  width: calc(100% + 1616px);
-  height: calc(100% + 798px);
+  width: calc(100vw + 1616px);
+  height: calc(100vh + 798px);
   background: url("../assets/pattern-tile-even.svg") repeat;
   background-size: 808px 399px;
   animation: kvDrift 90s linear infinite;
   pointer-events: none;
+  z-index: 0;
 }
 body.on-welcome .app {
   position: relative;
   background: transparent;
+  z-index: 1;
 }
 @keyframes kvDrift {
   from {
