@@ -57,7 +57,7 @@ body.on-welcome::before {
   height: calc(100vh + 798px);
   background: url("../assets/pattern-tile-even.svg") repeat;
   background-size: 808px 399px;
-  animation: kvDrift 90s linear infinite;
+  animation: kvDrift 60s linear infinite;
   pointer-events: none;
   z-index: 0;
 }
