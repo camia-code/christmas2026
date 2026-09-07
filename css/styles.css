@@ -43,12 +43,35 @@ body {
   padding: 16px;
 }
 
-/* 首頁（大廳）藍色背景 */
+/* 首頁（大廳）背景：底色 + 飄移無縫圖案 */
 body.on-welcome {
-  background: #75d3ff;
+  position: relative;
+  overflow: hidden;
+  background: #ffe7a5;
+}
+body.on-welcome::before {
+  content: "";
+  position: absolute;
+  top: -399px;
+  left: -808px;
+  width: calc(100% + 1616px);
+  height: calc(100% + 798px);
+  background: url("../assets/pattern-tile-even.svg") repeat;
+  background-size: 808px 399px;
+  animation: kvDrift 90s linear infinite;
+  pointer-events: none;
 }
 body.on-welcome .app {
-  background: #75d3ff;
+  position: relative;
+  background: transparent;
+}
+@keyframes kvDrift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-808px, -399px, 0);
+  }
 }
 
 /* 答題頁滿版背景（每題一張，由 JS 設 background-image） */

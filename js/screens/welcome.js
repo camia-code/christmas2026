@@ -13,12 +13,13 @@ export function renderWelcome(nav) {
   const hasPlayed = !!last;
   const attemptNo = getRecords().length + 1; // 第幾次挑戰
   const lang = getLang(); // 依語系載入 KV 主視覺（tch/sch/en）
+  const kvExt = lang === "tch" ? "svg" : "png"; // 繁中改用 svg
 
   el.innerHTML = `
     <div class="lobby">
       <img class="welcome-logo" src="assets/logo.png" alt="Letstalk" />
 
-      <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.png" alt="活動主視覺"
+      <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.${kvExt}" alt="活動主視覺"
         onerror="this.onerror=null;this.src='assets/2026mainpage_kv.png'" />
 
       <div class="gift-card">
