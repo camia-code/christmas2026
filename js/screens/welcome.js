@@ -17,6 +17,12 @@ export function renderWelcome(nav) {
 
   el.innerHTML = `
     <div class="lobby">
+      <nav class="lobby-nav">
+        <a href="#" class="lobby-nav-link" data-nav="home">首頁</a>
+        <a href="#" class="lobby-nav-link" data-nav="rules">活動辦法</a>
+        <button type="button" id="nav-start-btn" class="lobby-nav-cta">開始挑戰 GO！</button>
+      </nav>
+
       <img class="welcome-logo" src="assets/logo.png" alt="Letstalk" />
 
       <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.${kvExt}" alt="活動主視覺"
@@ -80,6 +86,19 @@ export function renderWelcome(nav) {
     const showRedeem = isAppUser() && !hasRedeemed();
     redeemEntry.classList.toggle("hidden", !showRedeem);
   }
+
+  // header 導覽：首頁（捲動回頂）、活動辦法（待建立，先示意）、開始挑戰（沿用主按鈕邏輯）
+  el.querySelector('[data-nav="home"]').addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  el.querySelector('[data-nav="rules"]').addEventListener("click", (e) => {
+    e.preventDefault();
+    alert("（示意）活動辦法頁面尚未建立，之後接內容。");
+  });
+  el.querySelector("#nav-start-btn").addEventListener("click", () => {
+    el.querySelector("#start-btn").click();
+  });
 
   el.querySelector("#start-btn").addEventListener("click", () => {
     if (!isAppUser()) {

@@ -180,7 +180,7 @@ body.on-history .app {
 /* ---------- 背景音樂開關 ---------- */
 .bgm-toggle {
   position: fixed;
-  top: 8px;
+  top: 18px; /* 與 header nav 垂直置中對齊 */
   left: 8px;
   z-index: 50;
   width: 34px;
@@ -197,7 +197,7 @@ body.on-history .app {
 /* ---------- mock 切換鈕 ---------- */
 .mock-toggle {
   position: fixed;
-  top: 8px;
+  top: 20.5px; /* 與 header nav 垂直置中對齊 */
   right: 8px;
   z-index: 50;
   font-size: 11px;
@@ -214,11 +214,50 @@ body.on-history .app {
   text-align: center;
 }
 
+/* 首頁上方 header：首頁／活動辦法／開始挑戰，玻璃毛玻璃效果（數值對齊 Figma） */
+.lobby-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: fit-content;
+  max-width: 100%;
+  margin: -8px auto 16px; /* 與右上角固定的身份切換鈕（top:8px）同高 */
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+.lobby-nav-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.lobby-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 999px;
+  background: #5ec272;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
 .welcome-logo {
   display: block;
   height: 24px; /* 與右上身份鈕差不多高 */
   width: auto;
-  margin: 8px auto 16px;
+  margin: 8px auto 4px;
   padding: 5px 10px;
   border-radius: 999px;
   background: #fff; /* 藍底上的白色膠囊 */
