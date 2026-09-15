@@ -37,7 +37,7 @@ export function renderWelcome(nav) {
           showRedeem
             ? `<button id="redeem-entry" class="redeem-entry" type="button" aria-label="兌換序號">
                  <img src="assets/changesticker.svg" alt="" />
-                 <span class="redeem-entry-text">兌換<br />序號</span>
+                 <span class="redeem-entry-text"><span>序號</span><span>兌換</span></span>
                </button>`
             : ""
         }
