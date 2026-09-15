@@ -91,9 +91,6 @@ const nav = {
   },
 };
 
-// 兌換入口按鈕點擊
-document.getElementById("redeem-entry").addEventListener("click", () => nav.redeem());
-
 // mock 身份切換鈕
 const mockBtn = document.getElementById("mock-toggle");
 function refreshMockLabel() {

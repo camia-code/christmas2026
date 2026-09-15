@@ -15,6 +15,7 @@ export function renderWelcome(nav) {
   const attemptNo = getRecords().length + 1; // 第幾次挑戰
   const lang = getLang(); // 依語系載入 KV 主視覺（tch/sch/en）
   const kvExt = lang === "tch" ? "svg" : "png"; // 繁中改用 svg
+  const showRedeem = isAppUser() && !hasRedeemed(); // 兌換入口：只有 app 用戶且未兌換過才顯示
 
   el.innerHTML = `
     <div class="lobby">
@@ -25,7 +26,21 @@ export function renderWelcome(nav) {
       <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.${kvExt}" alt="活動主視覺"
         onerror="this.onerror=null;this.src='assets/2026mainpage_kv.png'" />
 
+      <p class="attempt-count">第${attemptNo}次挑戰</p>
+
+      <button id="start-btn" class="btn btn-primary lobby-start">
+        開始挑戰
+      </button>
+
       <div class="gift-card">
+        ${
+          showRedeem
+            ? `<button id="redeem-entry" class="redeem-entry" type="button" aria-label="兌換序號">
+                 <img src="assets/changesticker.svg" alt="" />
+                 <span class="redeem-entry-text">兌換<br />序號</span>
+               </button>`
+            : ""
+        }
         <div class="gift-carousel" id="gift-carousel">
           ${Array.from({ length: GIFT_COUNT })
             .map(
@@ -43,12 +58,6 @@ export function renderWelcome(nav) {
           : `<input id="nickname" class="nickname-input" type="text"
                maxlength="12" placeholder="輸入你的暱稱" value="${user.name || ""}" />`
       }
-
-      <p class="attempt-count">第${attemptNo}次挑戰</p>
-
-      <button id="start-btn" class="btn btn-primary lobby-start">
-        開始挑戰
-      </button>
 
       ${
         hasPlayed
@@ -77,11 +86,10 @@ export function renderWelcome(nav) {
     });
   }
 
-  // 兌換入口：只有 app 用戶且未兌換過才顯示
-  const redeemEntry = document.getElementById("redeem-entry");
+  // 兌換入口按鈕點擊
+  const redeemEntry = el.querySelector("#redeem-entry");
   if (redeemEntry) {
-    const showRedeem = isAppUser() && !hasRedeemed();
-    redeemEntry.classList.toggle("hidden", !showRedeem);
+    redeemEntry.addEventListener("click", () => nav.redeem());
   }
 
   // header 導覽：開始挑戰沿用下方主按鈕的暱稱驗證邏輯

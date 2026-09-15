@@ -2,6 +2,46 @@
 
 import { renderHeaderNav, bindHeaderNav } from "../header.js";
 
+// 視差捲動：蘋果、蟲蟲用 fixed 定位釘在畫面上，但跟著捲動以較慢的速度位移，
+// 而不是完全靜止（避免跟卡片內容的捲動速度差太多、看起來像另一個頁面）。
+const PARALLAX_SPEED = 0.3; // 裝飾移動速度＝內容的 30%
+// 捲動漸現：活動期間、遊玩辦法卡片一開始不顯示，捲動到才淡入浮現
+// （參考 https://etoha-lab.co.jp/ 的捲動效果）
+function bindScrollReveal(el) {
+  const targets = el.querySelectorAll(".rules-reveal");
+  if (!targets.length) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+  );
+  targets.forEach((t) => observer.observe(t));
+}
+
+let parallaxBound = false;
+function bindParallax() {
+  if (parallaxBound) return;
+  parallaxBound = true;
+  window.addEventListener(
+    "scroll",
+    () => {
+      const apple = document.querySelector(".rules-deco--apple");
+      const worm = document.querySelector(".rules-deco--worm");
+      if (!apple && !worm) return;
+      const offset = -window.scrollY * PARALLAX_SPEED;
+      if (apple) apple.style.transform = `translateY(${offset}px)`;
+      if (worm) worm.style.transform = `translateY(${offset}px)`;
+    },
+    { passive: true }
+  );
+}
+
 export function renderRules(nav) {
   const el = document.getElementById("screen-rules");
 
@@ -10,8 +50,8 @@ export function renderRules(nav) {
 
     <div class="redeem-page">
       <div class="rules-content">
-        <img class="rules-deco rules-deco--apple" src="assets/activity-method/e-apple.svg" alt="" />
-        <img class="rules-deco rules-deco--worm" src="assets/activity-method/e-worm.svg" alt="" />
+        <div class="rules-deco rules-deco--apple"><img src="assets/activity-method/e-apple.svg" alt="" /></div>
+        <div class="rules-deco rules-deco--worm"><img src="assets/activity-method/e-worm.svg" alt="" /></div>
 
         <img class="rules-img" src="assets/activity-method/main_title.png" alt="好誕哩就來，聖你最會，還是剩你不會" />
 
@@ -30,7 +70,7 @@ export function renderRules(nav) {
           </div>
         </div>
 
-        <div class="rules-card2 rules-card2--event">
+        <div class="rules-card2 rules-card2--event rules-reveal">
           <span class="rules-card2-badge">活動期間</span>
           <div class="rules-card2-body">
             <p><span class="rules-card2-subhead">活動時間</span><br /><strong>2026.11.29 ~ 2027.01.02</strong></p>
@@ -38,7 +78,7 @@ export function renderRules(nav) {
           </div>
         </div>
 
-        <div class="rules-card2 rules-card2--rules">
+        <div class="rules-card2 rules-card2--rules rules-reveal">
           <span class="rules-card2-badge">遊玩辦法</span>
           <div class="rules-card2-body">
             <p><span class="rules-card2-subhead">Letstalk用戶</span><br />答題後貼圖將會立即派送給用戶<br />用戶可以於任一聊天室中查看</p>
@@ -64,4 +104,6 @@ export function renderRules(nav) {
   `;
 
   bindHeaderNav(el, nav);
+  bindParallax();
+  bindScrollReveal(el);
 }
