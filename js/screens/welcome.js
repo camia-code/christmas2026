@@ -3,6 +3,7 @@
 import { getUser, isAppUser, setNickname } from "../user.js";
 import { getLastRecord, getRecords, hasRedeemed } from "../storage.js";
 import { getLang } from "../lang.js";
+import { renderHeaderNav, bindHeaderNav } from "../header.js";
 
 const GIFT_COUNT = 8;
 
@@ -17,11 +18,7 @@ export function renderWelcome(nav) {
 
   el.innerHTML = `
     <div class="lobby">
-      <nav class="lobby-nav">
-        <a href="#" class="lobby-nav-link" data-nav="home">首頁</a>
-        <a href="#" class="lobby-nav-link" data-nav="rules">活動辦法</a>
-        <button type="button" id="nav-start-btn" class="lobby-nav-cta">開始挑戰 GO！</button>
-      </nav>
+      ${renderHeaderNav()}
 
       <img class="welcome-logo" src="assets/logo.png" alt="Letstalk" />
 
@@ -87,17 +84,9 @@ export function renderWelcome(nav) {
     redeemEntry.classList.toggle("hidden", !showRedeem);
   }
 
-  // header 導覽：首頁（捲動回頂）、活動辦法（待建立，先示意）、開始挑戰（沿用主按鈕邏輯）
-  el.querySelector('[data-nav="home"]').addEventListener("click", (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-  el.querySelector('[data-nav="rules"]').addEventListener("click", (e) => {
-    e.preventDefault();
-    alert("（示意）活動辦法頁面尚未建立，之後接內容。");
-  });
-  el.querySelector("#nav-start-btn").addEventListener("click", () => {
-    el.querySelector("#start-btn").click();
+  // header 導覽：開始挑戰沿用下方主按鈕的暱稱驗證邏輯
+  bindHeaderNav(el, nav, {
+    onStart: () => el.querySelector("#start-btn").click(),
   });
 
   el.querySelector("#start-btn").addEventListener("click", () => {

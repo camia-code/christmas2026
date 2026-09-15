@@ -1060,6 +1060,162 @@ body.on-redeem .app {
   background: #ffffff;
 }
 
+/* ---------- 活動辦法頁：底色 + 星星無縫平鋪（閃爍動畫寫在 SVG 內部） ---------- */
+body.on-rules {
+  background: #ffe0e0;
+}
+body.on-rules::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("../assets/activity-method/star-tile.svg") repeat;
+  background-size: 260px auto;
+  pointer-events: none;
+}
+body.on-rules .app {
+  background: transparent;
+}
+.rules-content {
+  position: relative;
+  text-align: center;
+}
+
+/* 背景裝飾（蘋果、蟲蟲）：獨立於卡片版面之外，當作頁面背景的一部分，
+   用 fixed 定位釘在畫面邊緣（不受 .rules-content 的窄版寬度限制，不會被卡片蓋住） */
+.rules-deco {
+  position: fixed;
+  z-index: 3;
+  pointer-events: none;
+}
+.rules-deco--apple {
+  right: 120px;
+  top: 22%;
+  width: 110px;
+}
+.rules-deco--worm {
+  left: 120px;
+  top: 46%;
+  width: 130px;
+}
+
+.rules-img {
+  display: block;
+  width: 380px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 20px;
+}
+
+/* 活動辦法卡片：乾淨背景圖（無文字）+ 疊上真正的 HTML 文字，方便選取/複製 */
+.rules-card2 {
+  position: relative;
+  z-index: 2;
+  width: 380px;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+}
+.rules-card2--content {
+  aspect-ratio: 820 / 708;
+  background-image: url("../assets/activity-method/bg_main_content.png");
+}
+.rules-card2--event {
+  aspect-ratio: 820 / 482;
+  background-image: url("../assets/activity-method/bg_during_the_event.png");
+}
+.rules-card2--rules {
+  aspect-ratio: 820 / 845;
+  background-image: url("../assets/activity-method/bg_game_rules.png");
+}
+
+.rules-card2-body {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.rules-card2-body p {
+  margin: 0;
+}
+.rules-card2-subhead {
+  color: #f2ff00;
+}
+.rules-card2--content .rules-card2-body {
+  top: 14%;
+  bottom: 28%;
+  color: #dc7251;
+}
+.rules-card2--event .rules-card2-body {
+  top: 22%;
+  bottom: 20%;
+  gap: 18px;
+  color: #fffce7;
+}
+.rules-card2--rules .rules-card2-body {
+  top: 14%;
+  bottom: 13%;
+  gap: 18px;
+  color: #fffce7;
+}
+
+.rules-card2-badge {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  font-size: 15px;
+  font-weight: 700;
+  color: #d35a35;
+  white-space: nowrap;
+}
+.rules-card2--event .rules-card2-badge {
+  top: 5%;
+}
+.rules-card2--rules .rules-card2-badge {
+  top: 3%;
+}
+
+.rules-terms {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 4px 24px 100px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #442c16;
+}
+.rules-terms p {
+  margin: 0 0 8px;
+}
+
+/* 注意事項底部的草地背景：草地圖本身是圓弧造型（透明區露出頁面藍底），
+   下方另外接一塊同色實心區塊，讓文字不管多長都不會露出藍底空隙 */
+.rules-footer {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  margin: -100px 0 -16px calc(50% - 50vw); /* -16px 抵銷 .app 底部 padding，避免露出藍底 */
+}
+.rules-footer-art {
+  display: block;
+  width: 100%;
+  height: 130px; /* 固定高度，避免寬螢幕等比例放大過高；改用非等比縮放鋪滿寬度 */
+  margin-bottom: -1px; /* 消除與下方實心區塊之間可能的次像素接縫 */
+  background-image: url("../assets/activity-method/footer.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.rules-footer-fill {
+  background-color: #eeceb1;
+}
+
 .redeem-page {
   padding: 16px;
   max-width: 480px;

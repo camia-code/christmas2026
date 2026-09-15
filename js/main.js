@@ -8,9 +8,10 @@ import { renderWelcome } from "./screens/welcome.js";
 import { renderPlay } from "./screens/play.js";
 import { renderHistory } from "./screens/history.js";
 import { renderRedeem } from "./screens/redeem.js";
+import { renderRules } from "./screens/rules.js";
 import { openResultModal, closeResultModal } from "./screens/result.js";
 
-const SCREENS = ["screen-welcome", "screen-play", "screen-redeem", "screen-history"];
+const SCREENS = ["screen-welcome", "screen-play", "screen-redeem", "screen-rules", "screen-history"];
 
 function showScreen(id) {
   SCREENS.forEach((s) =>
@@ -21,6 +22,7 @@ function showScreen(id) {
   document.body.classList.toggle("on-play", id === "screen-play");
   document.body.classList.toggle("on-history", id === "screen-history");
   document.body.classList.toggle("on-redeem", id === "screen-redeem");
+  document.body.classList.toggle("on-rules", id === "screen-rules");
   // 離開答題頁時清掉滿版背景圖
   if (id !== "screen-play") document.body.style.backgroundImage = "";
   window.scrollTo(0, 0);
@@ -76,6 +78,11 @@ const nav = {
   redeem() {
     renderRedeem(nav);
     showScreen("screen-redeem");
+  },
+
+  rules() {
+    renderRules(nav);
+    showScreen("screen-rules");
   },
 
   // 導回 app（wireframe 佔位）
