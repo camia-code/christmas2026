@@ -28,7 +28,7 @@ export function resultCardHTML(record) {
       <div class="rc-sub">${RESULT_SUBLINE}</div>
       <div class="rc-result">${line}</div>
     </div>
-    <img class="rc-logo" src="assets/logo.png" alt="Letstalk" />
+    <img class="rc-logo" src="assets/logo.svg" alt="Letstalk" />
   `;
 }
 

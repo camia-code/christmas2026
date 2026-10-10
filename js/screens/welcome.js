@@ -19,37 +19,40 @@ export function renderWelcome(nav) {
 
   el.innerHTML = `
     <div class="lobby">
-      ${renderHeaderNav()}
+      ${renderHeaderNav({ logo: true })}
 
-      <img class="welcome-logo" src="assets/logo.png" alt="Letstalk" />
+      <div class="lobby-kv-wrap">
+        <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.${kvExt}" alt="活動主視覺"
+          onerror="this.onerror=null;this.src='assets/2026mainpage_kv.png'" />
+      </div>
 
-      <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.${kvExt}" alt="活動主視覺"
-        onerror="this.onerror=null;this.src='assets/2026mainpage_kv.png'" />
+      <div class="start-wrap">
+        <span class="attempt-count">第${attemptNo}次挑戰</span>
+        <button id="start-btn" class="btn btn-primary lobby-start">
+          開始挑戰
+        </button>
+      </div>
 
-      <p class="attempt-count">第${attemptNo}次挑戰</p>
-
-      <button id="start-btn" class="btn btn-primary lobby-start">
-        開始挑戰
-      </button>
-
-      <div class="gift-card">
-        ${
-          showRedeem
-            ? `<button id="redeem-entry" class="redeem-entry" type="button" aria-label="兌換序號">
-                 <img src="assets/changesticker.svg" alt="" />
-                 <span class="redeem-entry-text"><span>序號</span><span>兌換</span></span>
-               </button>`
-            : ""
-        }
-        <div class="gift-carousel" id="gift-carousel">
-          ${Array.from({ length: GIFT_COUNT })
-            .map(
-              (_, i) => `<div class="placeholder gift-item">貼圖 ${i + 1}</div>`
-            )
-            .join("")}
+      <div class="gift-card-wrap">
+        <div class="gift-card">
+          ${
+            showRedeem
+              ? `<button id="redeem-entry" class="redeem-entry" type="button" aria-label="兌換序號">
+                   <img src="assets/changesticker.svg" alt="" />
+                   <span class="redeem-entry-text"><span>序號</span><span>兌換</span></span>
+                 </button>`
+              : ""
+          }
+          <div class="gift-carousel" id="gift-carousel">
+            ${Array.from({ length: GIFT_COUNT })
+              .map(
+                (_, i) => `<div class="placeholder gift-item">貼圖 ${i + 1}</div>`
+              )
+              .join("")}
+          </div>
+          <p class="gift-hint">左右滑動查看全部禮物</p>
+          <p class="gift-desc">完成答題就送你超萌限定動態貼圖</p>
         </div>
-        <p class="gift-hint">左右滑動查看全部禮物</p>
-        <p class="gift-desc">完成答題就送你超萌限定動態貼圖</p>
       </div>
 
       ${

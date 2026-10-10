@@ -46,7 +46,7 @@ export function renderRules(nav) {
   const el = document.getElementById("screen-rules");
 
   el.innerHTML = `
-    ${renderHeaderNav()}
+    ${renderHeaderNav({ logo: true })}
 
     <div class="redeem-page">
       <div class="rules-content">
@@ -55,7 +55,7 @@ export function renderRules(nav) {
 
         <img class="rules-img" src="assets/activity-method/main_title.png" alt="好誕哩就來，聖你最會，還是剩你不會" />
 
-        <div class="rules-card2 rules-card2--content">
+        <div class="rules-card2 rules-card2--content rules-reveal">
           <div class="rules-card2-body">
             <p>
               叮叮噹～叮叮噹～<br />

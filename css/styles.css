@@ -26,6 +26,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* 避免滿版寬度裝飾(100vw)在 zoom 縮放下產生左右可滑動的空隙 */
 }
 
 body {
@@ -51,12 +52,12 @@ body.on-welcome {
 body.on-welcome::before {
   content: "";
   position: fixed;
-  top: -399px;
-  left: -808px;
-  width: calc(100vw + 1616px);
-  height: calc(100vh + 798px);
+  top: -499px;
+  left: -1010px;
+  width: calc(100vw + 2020px);
+  height: calc(100vh + 998px);
   background: url("../assets/pattern-tile-even.svg") repeat;
-  background-size: 808px 399px;
+  background-size: 1010px 499px;
   animation: kvDrift 60s linear infinite;
   pointer-events: none;
   z-index: 0;
@@ -71,7 +72,7 @@ body.on-welcome .app {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(-808px, -399px, 0);
+    transform: translate3d(-1010px, -499px, 0);
   }
 }
 
@@ -208,75 +209,191 @@ body.on-history .app {
   color: var(--muted);
   cursor: pointer;
 }
+/* 首頁／活動辦法頁：header nav 變寬後會佔滿頂部，這兩顆固定按鈕改移到 nav 下方，避免疊在一起 */
+body.on-welcome .bgm-toggle,
+body.on-rules .bgm-toggle {
+  top: 66px;
+  left: 10px;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+}
+body.on-welcome .mock-toggle,
+body.on-rules .mock-toggle {
+  top: 68px;
+  right: 10px;
+  font-size: 11px;
+  padding: 6px 10px;
+}
 
 /* ---------- 步驟1 歡迎頁 ---------- */
 .lobby {
   text-align: center;
 }
 
+/* 外層跳脫 .app 欄寬限制，讓膠囊背景可以依內容自由撐開，桌機不會被裁切；
+   維持 sticky 置頂。中間留空的地方不能擋住底下內容的點擊。 */
+.lobby-nav-wrap {
+  position: sticky;
+  top: 10px;
+  z-index: 40;
+  width: 100vw;
+  margin: -10px 0 20px calc(50% - 50vw);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
 /* 首頁上方 header：首頁／活動辦法／開始挑戰，玻璃毛玻璃效果（數值對齊 Figma） */
 .lobby-nav {
+  position: relative; /* 手機版漢堡選單的下拉面板以它為定位基準 */
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 0; /* logo↔分隔線、分隔線↔文字間距不同，改用各元素自己的 margin 控制 */
   width: fit-content;
-  max-width: 100%;
-  margin: -8px auto 16px; /* 與右上角固定的身份切換鈕（top:8px）同高 */
-  padding: 10px 24px;
+  max-width: calc(100vw - 32px);
+  padding: 12.5px 22px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  position: sticky; /* 捲動時置頂，方便隨時切換頁面 */
-  top: 8px;
-  z-index: 40;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+  pointer-events: auto;
+}
+.lobby-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 38px;
 }
 .lobby-nav-link {
-  font-size: 14px;
+  font-size: 17.5px;
   font-weight: 600;
   color: #000;
   text-decoration: none;
   white-space: nowrap;
+  transition: color 0.15s ease;
+}
+.lobby-nav-link:hover {
+  color: #ffaa5a;
 }
 .lobby-nav-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 16px;
+  padding: 7.5px 20px;
   border: none;
   border-radius: 999px;
   background: #5ec272;
   color: #fff;
-  font-size: 14px;
+  font-size: 17.5px;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
 }
 
-.welcome-logo {
+/* 漢堡選單按鈕：預設（桌機／夠寬時）隱藏，手機斷點才顯示 */
+.lobby-nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.lobby-nav-burger span {
   display: block;
-  height: 24px; /* 與右上身份鈕差不多高 */
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: #000;
+}
+
+/* 斷點：選單項目收進漢堡選單，點擊後以同樣玻璃效果的面板展開。
+   610px 是含 LOGO 版本完整選單自然寬度(約574px)+左右各16px，確保切換漢堡選單前，
+   選單膠囊跟裝置邊緣一定保有至少 16px 間距，不會被裁切 */
+@media (max-width: 610px) {
+  .lobby-nav {
+    gap: 12px;
+  }
+  .lobby-nav-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .lobby-nav.is-open .lobby-nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .lobby-nav-link {
+    font-size: 16px;
+  }
+  .lobby-nav-cta {
+    width: 100%;
+  }
+  .lobby-nav-burger {
+    display: flex;
+  }
+}
+
+/* 首頁選單最左側：Letstalk logo + 分隔線，區隔右邊的選單內容 */
+.lobby-nav-logo {
+  display: block;
+  align-self: center;
+  height: 30px;
   width: auto;
-  margin: 8px auto 4px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: #fff; /* 藍底上的白色膠囊 */
+  margin-right: 28px;
+}
+.lobby-nav-divider {
+  display: inline-block;
+  align-self: center;
+  flex-shrink: 0;
+  width: 1.5px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.15);
+  margin-right: 28px;
 }
 
 /* 整合主視覺（含標題、貓咪、主標、副標） */
+/* 外層撐滿裝置寬度，圖片本身寬螢幕最大放大到 120%（537.6px），
+   螢幕較窄時自動縮小、左右至少各留 16px，不會再超出裝置邊緣 */
+.lobby-kv-wrap {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
 .lobby-kv {
   display: block;
-  width: 100%;
+  width: min(537.6px, calc(100vw - 32px));
   height: auto;
-  border-radius: 8px;
-  margin: 0 0 20px;
+  margin: 0 auto 25px;
+  border-radius: 10px;
 }
 /* 圖片未放入時的佔位外觀 */
 .lobby-kv.kv-missing {
-  min-height: 260px;
+  min-height: 325px;
   background: repeating-linear-gradient(
     45deg,
     #8fd9ff,
@@ -286,70 +403,114 @@ body.on-history .app {
   );
   border: 1px dashed #ffffff;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 16.25px;
 }
 
 /* 禮包卡片（純白底、黃框） */
+/* 外層撐滿整個裝置寬度（跳脫 .app 的欄寬限制），卡片本身在裡面依裝置寬度自動置中，
+   寬螢幕最大 600px，螢幕較窄時自動縮小、左右各留 16px */
+.gift-card-wrap {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
 .gift-card {
   position: relative;
+  width: min(600px, calc(100vw - 32px));
+  margin: 0 auto 22.5px;
   background: #ffffff;
   border: 2px solid #fff07b;
-  border-radius: 8px;
-  padding: 18px 16px 16px;
-  margin-bottom: 18px;
+  border-radius: 10px;
+  padding: 22.5px 20px 20px;
 }
 .gift-hint {
-  font-size: 13px;
+  font-size: 16.25px;
   color: var(--muted);
-  margin: 12px 0 4px;
+  margin: 15px 0 5px;
 }
 .gift-desc {
-  font-size: 14px;
+  font-size: 17.5px;
   color: var(--text);
   margin: 0;
 }
 
+/* 「開始挑戰」按鈕 + 疊在上面的「第N次挑戰」對話泡泡提醒 */
+.start-wrap {
+  position: relative;
+  margin-bottom: 50px;
+}
+
 .attempt-count {
-  font-size: 14px;
-  color: #656565;
-  margin: 0 0 12px;
+  position: absolute;
+  top: -20px;
+  right: 25px;
+  z-index: 2;
+  padding: 6px 17.5px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  font-size: 16.25px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: attempt-bounce 1.6s ease-in-out infinite;
+}
+.attempt-count::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 32.5px;
+  width: 12.5px;
+  height: 12.5px;
+  background: #fff;
+  transform: rotate(45deg);
+  box-shadow: 2.5px 2.5px 3.75px rgba(0, 0, 0, 0.08);
+}
+@keyframes attempt-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7.5px);
+  }
 }
 
 .lobby-start {
-  font-size: 18px;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 0 #3f9a55;
-  margin-bottom: 40px;
+  font-size: 22.5px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 0 #3f9a55;
 }
 
 /* 禮包貼圖：可左右滑動輪播 */
 .gift-carousel {
   display: flex;
-  gap: 12px;
+  gap: 15px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
+  padding-bottom: 5px;
   scrollbar-width: none;
 }
 .gift-carousel::-webkit-scrollbar {
   display: none;
 }
 .gift-item {
-  flex: 0 0 120px;
-  height: 120px;
+  flex: 0 0 150px;
+  height: 150px;
+  border-radius: 10px;
+  font-size: 16.25px;
   scroll-snap-align: center;
 }
 .gift-dots {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin-top: 10px;
+  gap: 7.5px;
+  margin-top: 12.5px;
 }
 .gift-dot {
-  width: 7px;
-  height: 7px;
+  width: 8.75px;
+  height: 8.75px;
   border-radius: 50%;
   background: var(--line);
 }
@@ -365,9 +526,9 @@ body.on-history .app {
   text-align: left;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 14px 18px;
-  margin-top: 16px;
+  border-radius: 10px;
+  padding: 17.5px 22.5px;
+  margin-top: 20px;
   cursor: pointer;
 }
 .last-record:active {
@@ -378,16 +539,16 @@ body.on-history .app {
   flex-direction: column;
 }
 .last-record .lr-label {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--muted);
 }
 .last-record .lr-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text);
 }
 .last-record .lr-score {
-  font-size: 14px;
+  font-size: 17.5px;
   color: var(--accent);
   font-weight: 600;
 }
@@ -398,15 +559,15 @@ body.on-history .app {
 
 .nickname-input {
   width: 100%;
-  padding: 12px;
-  font-size: 16px;
+  padding: 15px;
+  font-size: 20px;
   border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  margin-bottom: 8px; /* 與「第 N 次挑戰」間隔 8px */
+  border-radius: 10px;
+  margin-bottom: 10px; /* 與「第 N 次挑戰」間隔 */
 }
 
 .user-greeting {
-  font-size: 15px;
+  font-size: 18.75px;
 }
 .user-greeting strong {
   color: var(--accent);
@@ -621,6 +782,16 @@ body.on-history .app {
   max-width: 420px;
   padding: 24px 20px;
   position: relative;
+}
+/* 兌換序號 popup：要蓋過置頂 header（z-index 40）與左右上角固定按鈕（z-index 50） */
+.modal-overlay--top {
+  z-index: 60;
+}
+.redeem-modal {
+  padding: 28px 24px 24px;
+}
+.redeem-modal .redeem-title {
+  margin: 0 36px 12px 0;
 }
 .modal-close {
   position: absolute;
@@ -1044,8 +1215,8 @@ body.on-history .app {
 /* ---------- 兌換序號入口按鈕（固定左側，距頂部 20%） ---------- */
 .redeem-entry {
   position: absolute;
-  top: -35px;
-  right: -50px;
+  top: -43.75px;
+  right: -62.5px;
   z-index: 2;
   padding: 0;
   border: none;
@@ -1055,7 +1226,7 @@ body.on-history .app {
 }
 .redeem-entry img {
   display: block;
-  width: 112px;
+  width: 140px;
   height: auto;
 }
 .redeem-entry-text {
@@ -1063,24 +1234,18 @@ body.on-history .app {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 56px;
+  width: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  font-size: 18px;
+  gap: 3.75px;
+  font-size: 22.5px;
   font-weight: 700;
   line-height: 1;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   color: #fff;
   text-align: center;
   white-space: nowrap;
-}
-
-/* ---------- 兌換序號頁 ---------- */
-body.on-redeem,
-body.on-redeem .app {
-  background: #ffffff;
 }
 
 /* ---------- 活動辦法頁：底色 + 星星無縫平鋪（閃爍動畫寫在 SVG 內部） ---------- */
@@ -1093,7 +1258,7 @@ body.on-rules::before {
   inset: 0;
   z-index: -1;
   background: url("../assets/activity-method/star-tile.svg") repeat;
-  background-size: 260px auto;
+  background-size: 325px auto;
   pointer-events: none;
 }
 body.on-rules .app {
@@ -1112,11 +1277,11 @@ body.on-rules .app {
   pointer-events: none;
 }
 .rules-deco--apple {
-  right: 120px;
+  right: 150px;
   top: 22%;
 }
 .rules-deco--worm {
-  left: 120px;
+  left: 150px;
   top: 65%;
 }
 /* 上下懸浮動態：套在內層 img，避免跟外層 JS 視差捲動的 transform 互相覆蓋 */
@@ -1126,36 +1291,36 @@ body.on-rules .app {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-14px);
+    transform: translateY(-17.5px);
   }
 }
 .rules-deco--apple img {
   display: block;
-  width: 150px;
+  width: 187.5px;
   animation: rules-deco-float 3.2s ease-in-out infinite;
 }
 .rules-deco--worm img {
   display: block;
-  width: 170px;
+  width: 212.5px;
   animation: rules-deco-float 3.6s ease-in-out infinite;
   animation-delay: -1.8s;
 }
 
 .rules-img {
   display: block;
-  width: 380px;
+  width: 475px;
   max-width: 100%;
   height: auto;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
 }
 
 /* 活動辦法卡片：乾淨背景圖（無文字）+ 疊上真正的 HTML 文字，方便選取/複製 */
 .rules-card2 {
   position: relative;
   z-index: 2;
-  width: 380px;
+  width: 475px;
   max-width: 100%;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   text-align: center;
@@ -1176,7 +1341,7 @@ body.on-rules .app {
 /* 進場時只顯示「叮叮噹」卡片，活動期間／遊玩辦法卡片捲動到才淡入浮現 */
 .rules-reveal {
   opacity: 0;
-  transform: translateY(48px);
+  transform: translateY(60px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .rules-reveal.is-visible {
@@ -1191,8 +1356,8 @@ body.on-rules .app {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
-  font-size: 14px;
+  gap: 12.5px;
+  font-size: 17.5px;
   line-height: 1.5;
 }
 .rules-card2-body p {
@@ -1209,13 +1374,13 @@ body.on-rules .app {
 .rules-card2--event .rules-card2-body {
   top: 22%;
   bottom: 20%;
-  gap: 18px;
+  gap: 22.5px;
   color: #fffce7;
 }
 .rules-card2--rules .rules-card2-body {
   top: 14%;
   bottom: 13%;
-  gap: 18px;
+  gap: 22.5px;
   color: #fffce7;
 }
 
@@ -1223,7 +1388,7 @@ body.on-rules .app {
   position: absolute;
   left: 50%;
   transform: translateX(-50%) rotate(-2deg);
-  font-size: 15px;
+  font-size: 18.75px;
   font-weight: 700;
   color: #d35a35;
   white-space: nowrap;
@@ -1236,16 +1401,16 @@ body.on-rules .app {
 }
 
 .rules-terms {
-  max-width: 380px;
+  max-width: 475px;
   margin: 0 auto;
-  padding: 4px 24px 100px;
+  padding: 5px 30px 125px;
   text-align: left;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.7;
   color: #442c16;
 }
 .rules-terms p {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
 /* 注意事項底部的草地背景：草地圖本身是圓弧造型（透明區露出頁面藍底），
@@ -1254,12 +1419,12 @@ body.on-rules .app {
   position: relative;
   z-index: 1;
   width: 100vw;
-  margin: -100px 0 -16px calc(50% - 50vw); /* -16px 抵銷 .app 底部 padding，避免露出藍底 */
+  margin: -125px 0 -16px calc(50% - 50vw); /* -16px 抵銷 .app 底部 padding，避免露出藍底 */
 }
 .rules-footer-art {
   display: block;
   width: 100%;
-  height: 130px; /* 固定高度，避免寬螢幕等比例放大過高；改用非等比縮放鋪滿寬度 */
+  height: 162.5px; /* 固定高度，避免寬螢幕等比例放大過高；改用非等比縮放鋪滿寬度 */
   margin-bottom: -1px; /* 消除與下方實心區塊之間可能的次像素接縫 */
   background-image: url("../assets/activity-method/footer.png");
   background-repeat: no-repeat;
@@ -1274,25 +1439,10 @@ body.on-rules .app {
   max-width: 480px;
   margin: 0 auto;
 }
-
-.redeem-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.redeem-back {
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: var(--card);
-  font-size: 22px;
-  line-height: 1;
-  cursor: pointer;
-  color: var(--text);
-  flex-shrink: 0;
+/* 活動辦法頁整體放大 1.25 倍；兌換序號頁的 .redeem-page 維持原尺寸不受影響 */
+body.on-rules .redeem-page {
+  padding: 20px;
+  max-width: 600px;
 }
 
 .redeem-title {

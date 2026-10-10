@@ -7,11 +7,11 @@ import { pickQuestions, pickBackgrounds, buildRecord } from "./quiz.js";
 import { renderWelcome } from "./screens/welcome.js";
 import { renderPlay } from "./screens/play.js";
 import { renderHistory } from "./screens/history.js";
-import { renderRedeem } from "./screens/redeem.js";
+import { openRedeemModal, closeRedeemModal } from "./screens/redeem.js";
 import { renderRules } from "./screens/rules.js";
 import { openResultModal, closeResultModal } from "./screens/result.js";
 
-const SCREENS = ["screen-welcome", "screen-play", "screen-redeem", "screen-rules", "screen-history"];
+const SCREENS = ["screen-welcome", "screen-play", "screen-rules", "screen-history"];
 
 function showScreen(id) {
   SCREENS.forEach((s) =>
@@ -21,7 +21,6 @@ function showScreen(id) {
   document.body.classList.toggle("on-welcome", id === "screen-welcome");
   document.body.classList.toggle("on-play", id === "screen-play");
   document.body.classList.toggle("on-history", id === "screen-history");
-  document.body.classList.toggle("on-redeem", id === "screen-redeem");
   document.body.classList.toggle("on-rules", id === "screen-rules");
   // 離開答題頁時清掉滿版背景圖
   if (id !== "screen-play") document.body.style.backgroundImage = "";
@@ -32,6 +31,7 @@ function showScreen(id) {
 const nav = {
   welcome() {
     closeResultModal();
+    closeRedeemModal();
     renderWelcome(nav);
     showScreen("screen-welcome");
   },
@@ -75,9 +75,9 @@ const nav = {
     showScreen("screen-history");
   },
 
+  // 兌換序號：在當頁以 popup 開啟，不切換頁面
   redeem() {
-    renderRedeem(nav);
-    showScreen("screen-redeem");
+    openRedeemModal(nav);
   },
 
   rules() {
