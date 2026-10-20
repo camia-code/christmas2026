@@ -1,10 +1,8 @@
 // 分享卡片：產生成績卡片 DOM、轉成 PNG 預覽 / 下載。
 // 使用 CDN 的 html-to-image（index.html 引入，全域 window.htmlToImage）。
 
-import { getTitle } from "../data/titles.js";
-
-// 結果卡片「在 XX 測驗中」的固定引言（之後可改）
-const RESULT_SUBLINE = "在智慧測驗中";
+import { getTitle, getTitleName } from "../data/titles.js";
+import { t, localizeName } from "./i18n.js";
 
 // 成績卡片的 class（含依稱號分級的背景）。
 export function resultCardClass(record) {
@@ -17,15 +15,15 @@ export function resultCardHTML(record) {
   const title = getTitle(record.score);
   const line =
     record.score === 0
-      ? "一題都沒答對"
-      : `答對 ${record.score} / ${record.total} 題`;
+      ? t("result.zero")
+      : t("result.score", { s: record.score, t: record.total });
   return `
-    <div class="rc-username">${record.name || "神秘挑戰者"}</div>
+    <div class="rc-username">${localizeName(record.name) || t("user.anon")}</div>
     <div class="rc-mid">
       <img class="rc-cat" src="assets/result/result_cat_${title.idx}.png" alt=""
         onerror="this.classList.add('rc-cat-missing')" />
-      <div class="rc-title-pill">${title.name}</div>
-      <div class="rc-sub">${RESULT_SUBLINE}</div>
+      <div class="rc-title-pill">${getTitleName(record.score)}</div>
+      <div class="rc-sub">${t("result.subline")}</div>
       <div class="rc-result">${line}</div>
     </div>
     <img class="rc-logo" src="assets/logo.svg" alt="Letstalk" />
@@ -39,18 +37,18 @@ export async function openShareModal(record, onClose) {
   overlay.innerHTML = `
     <div class="modal">
       <button class="modal-close" id="share-close" type="button">×</button>
-      <p class="section-title">分享結果</p>
+      <p class="section-title">${t("share.title")}</p>
       <div id="share-preview-box">
-        <p style="color:var(--muted);font-size:14px;">產生圖片中…</p>
+        <p style="color:var(--muted);font-size:14px;">${t("share.generating")}</p>
       </div>
       <div id="share-actions" class="share-actions hidden">
-        <button id="share-download" class="icon-btn" type="button" aria-label="下載">
+        <button id="share-download" class="icon-btn" type="button" aria-label="${t("share.downloadAria")}">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 3v12" /><path d="M7 11l5 5 5-5" /><path d="M5 21h14" />
           </svg>
         </button>
-        <button id="share-send" class="icon-btn" type="button" aria-label="分享">
+        <button id="share-send" class="icon-btn" type="button" aria-label="${t("share.sendAria")}">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 2L11 13" /><path d="M22 2l-7 20-4-9-9-4 20-7z" />
@@ -84,7 +82,7 @@ export async function openShareModal(record, onClose) {
   const actions = overlay.querySelector("#share-actions");
   const downloadBtn = overlay.querySelector("#share-download");
   const sendBtn = overlay.querySelector("#share-send");
-  const FILE_NAME = "聖誕知識王-成績.png";
+  const FILE_NAME = t("share.fileName");
 
   try {
     if (!window.htmlToImage) throw new Error("html-to-image 未載入");
@@ -94,7 +92,7 @@ export async function openShareModal(record, onClose) {
       cacheBust: true,
       skipFonts: true, // 略過嵌入 4.9MB 粉圓字型，避免產圖卡住/失敗
     });
-    previewBox.innerHTML = `<img class="share-preview" src="${dataUrl}" alt="分享結果" />`;
+    previewBox.innerHTML = `<img class="share-preview" src="${dataUrl}" alt="${t("share.imgAlt")}" />`;
     actions.classList.remove("hidden");
 
     // 下載
@@ -111,7 +109,7 @@ export async function openShareModal(record, onClose) {
         const blob = await (await fetch(dataUrl)).blob();
         const file = new File([blob], FILE_NAME, { type: "image/png" });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: "聖誕知識王" });
+          await navigator.share({ files: [file], title: t("share.appTitle") });
         } else {
           const a = document.createElement("a");
           a.href = dataUrl;
@@ -124,7 +122,7 @@ export async function openShareModal(record, onClose) {
     });
   } catch (err) {
     console.warn(err);
-    previewBox.innerHTML = `<p style="color:var(--wrong);font-size:14px;">圖片產生失敗，請確認網路後重試。</p>`;
+    previewBox.innerHTML = `<p style="color:var(--wrong);font-size:14px;">${t("share.fail")}</p>`;
   } finally {
     document.body.removeChild(node);
   }

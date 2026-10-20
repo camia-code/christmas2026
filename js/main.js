@@ -3,7 +3,14 @@
 import { getMockMode, toggleMockMode, getDisplayName } from "./user.js";
 import { addRecord, resetAll } from "./storage.js";
 import { state, startRound } from "./state.js";
-import { pickQuestions, pickBackgrounds, buildRecord } from "./quiz.js";
+import {
+  pickQuestions,
+  pickBackgrounds,
+  buildRecord,
+  localizeQuestions,
+  localizeRecord,
+} from "./quiz.js";
+import { t, getLang, setLang, applyLangToDocument } from "./i18n.js";
 import { renderWelcome } from "./screens/welcome.js";
 import { renderPlay } from "./screens/play.js";
 import { renderHistory } from "./screens/history.js";
@@ -27,6 +34,9 @@ function showScreen(id) {
   window.scrollTo(0, 0);
 }
 
+// 目前在看的答題紀錄（切換語系時要重繪）
+let historyRecord = null;
+
 // 導頁 API：傳給各畫面使用。
 const nav = {
   welcome() {
@@ -40,14 +50,14 @@ const nav = {
     try {
       const questions = await pickQuestions();
       if (!questions.length) {
-        alert("題庫是空的，請先在 data/questions/questions.json 加題目。");
+        alert(t("main.emptyBank"));
         return;
       }
       startRound(questions, pickBackgrounds(questions.length));
       renderPlay(nav);
       showScreen("screen-play");
     } catch (e) {
-      alert(e.message || "載入題目失敗");
+      alert(e.message || t("main.loadFail"));
     }
   },
 
@@ -70,8 +80,9 @@ const nav = {
     openResultModal(record, nav);
   },
 
-  history(record) {
-    renderHistory(record, nav);
+  async history(record) {
+    historyRecord = record;
+    renderHistory(await localizeRecord(record), nav);
     showScreen("screen-history");
   },
 
@@ -87,7 +98,7 @@ const nav = {
 
   // 導回 app（wireframe 佔位）
   backToApp() {
-    alert("（示意）導回 Letstalk app 聊天室領取貼圖。\n之後接 deep link / app bridge。");
+    alert(t("main.backToApp"));
   },
 };
 
@@ -101,6 +112,46 @@ mockBtn.addEventListener("click", () => {
   refreshMockLabel();
   nav.welcome(); // 切換後重繪歡迎頁
 });
+
+// ---------- 展示用：語系下拉（交給工程師時連同 index.html 的 #demo-bar 一起移除；
+// 語系切換的重繪邏輯 rerenderForLang() 可留著給正式的語言切換用）----------
+const langSelect = document.getElementById("lang-select");
+
+// 切換語系後，把目前畫面、開著的 popup 都重繪成新語系。
+async function rerenderForLang() {
+  applyLangToDocument();
+  document.getElementById("share-modal").classList.add("hidden");
+  document.getElementById("share-modal").innerHTML = "";
+
+  const visible = SCREENS.find(
+    (s) => !document.getElementById(s).classList.contains("hidden")
+  );
+  const resultOpen = !document.getElementById("result-modal").classList.contains("hidden");
+  const redeemOpen = !document.getElementById("redeem-modal").classList.contains("hidden");
+
+  if (visible === "screen-welcome") {
+    renderWelcome(nav);
+  } else if (visible === "screen-rules") {
+    renderRules(nav);
+  } else if (visible === "screen-history" && historyRecord) {
+    renderHistory(await localizeRecord(historyRecord), nav);
+  } else if (visible === "screen-play" && state.questions.length) {
+    state.questions = await localizeQuestions(state.questions);
+    // 目前這題若已作答，重繪後會回到未作答狀態：先捨棄這題的答案，避免重複計分
+    state.answers.length = Math.min(state.answers.length, state.current);
+    renderPlay(nav);
+  }
+  if (resultOpen && state.viewingRecord) openResultModal(state.viewingRecord, nav);
+  if (redeemOpen) openRedeemModal(nav);
+}
+
+if (langSelect) {
+  langSelect.value = getLang();
+  langSelect.addEventListener("change", () => {
+    setLang(langSelect.value);
+    rerenderForLang();
+  });
+}
 
 // 背景音樂：播放清單（bg_music → bg_music_2 → 循環），低音量；
 // 瀏覽器擋自動播放 → 第一次互動時啟動；可靜音切換
@@ -177,4 +228,5 @@ document.addEventListener("click", (e) => {
 // 啟動：每次重整都清掉本機紀錄，回到 default 狀態
 resetAll();
 refreshMockLabel();
+applyLangToDocument();
 nav.welcome();

@@ -195,34 +195,55 @@ body.on-history .app {
   cursor: pointer;
 }
 
-/* ---------- mock 切換鈕 ---------- */
-.mock-toggle {
-  position: fixed;
-  top: 20.5px; /* 與 header nav 垂直置中對齊 */
-  right: 8px;
-  z-index: 50;
-  font-size: 11px;
-  padding: 6px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+/* ---------- 展示用切換列（頁面最上方）----------
+   只給展示/簡報用，交給工程師時整段移除：
+   index.html 的 #demo-bar、這裡的 .demo-bar / .mock-toggle 兩段、main.js 的 mock-toggle 段落 */
+.demo-bar {
+  position: relative;
+  z-index: 30; /* 蓋過首頁/活動辦法的背景圖層(0)，但在 header(40)與 popup(40+)之下 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 8px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6ea;
+  font-size: 13px;
   color: var(--muted);
+}
+.demo-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-select {
+  font: inherit;
+  color: var(--text);
+  padding: 4px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
   cursor: pointer;
 }
-/* 首頁／活動辦法頁：mock 切換鈕移到 nav 下方，避免跟 header 疊在一起 */
+.mock-toggle {
+  font-size: 13px;
+  padding: 5px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+}
+.mock-toggle:hover {
+  background: #f6f1e6;
+}
 /* 首頁／活動辦法頁的音樂鈕改放在 header 膠囊左側（見 .lobby-nav .bgm-toggle），
    答題頁改放在進度條左側（見 .play-top），全域固定那顆在這些頁面隱藏 */
 body.on-welcome .bgm-toggle--global,
 body.on-rules .bgm-toggle--global,
 body.on-play .bgm-toggle--global {
   display: none;
-}
-body.on-welcome .mock-toggle,
-body.on-rules .mock-toggle {
-  top: 68px;
-  right: 10px;
-  font-size: 11px;
-  padding: 6px 10px;
 }
 
 /* ---------- 步驟1 歡迎頁 ---------- */
@@ -609,7 +630,8 @@ body.on-rules .mock-toggle {
   font-size: 20px;
   border: 1px solid var(--line-strong);
   border-radius: 10px;
-  margin-bottom: 10px; /* 與「第 N 次挑戰」間隔 */
+  /* 在「開始挑戰」按鈕上方；「第 N 次挑戰」泡泡會往上凸出約 20px 並上下跳動 7.5px，所以留 40px */
+  margin-bottom: 40px;
 }
 
 .user-greeting {
@@ -1379,6 +1401,35 @@ body.on-rules .app {
   margin: 0 auto 25px;
 }
 
+/* 英文：「序號兌換」圓章文字較長（Redeem / Code），縮小字級避免超出圓章 */
+body.lang-en .redeem-entry-text {
+  font-size: 15px;
+  letter-spacing: 0;
+  width: 84px;
+}
+
+/* 簡中／英文標題圖尚未提供時的文字版標題（顏色與字級對齊標題圖：橘字＋深褐立體陰影） */
+.rules-title-text {
+  text-align: center;
+  padding: 8px 0 4px;
+}
+.rules-title-main {
+  font-family: "Huninn", "PingFang TC", "PingFang SC", sans-serif;
+  font-size: clamp(34px, 12vw, 60px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #ffa24c;
+  -webkit-text-stroke: 2px #4a2d14;
+  paint-order: stroke fill;
+  text-shadow: 3px 4px 0 #4a2d14;
+}
+.rules-title-sub {
+  margin-top: 10px;
+  font-size: clamp(14px, 4.2vw, 19px);
+  font-weight: 600;
+  color: #442c16;
+}
+
 /* 活動辦法卡片：乾淨背景圖（無文字）+ 疊上真正的 HTML 文字，方便選取/複製 */
 .rules-card2 {
   position: relative;
@@ -1436,6 +1487,7 @@ body.on-rules .app {
 }
 .rules-card2-body p {
   margin: 0;
+  text-wrap: balance; /* 多行文字平均斷行，避免英文最後一行只剩一個字 */
 }
 .rules-card2-subhead {
   color: #f2ff00;
@@ -1461,6 +1513,23 @@ body.on-rules .app {
   .rules-card2--event .rules-card2-body,
   .rules-card2--rules .rules-card2-body {
     gap: min(22.5px, 5.515cqw); /* 22.5 / 408 */
+  }
+}
+
+/* 英文文案較長：卡片內文字級縮小（卡片文字區高度固定，不縮會超出卡片） */
+body.lang-en .rules-card2-body {
+  font-size: 14px;
+  line-height: 1.4;
+  gap: 10px;
+}
+@supports (width: 1cqw) {
+  body.lang-en .rules-card2-body {
+    font-size: min(13.5px, 3.31cqw); /* 13.5 / 408 */
+    gap: min(10px, 2.45cqw);
+  }
+  body.lang-en .rules-card2--event .rules-card2-body,
+  body.lang-en .rules-card2--rules .rules-card2-body {
+    gap: min(14px, 3.43cqw);
   }
 }
 

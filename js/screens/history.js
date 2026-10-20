@@ -1,6 +1,7 @@
 // 步驟4 答題紀錄頁
 
 import { openShareModal } from "../share.js";
+import { t } from "../i18n.js";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -20,7 +21,7 @@ export function renderHistory(record, nav) {
           if (i === q.answerIndex) cls += " correct";
           else if (i === selected) cls += " your-wrong";
           const mark =
-            i === selected ? "（你的選擇）" : i === q.answerIndex ? "（正解）" : "";
+            i === selected ? t("history.yourPick") : i === q.answerIndex ? t("history.correctMark") : "";
           const markHtml = mark ? `<span class="hist-opt-mark">${mark}</span>` : "";
           return `<div class="${cls}">${LETTERS[i]}. ${opt}${markHtml}</div>`;
         })
@@ -31,7 +32,7 @@ export function renderHistory(record, nav) {
           <button class="hist-head" type="button" aria-expanded="false">
             <span class="hist-q"><span class="idx">${qi + 1}.</span> ${q.question}</span>
             <span class="hist-right">
-              <img class="hist-mark" src="assets/quiz-deco/${mark}.png" alt="${isCorrect ? "答對" : "答錯"}" />
+              <img class="hist-mark" src="assets/quiz-deco/${mark}.png" alt="${isCorrect ? t("play.altRight") : t("play.altWrong")}" />
               <svg class="hist-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none"
                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 9l6 6 6-6" />
@@ -49,11 +50,11 @@ export function renderHistory(record, nav) {
 
   el.innerHTML = `
     <div class="history-head">
-      <strong>答題紀錄（${record.score}/${record.total}）</strong>
-      <button class="link-btn" id="hist-share">分享結果</button>
+      <strong>${t("history.title", { s: record.score, t: record.total })}</strong>
+      <button class="link-btn" id="hist-share">${t("history.share")}</button>
     </div>
     ${items}
-    <button id="hist-back" class="btn btn-primary">返回大廳</button>
+    <button id="hist-back" class="btn btn-primary">${t("history.back")}</button>
   `;
 
   // 折疊/展開

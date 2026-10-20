@@ -1,6 +1,7 @@
 // 共用首頁上方 header bar（首頁／活動辦法／開始挑戰），各畫面共用。
 
 import { isAppUser } from "./user.js";
+import { t } from "./i18n.js";
 
 // options.logo：是否在選單最左側顯示 Letstalk logo + 分隔線（目前只有首頁需要）
 // 桌機：膠囊背景跟著內容寬度自動撐開，不受 .app 欄寬限制。
@@ -10,7 +11,7 @@ export function renderHeaderNav(options = {}) {
     <div class="lobby-nav-wrap">
       <nav class="lobby-nav">
         <!-- 背景音樂鈕：絕對定位在膠囊左側 16px，不影響膠囊位置 -->
-        <button type="button" class="bgm-toggle" aria-label="背景音樂">${window.__soundOn === false ? "🔇" : "🔊"}</button>
+        <button type="button" class="bgm-toggle" aria-label="${t("bgm.aria")}">${window.__soundOn === false ? "🔇" : "🔊"}</button>
         ${
           options.logo
             ? `<img class="lobby-nav-logo" src="assets/logo.svg" alt="Letstalk" />
@@ -18,11 +19,11 @@ export function renderHeaderNav(options = {}) {
             : ""
         }
         <div class="lobby-nav-links">
-          <a href="#" class="lobby-nav-link" data-nav="home">首頁</a>
-          <a href="#" class="lobby-nav-link" data-nav="rules">活動辦法</a>
-          <button type="button" class="lobby-nav-cta" data-nav="start">開始挑戰 GO！</button>
+          <a href="#" class="lobby-nav-link" data-nav="home">${t("nav.home")}</a>
+          <a href="#" class="lobby-nav-link" data-nav="rules">${t("nav.rules")}</a>
+          <button type="button" class="lobby-nav-cta" data-nav="start">${t("nav.start")}</button>
         </div>
-        <button type="button" class="lobby-nav-burger" aria-label="選單" aria-expanded="false">
+        <button type="button" class="lobby-nav-burger" aria-label="${t("nav.menu")}" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </nav>

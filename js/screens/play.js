@@ -7,6 +7,7 @@ import {
   isLastQuestion,
   getCurrentQuestion,
 } from "../state.js";
+import { t } from "../i18n.js";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -82,7 +83,7 @@ export function renderPlay(nav) {
     <div class="play-top">
       <button type="button" class="bgm-toggle" aria-label="背景音樂">${window.__soundOn === false ? "🔇" : "🔊"}</button>
       <div class="play-top-main">
-        <div class="progress">第 ${num} / ${total} 題 · 答對 <span id="correct-count">${getScore()}</span> 題</div>
+        <div class="progress">${t("play.progress", { n: num, t: total, c: `<span id="correct-count">${getScore()}</span>` })}</div>
         <div class="progress-wrap">
           <div class="progress-bar"><span style="width:${(num / total) * 100}%"></span></div>
           <img class="progress-apple" src="assets/quiz-deco/${appleImg}.png" alt=""
@@ -106,7 +107,7 @@ export function renderPlay(nav) {
             .join("")}
         </div>
         <div id="feedback" class="explain-box hidden"></div>
-        <button id="next-btn" class="btn btn-primary hidden">下一題</button>
+        <button id="next-btn" class="btn btn-primary hidden">${t("play.next")}</button>
       </div>
     </div>
   `;
@@ -160,12 +161,12 @@ export function renderPlay(nav) {
           b.classList.add("correct");
           tag.innerHTML =
             selected === correct
-              ? `<img class="cat-mark cat-right" src="assets/quiz-deco/anwser_right.png" alt="答對" />`
-              : `<img class="tag-correct" src="assets/quiz-deco/correct.png" alt="正解" />`;
+              ? `<img class="cat-mark cat-right" src="assets/quiz-deco/anwser_right.png" alt="${t("play.altRight")}" />`
+              : `<img class="tag-correct" src="assets/quiz-deco/correct.png" alt="${t("play.altCorrect")}" />`;
         }
         if (i === selected && selected !== correct) {
           b.classList.add("wrong");
-          tag.innerHTML = `<img class="cat-mark cat-wrong" src="assets/quiz-deco/anwser_wrong.png" alt="答錯" />`;
+          tag.innerHTML = `<img class="cat-mark cat-wrong" src="assets/quiz-deco/anwser_wrong.png" alt="${t("play.altWrong")}" />`;
         }
       });
 
@@ -190,12 +191,12 @@ export function renderPlay(nav) {
       feedbackEl.innerHTML = `
         <div class="explain-head">
           <img class="explain-icon" src="assets/quiz-deco/${isOk ? "icon_right" : "icon_wrong"}.png" alt="" />
-          ${isOk ? "答對了！" : "答錯了"}
+          ${isOk ? t("play.right") : t("play.wrong")}
         </div>
         <div class="explain-text">${q.explanation}</div>
       `;
 
-      nextBtn.textContent = isLastQuestion() ? "看成績" : "下一題";
+      nextBtn.textContent = isLastQuestion() ? t("play.finish") : t("play.next");
       nextBtn.classList.remove("hidden");
     });
   });

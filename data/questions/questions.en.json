@@ -1,0 +1,1310 @@
+[
+  {
+    "id": "q001",
+    "question": "[Human Architecture] About how many bones does a baby have at birth?",
+    "options": [
+      "206",
+      "250",
+      "300",
+      "350"
+    ],
+    "answerIndex": 2,
+    "explanation": "300. A newborn has about 300 bones. Many of them fuse as the child grows, leaving 206 in adults."
+  },
+  {
+    "id": "q002",
+    "question": "[Blood Circulation] By popular-science estimates, if all the blood vessels in a human body were laid end to end, how many times could they circle the Earth's equator?",
+    "options": [
+      "Half a time",
+      "1.5 times",
+      "2.5 times",
+      "5 times"
+    ],
+    "answerIndex": 2,
+    "explanation": "2.5 times. Common estimates put the total at about 96,000 to 100,000 km, roughly 2.5 laps around the equator. The actual figure varies with the estimation method and individual differences."
+  },
+  {
+    "id": "q003",
+    "question": "[Vision Challenge] What color can your skin turn if you eat too many carrots?",
+    "options": [
+      "Greenish",
+      "Orange-yellow",
+      "Milk-tea brown",
+      "Grayish blue"
+    ],
+    "answerIndex": 1,
+    "explanation": "Orange-yellow. Eating too many carrots can turn the skin orange-yellow, a condition known in medicine as “carotenemia”."
+  },
+  {
+    "id": "q004",
+    "question": "[Physics] Under an extreme theoretical assumption, if the empty space between the atoms in every human body were squeezed out, how much volume would all of humanity take up?",
+    "options": [
+      "An apple",
+      "A sugar cube",
+      "A soccer ball",
+      "A hot-air balloon"
+    ],
+    "answerIndex": 1,
+    "explanation": "A sugar cube. If all the empty space inside the atoms of every human were removed, all of humanity would fit into the volume of a single sugar cube."
+  },
+  {
+    "id": "q005",
+    "question": "[Human Glow] Humans actually emit light like fireflies do, so why can't we see it with the naked eye?",
+    "options": [
+      "The light is about a thousandth as intense as the eye can detect",
+      "Light can't pass through the skin",
+      "We only glow during deep sleep",
+      "The light's wavelength isn't visible light"
+    ],
+    "answerIndex": 0,
+    "explanation": "The light is about a thousandth as intense as the eye can detect. When our cells carry out metabolism and biochemical reactions such as DNA replication and repair, they release extremely faint photons."
+  },
+  {
+    "id": "q006",
+    "question": "[Body Strength] In terms of bite force or strength relative to size, which muscle is often called one of the strongest?",
+    "options": [
+      "Gastrocnemius (calf)",
+      "Gluteus maximus",
+      "Masseter (jaw muscle)",
+      "Biceps"
+    ],
+    "answerIndex": 2,
+    "explanation": "The masseter. By the principle of leverage, the masseter has a huge mechanical advantage and can produce a very strong single bite force."
+  },
+  {
+    "id": "q007",
+    "question": "[Body Function] Staring at a screen for a long time makes your eyes dry because your blink rate drops to about how many times per minute?",
+    "options": [
+      "0",
+      "5",
+      "12",
+      "20"
+    ],
+    "answerIndex": 1,
+    "explanation": "5. While concentrating on a screen, the blink rate drops from the usual 15–20 times per minute to only about 5."
+  },
+  {
+    "id": "q008",
+    "question": "[Body Function] Why do your fingers wrinkle after soaking in water for a long time?",
+    "options": [
+      "Skin cells absorb too much water and swell",
+      "The skin's natural oils get washed away",
+      "A nervous-system reflex constricts the blood vessels in the fingers, creating wrinkles that may help grip in wet conditions",
+      "Constricted blood vessels shrink the fat under the skin"
+    ],
+    "answerIndex": 2,
+    "explanation": "A nervous-system reflex constricts the blood vessels in the fingers, creating wrinkles that may help grip in wet conditions."
+  },
+  {
+    "id": "q009",
+    "question": "[Daily Physiology] Why do we often feel sleepy after a hot bath?",
+    "options": [
+      "The brain is briefly short of oxygen",
+      "Hot water dilates the surface blood vessels, so body temperature drops quickly afterward",
+      "The chlorine in hot water causes mild fatigue",
+      "A lot of body water is lost"
+    ],
+    "answerIndex": 1,
+    "explanation": "Hot water dilates the surface blood vessels, so body temperature drops quickly afterward. This rapid drop mimics the signal that tells the brain it's time to sleep."
+  },
+  {
+    "id": "q010",
+    "question": "[Taste Secrets] When you eat chili peppers, the brain feels “burning heat” because capsaicin stimulates which receptor on the tongue?",
+    "options": [
+      "Cold-sensing receptor",
+      "Heat/spicy-pain receptor TRPV1",
+      "Salt-suppressing receptor",
+      "Mechanical touch receptor"
+    ],
+    "answerIndex": 1,
+    "explanation": "The heat/spicy-pain receptor TRPV1. Capsaicin stimulates the TRPV1 receptors on the tongue that sense heat and spicy pain, which tricks the brain."
+  },
+  {
+    "id": "q011",
+    "question": "[Body Function] When we blush from embarrassment or shyness, what physiological change is mainly happening?",
+    "options": [
+      "The facial bones heat up",
+      "The tiny blood vessels in the face dilate and blood flow increases",
+      "The liver instantly turns red",
+      "The kidneys stop working"
+    ],
+    "answerIndex": 1,
+    "explanation": "The tiny blood vessels in the face dilate and blood flow increases. Blushing is mainly a change in facial blood flow caused by the autonomic nervous system."
+  },
+  {
+    "id": "q012",
+    "question": "[Human Power] While awake, the human brain uses about as much power as a small light bulb of how many watts?",
+    "options": [
+      "1 to 5 W",
+      "10 to 23 W",
+      "60 to 100 W",
+      "500 W"
+    ],
+    "answerIndex": 1,
+    "explanation": "10 to 23 W. The energy it produces is enough to light a small bulb of about 10 to 23 watts."
+  },
+  {
+    "id": "q013",
+    "question": "[Taste Illusion] If you pinch your nose while eating, which food, like apples and onions, becomes harder to tell apart by taste alone?",
+    "options": [
+      "Carrot",
+      "Cucumber",
+      "Potato",
+      "Eggplant"
+    ],
+    "answerIndex": 2,
+    "explanation": "Potato. Human flavor perception relies on smell, so it's harder to tell foods apart when your nose is pinched."
+  },
+  {
+    "id": "q014",
+    "question": "[Human Mysteries] Research has observed that after two people gaze at each other for a while, which physiological signal may become synchronized?",
+    "options": [
+      "Blink rate",
+      "Heart rate",
+      "Body temperature changes",
+      "Fingernail growth speed"
+    ],
+    "answerIndex": 1,
+    "explanation": "Heart rate. Some studies have observed that physiological signals such as heart rate may synchronize while two people look into each other's eyes."
+  },
+  {
+    "id": "q015",
+    "question": "[Human Mysteries] Regarding physiological differences between babies and adults, which statement is more accurate?",
+    "options": [
+      "Babies breathe more slowly than adults",
+      "Young babies are better able to coordinate breathing and swallowing while sucking",
+      "Babies can't swallow breast milk until age 1",
+      "A baby's throat structure is exactly the same as an adult's"
+    ],
+    "answerIndex": 1,
+    "explanation": "Young babies are better able to coordinate breathing and swallowing while sucking. This is linked to developmental features such as the position of the infant larynx and the sucking reflex."
+  },
+  {
+    "id": "q016",
+    "question": "[Neuroscience] Where does the pain we feel as a “headache” mainly come from?",
+    "options": [
+      "Living cells in the center of the brain",
+      "Tissues around the brain, such as the meninges, blood vessels, scalp and muscles",
+      "Spoiled cerebrospinal fluid",
+      "Overloaded memory centers"
+    ],
+    "answerIndex": 1,
+    "explanation": "Tissues around the brain, such as the meninges, blood vessels, scalp and muscles. The brain tissue itself has no pain receptors (nociceptors); headaches mostly come from surrounding tissues."
+  },
+  {
+    "id": "q017",
+    "question": "[Sleep Truths] Once asleep, which sense is least likely to wake a person up, which is why fire alarms rely on sound?",
+    "options": [
+      "Hearing",
+      "Touch",
+      "Smell",
+      "Taste"
+    ],
+    "answerIndex": 2,
+    "explanation": "Smell. Research shows people respond very weakly to odors during sleep, so you can't count on smelling smoke to wake you up."
+  },
+  {
+    "id": "q018",
+    "question": "[Medical Myths] About the autonomic reflex of “not being able to open your eyes when sneezing,” which statement is correct?",
+    "options": [
+      "It is physically impossible to keep your eyes open",
+      "Keeping your eyes open would make your eyeballs pop out",
+      "With extreme deliberate control, or by holding the eyelids open with your hands, you can keep your eyes open while sneezing",
+      "You can only keep your eyes open if you sneeze fully undressed"
+    ],
+    "answerIndex": 2,
+    "explanation": "With extreme deliberate control, or by holding the eyelids open with your hands, you can keep your eyes open while sneezing. Closing the eyes is an autonomic reflex, but keeping them open is not physically impossible, and your eyeballs will definitely not pop out."
+  },
+  {
+    "id": "q019",
+    "question": "[Physiology Myths] Adult skin cells renew about every 28 days on average. What is the main reason?",
+    "options": [
+      "Everyday friction from clothing",
+      "Daily exfoliation from bathing",
+      "The skin itself constantly carries out metabolism",
+      "Sunlight's UV rays directly replace the cells"
+    ],
+    "answerIndex": 2,
+    "explanation": "The skin itself constantly carries out metabolism. 28 days is a common average and varies with age, body area and health."
+  },
+  {
+    "id": "q020",
+    "question": "[Organ Development] About the widely spread claim that “the eye is the only organ that doesn't grow,” what's the truth?",
+    "options": [
+      "Completely true; the size at birth and in adulthood is identical",
+      "False; a baby's eyeball is only about 16–17 mm front to back and reaches the adult size of about 24 mm after puberty",
+      "The eyes only grow before age 5",
+      "The eyes gradually shrink by half with age"
+    ],
+    "answerIndex": 1,
+    "explanation": "False; a baby's eyeball is only about 16–17 mm front to back and reaches the adult size of about 24 mm after puberty. The eyeball grows quickly in childhood and reaches adult size around puberty."
+  },
+  {
+    "id": "q021",
+    "question": "[Heat-Loss Myth] There's a saying that “nearly half of your body heat escapes through the top of your head.” Which statement is closer to the scientific facts?",
+    "options": [
+      "Completely true; the head is the only way heat escapes",
+      "False; body heat loss mainly depends on exposed body surface area, and the head is only about 7% to 10% of total surface area",
+      "Only during intense exercise does half the heat escape from the head",
+      "Not wearing a hat increases whole-body sweating by 50%"
+    ],
+    "answerIndex": 1,
+    "explanation": "False; body heat loss mainly depends on exposed body surface area, and the head is only about 7% to 10% of total surface area."
+  },
+  {
+    "id": "q022",
+    "question": "[Respiratory Organs] About how the lungs work and use energy, which of the following is more accurate?",
+    "options": [
+      "The lungs use no energy at all",
+      "The lungs are a self-contracting organ made purely of skeletal muscle",
+      "Lung cells need energy to maintain metabolism, and breathing is mainly driven by the diaphragm and intercostal muscles",
+      "The lungs only use energy when inhaling, never when exhaling"
+    ],
+    "answerIndex": 2,
+    "explanation": "Lung cells need energy to maintain metabolism, and breathing is mainly driven by the diaphragm and intercostal muscles."
+  },
+  {
+    "id": "q023",
+    "question": "[Calorie Myths] Comparing the calories burned watching TV and sleeping, which of the following is more accurate?",
+    "options": [
+      "Sleeping burns far more calories than watching TV",
+      "They're exactly the same",
+      "Watching TV while sitting usually burns slightly more than lying asleep",
+      "Watching TV burns three times the calories"
+    ],
+    "answerIndex": 2,
+    "explanation": "Watching TV while sitting usually burns slightly more than lying asleep. Metabolic rate typically drops during sleep, so less energy is used."
+  },
+  {
+    "id": "q024",
+    "question": "[The Science of Spicy Relief] After eating something spicy, can rinsing your mouth with salt water effectively relieve the burn, scientifically speaking?",
+    "options": [
+      "Yes, salt instantly neutralizes capsaicin",
+      "No; capsaicin is fat-soluble and doesn't dissolve in water, and salt can actually irritate the mouth lining and hurt more",
+      "It crystallizes the capsaicin so it falls off",
+      "It can completely numb the pain receptors on the tongue"
+    ],
+    "answerIndex": 1,
+    "explanation": "No; capsaicin is fat-soluble and doesn't dissolve in water, and salt can actually irritate the mouth lining and hurt more. What really helps is drinking milk (casein can carry capsaicin away) or eating something fatty."
+  },
+  {
+    "id": "q025",
+    "question": "[Body Structure] About how fast human fingernails grow, which is closer to common observation?",
+    "options": [
+      "All fingernails grow at exactly the same speed",
+      "The thumb grows fastest and the pinky slowest",
+      "The middle finger often grows faster, while the thumb and pinky are relatively slower",
+      "The more a finger is used, the slower its nail grows"
+    ],
+    "answerIndex": 2,
+    "explanation": "The middle finger usually grows faster, while the thumb and pinky are relatively slower; but nail growth is also affected by age, health and handedness."
+  },
+  {
+    "id": "q026",
+    "question": "[Psychology] One study observed that when making a request of someone, speaking into which ear gives a slightly higher success rate?",
+    "options": [
+      "Left ear",
+      "Right ear",
+      "Both ears at once",
+      "There's no difference"
+    ],
+    "answerIndex": 1,
+    "explanation": "The right ear. This was observed in a specific study setting and doesn't mean it always holds in every situation."
+  },
+  {
+    "id": "q027",
+    "question": "[Animal Superpowers] Some freshwater turtles, in cold temperatures or during long dives, can exchange gases underwater with the help of which body part?",
+    "options": [
+      "Shell pores",
+      "Skin on the toes",
+      "The cloaca (their rear end)",
+      "Tear glands in the eyes"
+    ],
+    "answerIndex": 2,
+    "explanation": "The cloaca (their rear end). Under certain conditions, some freshwater turtles can absorb oxygen from the water through special structures in the cloaca."
+  },
+  {
+    "id": "q028",
+    "question": "[Longevity Champion] What is the longest-lived mammal on Earth?",
+    "options": [
+      "Blue whale",
+      "Bowhead whale",
+      "African elephant",
+      "Galápagos tortoise"
+    ],
+    "answerIndex": 1,
+    "explanation": "The bowhead whale. The longest-lived mammal on Earth is the bowhead whale, which can live for more than 200 years."
+  },
+  {
+    "id": "q029",
+    "question": "[Animal Appetite] The giant blue whale can't swallow a grown human because its throat is only about how wide?",
+    "options": [
+      "10–20 cm (about a grapefruit)",
+      "50 cm (about a large washbasin)",
+      "1 m (about a tire)",
+      "3 m"
+    ],
+    "answerIndex": 0,
+    "explanation": "10–20 cm (about a grapefruit). Despite its size, a blue whale's throat is only about 10–20 cm wide, roughly the size of a grapefruit."
+  },
+  {
+    "id": "q030",
+    "question": "[Plant Defense] The fresh smell of newly cut grass usually signals what in the plant world?",
+    "options": [
+      "Plants attracting insects to pollinate them",
+      "Volatile chemical signals released when a plant is injured",
+      "Plants celebrating growth",
+      "Plants releasing excess water"
+    ],
+    "answerIndex": 1,
+    "explanation": "Volatile chemical signals released when a plant is injured. These scent molecules are tied to the plant's defense response after damage."
+  },
+  {
+    "id": "q031",
+    "question": "[Animal Senses] Because of a genetic defect, which taste can cats not detect?",
+    "options": [
+      "Sour",
+      "Bitter",
+      "Salty",
+      "Sweet"
+    ],
+    "answerIndex": 3,
+    "explanation": "Sweet. Because of a genetic defect, cats lack the taste receptors for sweetness."
+  },
+  {
+    "id": "q032",
+    "question": "[Animal Sleep] Which bird has been recorded in studies spending almost 10 months of the non-breeding season in the air, rarely landing?",
+    "options": [
+      "Albatross",
+      "Swift",
+      "Hummingbird",
+      "Vulture"
+    ],
+    "answerIndex": 1,
+    "explanation": "The swift. Studies show the common swift can spend more than 99% of its non-breeding season airborne, and some individuals almost never touch down."
+  },
+  {
+    "id": "q033",
+    "question": "[Animal Kingdom] Do penguins actually have knees?",
+    "options": [
+      "None at all; their leg bones are straight",
+      "Yes, they're just hidden under thick feathers and body fat",
+      "Only the left leg has a knee",
+      "Their knees evolved into ankle-like structures"
+    ],
+    "answerIndex": 1,
+    "explanation": "Yes, they're just hidden under thick feathers and body fat. Penguins do have knees; they're simply tucked away under thick feathers and a layer of fat."
+  },
+  {
+    "id": "q034",
+    "question": "[Fruits] From a botanical point of view, which statement about “berries” is correct?",
+    "options": [
+      "Strawberries are berries; bananas are not",
+      "Watermelons and strawberries are both berries",
+      "Strawberries aren't berries, while giant watermelons and bananas are",
+      "All three are berries"
+    ],
+    "answerIndex": 2,
+    "explanation": "Strawberries aren't berries, while giant watermelons and bananas are. Botanically, a strawberry is not a “berry” (it is an aggregate fruit made of tiny achenes), whereas watermelons and bananas count as berries."
+  },
+  {
+    "id": "q035",
+    "question": "[Animal Anatomy] Comparing an ostrich's eye to its brain, which statement is correct?",
+    "options": [
+      "The ostrich's brain is bigger than its eye",
+      "The ostrich's eye is bigger than its brain",
+      "Ostriches have no brain",
+      "The ostrich's eye and brain are exactly the same size"
+    ],
+    "answerIndex": 1,
+    "explanation": "The ostrich's eye is bigger than its brain. It is also the land animal with the largest eyes."
+  },
+  {
+    "id": "q036",
+    "question": "[Animal Behavior] Sea otters often hold hands while sleeping. What is the main evolutionary reason?",
+    "options": [
+      "To show affection during mating season",
+      "To share body heat and stay warm in cold water",
+      "To keep from being swept apart by currents while asleep",
+      "To jointly guard against predators from below the surface"
+    ],
+    "answerIndex": 2,
+    "explanation": "To keep from being swept apart by currents while asleep. Sea otters hold hands when sleeping so they don't drift apart in the current."
+  },
+  {
+    "id": "q037",
+    "question": "[Marine Life] Which statement about an octopus's body and nervous system is correct?",
+    "options": [
+      "1 heart, blue blood",
+      "3 hearts, red blood",
+      "3 hearts, blue blood, and arms with abundant ganglia for semi-autonomous control",
+      "No heart, green blood"
+    ],
+    "answerIndex": 2,
+    "explanation": "An octopus has 3 hearts and blue blood, and its arms contain abundant ganglia that allow a degree of semi-autonomous control."
+  },
+  {
+    "id": "q038",
+    "question": "[Biology] Giraffes were long thought to be silent, but studies have recorded them making which kind of sound at night?",
+    "options": [
+      "High-pitched screams",
+      "Low-frequency humming",
+      "They have no vocal cords, so they're silent",
+      "They can only communicate with ultrasound"
+    ],
+    "answerIndex": 1,
+    "explanation": "Low-frequency humming."
+  },
+  {
+    "id": "q039",
+    "question": "[Physical Phenomena] A typical cumulus cloud looks light and fluffy, but its water content is estimated to be about how much?",
+    "options": [
+      "50 kg",
+      "5,000 kg",
+      "500,000 kg (500 tonnes)",
+      "50 million kg"
+    ],
+    "answerIndex": 2,
+    "explanation": "500,000 kg (500 tonnes). This is a popular-science estimate for a typical cumulus cloud; the actual amount varies by cloud type, size and water content."
+  },
+  {
+    "id": "q040",
+    "question": "[Animal Trivia] Australian wombats produce nearly cube-shaped droppings. What might be the benefit of this shape?",
+    "options": [
+      "Easy to carry in the mouth to build a nest",
+      "Less likely to roll, helping them stack droppings to mark territory",
+      "Saves energy when excreting",
+      "Attracts mates at night"
+    ],
+    "answerIndex": 1,
+    "explanation": "Less likely to roll, helping them stack droppings to mark territory. Differences in the elasticity of a wombat's intestine are linked to how the droppings take shape."
+  },
+  {
+    "id": "q041",
+    "question": "[Animal Behavior] When conditions such as drought become harsh, some snails may enter dormancy (estivation). How long can it last at most?",
+    "options": [
+      "3 days",
+      "3 months",
+      "3 years or more",
+      "30 years"
+    ],
+    "answerIndex": 2,
+    "explanation": "3 years or more. Some snails secrete mucus to seal the shell opening and estivate through the drought."
+  },
+  {
+    "id": "q042",
+    "question": "[Animal Features] Besides primates, which animal also has fingerprints very similar to humans'?",
+    "options": [
+      "Chimpanzee",
+      "Koala",
+      "Polar bear",
+      "African elephant"
+    ],
+    "answerIndex": 1,
+    "explanation": "The koala. Koala fingerprints are very similar to human ones and can even cause confusion in forensic identification."
+  },
+  {
+    "id": "q043",
+    "question": "[Zoology] Everyday bananas are very slightly radioactive because they're rich in which radioactive isotope?",
+    "options": [
+      "Uranium-235",
+      "Radium-226",
+      "Potassium-40",
+      "Cobalt-60"
+    ],
+    "answerIndex": 2,
+    "explanation": "Potassium-40. Bananas are rich in potassium-40, so they carry a very faint amount of radioactivity."
+  },
+  {
+    "id": "q044",
+    "question": "[Zoology] Which marine mammal's different groups learn and keep their own distinctive calls, like “dialects”?",
+    "options": [
+      "Octopus",
+      "Orca (killer whale)",
+      "Starfish",
+      "Jellyfish"
+    ],
+    "answerIndex": 1,
+    "explanation": "The orca (killer whale). Different orca groups have distinctive calls that are learned and passed down through generations."
+  },
+  {
+    "id": "q045",
+    "question": "[Animal Anatomy] The tongue of an adult blue whale weighs about as much as the whole body of which animal?",
+    "options": [
+      "An adult cat",
+      "An adult hippo",
+      "An elephant",
+      "A polar bear"
+    ],
+    "answerIndex": 2,
+    "explanation": "An elephant. An adult blue whale's tongue weighs about as much as an elephant."
+  },
+  {
+    "id": "q046",
+    "question": "[Geography] By the scientific definition of “very low annual precipitation,” where is the world's largest “desert”?",
+    "options": [
+      "Sahara Desert",
+      "Gobi Desert",
+      "Antarctica",
+      "Arabian Desert"
+    ],
+    "answerIndex": 2,
+    "explanation": "Antarctica. A desert is scientifically defined as a barren region with very low annual precipitation, and Antarctica is far larger than the Sahara."
+  },
+  {
+    "id": "q047",
+    "question": "[Animal Kingdom] How many limbs does a cuttlefish have in total?",
+    "options": [
+      "5",
+      "8",
+      "10",
+      "12"
+    ],
+    "answerIndex": 2,
+    "explanation": "10. They have 8 arms and 2 longer tentacles."
+  },
+  {
+    "id": "q048",
+    "question": "[Animal Kingdom] Starfish are a classic brainless animal, but they actually have tiny eyes (eyespots). Where on the body are they?",
+    "options": [
+      "The very center of the body",
+      "At the tip of each arm",
+      "Around the inside of the mouth",
+      "At the base of the arms' suckers"
+    ],
+    "answerIndex": 1,
+    "explanation": "At the tip of each arm. Though a starfish has no brain, there is an eyespot at the end of each arm."
+  },
+  {
+    "id": "q049",
+    "question": "[Everyday Oddities] Which animal eats its own “brain” once it grows up and finds a place to settle?",
+    "options": [
+      "Starfish",
+      "Sea urchin",
+      "Sea squirt",
+      "Jellyfish"
+    ],
+    "answerIndex": 2,
+    "explanation": "The sea squirt. After a sea squirt larva settles down, it goes through metamorphosis and absorbs part of the nervous structures it once used for swimming and sensing."
+  },
+  {
+    "id": "q050",
+    "question": "[Ecological Crisis] Why do sea turtles often mistakenly eat plastic bags and other trash in the ocean?",
+    "options": [
+      "Their brains have no visual function at all",
+      "Plastic bags look much like their main food, jellyfish, and after drifting a long time they collect algae that smells like food",
+      "They prefer swallowing polymers",
+      "To help their stomachs grind hard seaweed"
+    ],
+    "answerIndex": 1,
+    "explanation": "Plastic bags look much like their main food, jellyfish, and after drifting a long time they collect algae that smells like food. Sea turtles often eat plastic mainly because of visual mistaken identity and tempting smells."
+  },
+  {
+    "id": "q051",
+    "question": "[Animal Behavior] When male giraffes fight, they swing their long necks and slam their heads into their opponents. What is this behavior called in biology?",
+    "options": [
+      "Head-butting",
+      "Necking",
+      "Pendulum slamming",
+      "Wrestling match"
+    ],
+    "answerIndex": 1,
+    "explanation": "Necking. Male giraffes swing their powerful long necks and slam their heads into rivals like a flail; in biology this behavior is called “necking.”"
+  },
+  {
+    "id": "q052",
+    "question": "[Animal Ecology] When the skin cells of fish such as carp are broken by injury, which chemical signal do they release into the water to warn others?",
+    "options": [
+      "Alarm pheromone",
+      "Schreckstoff (fright substance)",
+      "Histamine defensin",
+      "A mild neurotoxin"
+    ],
+    "answerIndex": 1,
+    "explanation": "Schreckstoff (fright substance). This chemical alarm signal makes nearby fish flee or hide."
+  },
+  {
+    "id": "q053",
+    "question": "[Animal Anatomy] About cows and stairs, which is closer to the facts?",
+    "options": [
+      "Cows can't climb any stairs at all",
+      "Cows can go down stairs but usually aren't good at going up",
+      "Cows can go up stairs but usually aren't good at going down",
+      "Cows can go up and down stairs freely"
+    ],
+    "answerIndex": 2,
+    "explanation": "Cows can go up stairs but usually aren't good at going down. This is mainly related to their center of gravity and how their joints move."
+  },
+  {
+    "id": "q054",
+    "question": "[Animal Ecology] Which insect's compound eyes actually have tiny “hairs” that pick up pollen and sense wind direction to help with navigation?",
+    "options": [
+      "Fly",
+      "Bee",
+      "Butterfly",
+      "Dragonfly"
+    ],
+    "answerIndex": 1,
+    "explanation": "The bee. That's right, bees. Their compound eyes have tiny hairs that help collect pollen and sense wind direction to aid flight navigation."
+  },
+  {
+    "id": "q055",
+    "question": "[Marine Life] Where in its body is a shrimp's “heart”?",
+    "options": [
+      "In the tail",
+      "Along the middle of the abdomen",
+      "In the head-chest area (the head)",
+      "At the joint of the big claw"
+    ],
+    "answerIndex": 2,
+    "explanation": "In the head-chest area (what people usually call the head). A shrimp's heart is located in its cephalothorax, commonly called the head."
+  },
+  {
+    "id": "q056",
+    "question": "[Animal Ecology] How do dolphins sleep in the water while still breathing and staying alert for predators?",
+    "options": [
+      "They are special mammals that evolved to need no sleep",
+      "They float at the surface holding their breath and breathe after waking",
+      "They use “unihemispheric sleep,” letting half the brain sleep while the other half stays awake",
+      "They hide in sheltered coral caves and sleep deeply"
+    ],
+    "answerIndex": 2,
+    "explanation": "They use “unihemispheric sleep,” letting half the brain sleep while the other half stays awake. This lets them stay alert for predators and surface regularly to breathe."
+  },
+  {
+    "id": "q057",
+    "question": "[Biology] Although coral stays fixed on the seabed and looks like a plant or a rock, what is it in biological classification?",
+    "options": [
+      "Algae (a plant phylum)",
+      "A colonial animal of the phylum Cnidaria",
+      "Marine mineral crystals",
+      "A mollusk"
+    ],
+    "answerIndex": 1,
+    "explanation": "A colonial animal of the phylum Cnidaria. Although it settles on the seabed, coral is a colonial animal made of thousands of tiny “polyps,” and in biology it belongs to the phylum Cnidaria."
+  },
+  {
+    "id": "q058",
+    "question": "[Animal Ecology] Some sloths, especially three-toed sloths, have a special habit when it comes to going to the bathroom. What is it?",
+    "options": [
+      "Always on tree branches",
+      "Always in the sea",
+      "They make a special trip down to the base of the tree",
+      "They only go once in their lifetime, at their birthplace"
+    ],
+    "answerIndex": 2,
+    "explanation": "They make a special trip down to the base of the tree."
+  },
+  {
+    "id": "q059",
+    "question": "[Zoology] A polar bear looks snow-white, but do you know what color the skin under its fur really is?",
+    "options": [
+      "Pink",
+      "Pure white",
+      "Black",
+      "Brown"
+    ],
+    "answerIndex": 2,
+    "explanation": "Black. A polar bear's fur is transparent and hollow, but the skin beneath it is actually black."
+  },
+  {
+    "id": "q060",
+    "question": "[Deadly Creatures] Which creature kills the most people every year and causes the most casualties in the world?",
+    "options": [
+      "The lion, king of beasts",
+      "The great white shark",
+      "The venomous cobra",
+      "The mosquito"
+    ],
+    "answerIndex": 3,
+    "explanation": "The mosquito. Mosquitoes spread serious diseases (such as malaria) through blood-sucking, causing extremely heavy casualties in regions with poor medical care."
+  },
+  {
+    "id": "q061",
+    "question": "[Taste Secrets] Why does airplane food often seem less tasty? What is the main scientific reason?",
+    "options": [
+      "The chefs on planes are generally less skilled",
+      "Frozen food loses moisture when reheated",
+      "Dry air and low air pressure affect taste and smell; sweet and salty perception can drop by about 30%",
+      "The high-altitude environment completely destroys the amino acids in meat"
+    ],
+    "answerIndex": 2,
+    "explanation": "Dry air and low air pressure affect taste and smell; sweet and salty perception can drop by about 30%. It isn't the chefs' skill: the low pressure and extreme dryness at altitude reduce the sensitivity of the human tongue by about 30%."
+  },
+  {
+    "id": "q062",
+    "question": "[Tech Basics] In computer data units, how many bits equal 1 byte?",
+    "options": [
+      "2",
+      "4",
+      "8",
+      "16"
+    ],
+    "answerIndex": 2,
+    "explanation": "8. The byte is a common unit of data capacity, and 1 byte equals 8 bits."
+  },
+  {
+    "id": "q063",
+    "question": "[Food & Drink Basics] The international standard for the common crown cap on glass bottles is mostly how many teeth (crimps)?",
+    "options": [
+      "18",
+      "21",
+      "24",
+      "30"
+    ],
+    "answerIndex": 1,
+    "explanation": "21. Crown caps originally had 24 teeth, but the common modern standard is 21."
+  },
+  {
+    "id": "q064",
+    "question": "[Clothing Details] When designed in the 19th century, what was the tiny extra pocket inside the right pocket of jeans originally meant to hold?",
+    "options": [
+      "Gold coins or gold dust",
+      "Matches and a lighter",
+      "A pocket watch",
+      "A miner's ID"
+    ],
+    "answerIndex": 2,
+    "explanation": "A pocket watch. The classic original design was for holding a “pocket watch.”"
+  },
+  {
+    "id": "q065",
+    "question": "[Stationery Science] What is the physical principle that lets an eraser easily remove pencil marks from paper?",
+    "options": [
+      "The eraser contains chemicals that dissolve graphite",
+      "The friction and adhesion of the eraser are stronger than the paper fibers', so it directly “sticks” the graphite powder away",
+      "The eraser physically scrapes off the top layer of the paper",
+      "Graphite powder vaporizes on contact with the eraser"
+    ],
+    "answerIndex": 1,
+    "explanation": "The friction and adhesion of the eraser are stronger than the paper fibers', so it directly “sticks” the graphite powder away. The friction and adhesion produced when rubbing are stronger than the paper fibers, so it lifts away the graphite powder left on the paper."
+  },
+  {
+    "id": "q066",
+    "question": "[Transportation] Why are the windows on commercial airliners always designed with rounded corners instead of right angles?",
+    "options": [
+      "Rounded windows look the nicest",
+      "Right-angled windows are too complicated to manufacture",
+      "Right angles tend to develop “stress concentration” under high-altitude pressure and crack, while rounded corners spread the stress evenly",
+      "Rounded designs widen passengers' view"
+    ],
+    "answerIndex": 2,
+    "explanation": "Right angles tend to develop “stress concentration” under high-altitude pressure and crack, while rounded corners spread the stress evenly. Sharp corners can crack and even cause disasters, while rounded corners distribute the pressure difference between inside and outside the cabin evenly."
+  },
+  {
+    "id": "q067",
+    "question": "[Food Science] Why does coffee often taste different once it gets cold?",
+    "options": [
+      "Caffeine disappears when it cools",
+      "Bitterness turns into sweetness",
+      "Temperature affects aroma release and taste perception, changing the balance of acidity, bitterness and aroma",
+      "Temperature has no effect on flavor at all"
+    ],
+    "answerIndex": 2,
+    "explanation": "Temperature affects aroma release and taste perception, changing the balance of acidity, bitterness and aroma."
+  },
+  {
+    "id": "q068",
+    "question": "[Kitchen Science] You should never heat a nonstick pan empty (“dry-fire” it). What is the main danger?",
+    "options": [
+      "The metal at the bottom of the pan melts directly",
+      "The Teflon coating starts to break down above 260°C and releases gases that are harmful to people",
+      "It ruins the pan's appearance",
+      "It makes the pan permanently lose its nonstick ability"
+    ],
+    "answerIndex": 1,
+    "explanation": "The Teflon coating starts to break down above 260°C and releases gases that are harmful to people."
+  },
+  {
+    "id": "q069",
+    "question": "[Kitchen Science] Why shouldn't you put metal items not marked microwave-safe, especially foil or sharp objects like forks, into a microwave oven?",
+    "options": [
+      "Metal absorbs all the microwaves",
+      "Metal can reflect microwaves and create electric arcs at sharp points, risking damage or fire",
+      "It will definitely short-circuit the microwave instantly",
+      "Metal melts within seconds"
+    ],
+    "answerIndex": 1,
+    "explanation": "Metal can reflect microwaves and create electric arcs at sharp points, risking damage or fire."
+  },
+  {
+    "id": "q070",
+    "question": "[Everyday Design] Why are the buttons on most TV or air-conditioner remote controls made of rubber?",
+    "options": [
+      "It has the most premium look and feel",
+      "It's elastic, durable and insulating",
+      "It feels the softest and is the most ergonomic",
+      "It's the easiest to dissolve chemically for environmental disposal"
+    ],
+    "answerIndex": 1,
+    "explanation": "It's elastic, durable and insulating, and also easy to mold in large quantities, protecting the internal circuits and giving a good pressing feel."
+  },
+  {
+    "id": "q071",
+    "question": "[Scent Memory] Why does the smell of soil after rain seem so fresh? What is one of its main scent sources?",
+    "options": [
+      "Rain washes away all pollution",
+      "Plants release lots of oxygen",
+      "Geosmin produced by soil bacteria is carried into the air by raindrops",
+      "Dissolving minerals create the aroma"
+    ],
+    "answerIndex": 2,
+    "explanation": "Geosmin produced by soil bacteria is carried into the air by raindrops."
+  },
+  {
+    "id": "q072",
+    "question": "[Food Packaging] A bag of potato chips is always half full of “air.” What gas is it actually?",
+    "options": [
+      "Compressed oxygen",
+      "High-purity nitrogen",
+      "Carbon dioxide",
+      "Special sterile air"
+    ],
+    "answerIndex": 1,
+    "explanation": "High-purity nitrogen. It isn't ordinary air; it's nitrogen, added to keep the chips from breaking during shipping and to prevent the oil from oxidizing and spoiling."
+  },
+  {
+    "id": "q073",
+    "question": "[Everyday Items] The top of a ballpoint pen cap usually has a tiny hole. What is the main purpose of this safety-regulation design?",
+    "options": [
+      "To let the volatile parts of the ink dry faster",
+      "So that if a child accidentally swallows the cap, air can still flow through the throat and prevent choking",
+      "To make it easy to fit the cap onto the end of another pen",
+      "To balance air pressure inside and outside the pen body"
+    ],
+    "answerIndex": 1,
+    "explanation": "So that if a child accidentally swallows the cap, air can still flow through the throat and prevent choking. This is a safety-regulation design."
+  },
+  {
+    "id": "q074",
+    "question": "[Everyday Efficiency] Why does a microwave turntable sometimes turn clockwise and sometimes counterclockwise?",
+    "options": [
+      "The motor simply starts in a random direction, which still lets food heat more evenly across different batches",
+      "It represents different directions of microwave intensity distribution",
+      "It automatically adjusts for the Coriolis force depending on the northern or southern hemisphere",
+      "It signals the user that the microwave is about to finish"
+    ],
+    "answerIndex": 0,
+    "explanation": "In most cases the synchronous motor can start in either direction; whichever way it turns, the turntable's main job is to move the food through the microwave field so it heats more evenly."
+  },
+  {
+    "id": "q075",
+    "question": "[Spatial Psychology] Why do most passenger elevators deliberately have mirrors installed?",
+    "options": [
+      "So passengers can check their appearance anytime",
+      "To increase brightness and the sense of space inside the elevator",
+      "Common reasons include creating a sense of space, distracting attention, and reducing waiting and claustrophobia anxiety",
+      "So the cameras in the elevator can monitor with no blind spots"
+    ],
+    "answerIndex": 2,
+    "explanation": "Common reasons include creating a sense of space, distracting attention, and reducing waiting and claustrophobia anxiety."
+  },
+  {
+    "id": "q076",
+    "question": "[Color in Life] In hospital operating rooms, surgeons' gowns are usually green or blue. What is the main physiological purpose?",
+    "options": [
+      "Green and blue have a natural germ-killing effect",
+      "They are adjusted to the wavelength of the special shadowless surgical lights",
+      "Green/blue helps neutralize the afterimages and visual fatigue caused by looking at red for long periods",
+      "Green effectively helps the patient on the table relax"
+    ],
+    "answerIndex": 2,
+    "explanation": "Green/blue helps neutralize the afterimages and visual fatigue caused by looking at red for long periods."
+  },
+  {
+    "id": "q077",
+    "question": "[Everyday Chemistry] Why does cutting onions make people cry?",
+    "options": [
+      "The onion smell is simply too pungent",
+      "When onion cells break, they produce the volatile tear-inducing compound syn-propanethial-S-oxide, which irritates the eyes",
+      "Onions absorb moisture from the eyes",
+      "Onions release large amounts of carbon dioxide"
+    ],
+    "answerIndex": 1,
+    "explanation": "When onion cells break, an enzyme reaction produces the volatile tear-inducing compound syn-propanethial-S-oxide, which irritates the eyes and makes them tear."
+  },
+  {
+    "id": "q078",
+    "question": "[Everyday Cold Science] Why does a phone's touch screen stop working when it's wet or has water droplets on it?",
+    "options": [
+      "Water shorts out and burns the core circuits inside the screen",
+      "Water conducts electricity and interferes with how a capacitive screen detects changes in the electric field/capacitance at the touch point",
+      "Water droplets completely block the infrared sensing under the screen",
+      "Droplets thicken the screen so it can't sense physical pressure"
+    ],
+    "answerIndex": 1,
+    "explanation": "Water conducts electricity and interferes with how a capacitive screen detects changes in the electric field/capacitance at the touch point."
+  },
+  {
+    "id": "q079",
+    "question": "[Everyday History] Comparing 19th-century chemical lighters with friction matches, which appeared first?",
+    "options": [
+      "The simply built match was invented first",
+      "The more complex lighter was invented first",
+      "Both were invented in the same year by the same scientist",
+      "The magnifying-glass fire-starting technique came first"
+    ],
+    "answerIndex": 1,
+    "explanation": "The chemical lighter came first. A commonly cited account is that the Döbereiner lamp preceded John Walker's friction match."
+  },
+  {
+    "id": "q080",
+    "question": "[Food Science] Which food, properly sealed and stored, is very hard to spoil thanks to low water content and a high-sugar, high-acid environment?",
+    "options": [
+      "Dried beef jerky",
+      "Pure honey",
+      "Cooked white rice",
+      "Pickled black olives"
+    ],
+    "answerIndex": 1,
+    "explanation": "Pure honey. When sealed and uncontaminated, honey keeps extremely well."
+  },
+  {
+    "id": "q081",
+    "question": "[Everyday Knowledge] The main fiber in many traditional banknotes isn't ordinary wood-pulp paper. What is it?",
+    "options": [
+      "Petroleum-based plastic fibers",
+      "High-grade anti-counterfeit silk",
+      "Cotton fibers, with some notes also blending in fibers such as linen",
+      "Iron powder and aluminum foil"
+    ],
+    "answerIndex": 2,
+    "explanation": "Cotton fibers, with some notes also blending in fibers such as linen."
+  },
+  {
+    "id": "q082",
+    "question": "[Everyday History] In the 1830s a “tomato therapy” craze appeared in the US. What were tomatoes or tomato products claimed to cure?",
+    "options": [
+      "Fever",
+      "Ailments such as indigestion",
+      "Headaches",
+      "Skin diseases"
+    ],
+    "answerIndex": 1,
+    "explanation": "Ailments such as indigestion. John Cook Bennett and others claimed tomatoes could treat indigestion, diarrhea, jaundice and more, and tomato pills later appeared."
+  },
+  {
+    "id": "q083",
+    "question": "[Movie Culture] In the first Toy Story, when Buzz Lightyear flips open his arm to look, where does it clearly say he was made?",
+    "options": [
+      "Made in USA",
+      "Made in Japan",
+      "Made in Taiwan",
+      "Made in China"
+    ],
+    "answerIndex": 2,
+    "explanation": "Made in Taiwan. In the first film, when Buzz flips open his arm, it clearly says “Made in Taiwan” (Taiwan was a toy-making powerhouse in the 1990s)."
+  },
+  {
+    "id": "q084",
+    "question": "[Brand Trivia] Where is the world's only McDonald's that, by regulation, changed its signature yellow M sign to “turquoise” so as not to spoil the local red-rock scenery?",
+    "options": [
+      "Times Square, New York, USA",
+      "Champs-Élysées, Paris, France",
+      "Sedona, Arizona, USA",
+      "Next to Kiyomizu-dera, Kyoto, Japan"
+    ],
+    "answerIndex": 2,
+    "explanation": "Sedona, Arizona, USA. To avoid spoiling the magnificent red-rock landscape, strict local regulations required the yellow to be changed to “turquoise.”"
+  },
+  {
+    "id": "q085",
+    "question": "[Chemical Reaction] What happens if you soak a natural pearl in everyday cooking vinegar for a long time?",
+    "options": [
+      "The pearl absorbs the acid and becomes harder",
+      "The pearl slowly dissolves or its surface is badly corroded",
+      "The pearl reacts chemically and turns emerald green",
+      "The two don't react at all"
+    ],
+    "answerIndex": 1,
+    "explanation": "The pearl slowly dissolves or its surface is badly corroded. Pearls are mainly calcium carbonate and vinegar contains acetic acid, so the two react; soaking for a long time really can make a pearl dissolve slowly or corrode badly."
+  },
+  {
+    "id": "q086",
+    "question": "[Invention Trivia] The microwave oven common in modern homes was inspired by which chance discovery?",
+    "options": [
+      "An oven overheated and melted the baking tray",
+      "A Raytheon engineer studying a military radar magnetron noticed the chocolate bar in his pocket had melted",
+      "A refrigerator compressor overheated and cooked food",
+      "A TV antenna heated up dinner"
+    ],
+    "answerIndex": 1,
+    "explanation": "A Raytheon engineer studying a military radar magnetron noticed the chocolate bar in his pocket had melted. This discovery happened in 1945."
+  },
+  {
+    "id": "q087",
+    "question": "[Historical Misconceptions] How tall was the famous general Napoleon really? And where did that rank at the time?",
+    "options": [
+      "150 cm (short by historical records of the time)",
+      "168–170 cm (not short in France at the time; about average or slightly above for French men then)",
+      "185 cm (rarely tall in all of Europe at the time)",
+      "160 cm (exactly the average height of European men at the time)."
+    ],
+    "answerIndex": 1,
+    "explanation": "168–170 cm (not short in France at the time; about average or slightly above for French men then)."
+  },
+  {
+    "id": "q088",
+    "question": "[Map Bias] On the world maps we commonly use (the Mercator projection), Greenland and Africa look about the same size, but Africa is actually how many times larger than Greenland?",
+    "options": [
+      "2 times",
+      "5 times",
+      "14 times",
+      "50 times"
+    ],
+    "answerIndex": 2,
+    "explanation": "14 times. They look about equal on the map, but that's the bias of the Mercator projection. In reality, Africa is 14 times the size of Greenland."
+  },
+  {
+    "id": "q089",
+    "question": "[Astronomy] Which planet in the solar system rotates so slowly that one “day” (one rotation) is longer than its “year” (one orbit around the Sun)?",
+    "options": [
+      "Mercury",
+      "Venus",
+      "Mars",
+      "Jupiter"
+    ],
+    "answerIndex": 1,
+    "explanation": "Venus. Because Venus rotates extremely slowly, one rotation (a day) takes longer than one trip around the Sun (a year)."
+  },
+  {
+    "id": "q090",
+    "question": "[Obscure History & Geography] When France carried out its last execution by guillotine, which classic sci-fi film's first installment had just opened in the US?",
+    "options": [
+      "Foundation",
+      "Star Wars",
+      "Back to the Future",
+      "2001: A Space Odyssey"
+    ],
+    "answerIndex": 1,
+    "explanation": "Star Wars. In 1977. When France used the guillotine for the last time, the first Star Wars film was already showing in American theaters."
+  },
+  {
+    "id": "q091",
+    "question": "[Language Charm] Apart from religious books, which French literary work is often listed among the non-religious books translated into the most languages in the world?",
+    "options": [
+      "Harry Potter and the Philosopher's Stone",
+      "The Lord of the Rings trilogy",
+      "The Little Prince",
+      "In Search of Lost Time"
+    ],
+    "answerIndex": 2,
+    "explanation": "The Little Prince. It is often listed among the non-religious literary works translated into the most languages."
+  },
+  {
+    "id": "q092",
+    "question": "[Geographic Superlatives] Which country's territory, thanks to its overseas territories and islands around the world, spans 12 time zones, making it the country with the most time zones?",
+    "options": [
+      "Vast Russia",
+      "The United States",
+      "China",
+      "France"
+    ],
+    "answerIndex": 3,
+    "explanation": "France. The answer is France. With its overseas territories and islands around the globe (such as Tahiti), it spans 12 time zones in total."
+  },
+  {
+    "id": "q093",
+    "question": "[Geographic Location] Which is actually the closest neighboring country to the island of Taiwan?",
+    "options": [
+      "China (Niushan Island in Pingtan to Nanliao Fishing Port in Hsinchu)",
+      "Japan (Yonaguni Island to Wuyan Cape in Su'ao)",
+      "The Philippines (Batanes Islands to Eluanbi)",
+      "South Korea (Jeju Island to Fugui Cape)"
+    ],
+    "answerIndex": 1,
+    "explanation": "Japan. Measured as straight-line distance from Taiwan's main island to neighboring countries' territory: Japan's Yonaguni Island to Su'ao's Wuyan Cape is about 111 km; China's Niushan Island in Pingtan to Hsinchu's Nanliao Fishing Port is about 119 km; the Philippines' Batanes Islands to Eluanbi is about 142 km; and South Korea's Jeju Island to Fugui Cape is about 1,000 km. So the closest is Japan."
+  },
+  {
+    "id": "q094",
+    "question": "[Geographic Superlatives] The sandbar border between Spain's Peñón de Vélez de la Gomera and Morocco is about 85 meters long. What geographic record is it often called?",
+    "options": [
+      "One of the most heavily guarded places in the world",
+      "One of the shortest land borders in the world",
+      "One of the starting points of the longest coastline in the world",
+      "One of the highest borders in the world"
+    ],
+    "answerIndex": 1,
+    "explanation": "One of the shortest land borders in the world."
+  },
+  {
+    "id": "q095",
+    "question": "[Historical Trivia] The world's earliest vending machine appeared in ancient Greece in the 1st century AD. After a worshipper dropped in a coin, what did the machine dispense?",
+    "options": [
+      "Mixed red wine",
+      "Cold-pressed edible olive oil",
+      "“Holy water” for rituals and warding off evil",
+      "Fresh sheep's milk"
+    ],
+    "answerIndex": 2,
+    "explanation": "“Holy water” for rituals and warding off evil. In the 1st century AD, an ancient Greek scientist invented a machine that, after a worshipper dropped in a coin, used the principle of a weighted lever to release “holy water.”"
+  },
+  {
+    "id": "q096",
+    "question": "[Historical Records] In the 1896 Anglo-Zanzibar War, Zanzibar's forces surrendered in under 40 minutes after fighting began. What record did this war set in international history?",
+    "options": [
+      "The shortest war in duration",
+      "The war between two countries with the fewest participants",
+      "The naval battle using the most ironclad ships",
+      "The most peaceful battle, with zero casualties"
+    ],
+    "answerIndex": 0,
+    "explanation": "The shortest war in duration. In the 1896 Anglo-Zanzibar War, the Sultan of Zanzibar's forces surrendered in under 40 minutes after being destroyed by British forces, making it the shortest war in international history."
+  },
+  {
+    "id": "q097",
+    "question": "[Astronomy] The speed of light is constant, and the Sun is about 150 million km from Earth. So the sunlight we see when we look up right now was actually emitted by the Sun how long ago?",
+    "options": [
+      "8 seconds ago",
+      "8 minutes 19 seconds ago",
+      "1 hour ago",
+      "Exactly 1 day ago"
+    ],
+    "answerIndex": 1,
+    "explanation": "8 minutes 19 seconds ago. Because the speed of light is constant, sunlight needs about 8 minutes 20 seconds to travel the 150 million km to Earth."
+  },
+  {
+    "id": "q098",
+    "question": "[Geography] The world's largest inland body of water is the Caspian Sea; which is the world's deepest freshwater lake and the one with the largest water volume?",
+    "options": [
+      "Lake Superior",
+      "Lake Victoria",
+      "Lake Baikal",
+      "Dongting Lake"
+    ],
+    "answerIndex": 2,
+    "explanation": "Lake Baikal. Lake Baikal's maximum depth is about 1,642 meters, and it holds the most water of any freshwater lake in the world."
+  },
+  {
+    "id": "q099",
+    "question": "[Geographic Superlatives] Which lake in North America is, as far as science now knows, the world's freshwater lake with the largest surface area?",
+    "options": [
+      "Lake Huron",
+      "Lake Superior",
+      "Lake Baikal",
+      "Lake Michigan"
+    ],
+    "answerIndex": 1,
+    "explanation": "Lake Superior. North America's Lake Superior covers about 82,100 square kilometers and is the freshwater lake with the largest surface area in the world."
+  },
+  {
+    "id": "q100",
+    "question": "[Geographic Superlatives] Which country has the most lakes in the world?",
+    "options": [
+      "Vast Russia",
+      "Canada",
+      "Finland, the land of a thousand lakes",
+      "Brazil, in the Amazon basin"
+    ],
+    "answerIndex": 1,
+    "explanation": "Canada. The country with the most lakes in the world is Canada. Results can vary with the counting threshold, but common geography sources mostly list Canada."
+  },
+  {
+    "id": "q101",
+    "question": "[Geographic Superlatives] In terms of geography and administrative regions, which is the largest island in the world?",
+    "options": [
+      "Iceland",
+      "Greenland",
+      "Madagascar",
+      "New Zealand"
+    ],
+    "answerIndex": 1,
+    "explanation": "Greenland. Greenland is the largest island in the world."
+  },
+  {
+    "id": "q102",
+    "question": "[Geography Basics] At the Bering Strait, what is the “closest distance” between the territories of the US and Russia?",
+    "options": [
+      "3.8 km",
+      "38 km",
+      "380 km",
+      "3,800 km"
+    ],
+    "answerIndex": 0,
+    "explanation": "3.8 km. At the Bering Strait, the closest distance between US and Russian territory is only 3.8 km."
+  },
+  {
+    "id": "q103",
+    "question": "[Geographic Superlatives] Which independent sovereign state has the smallest land area in the world?",
+    "options": [
+      "Monaco",
+      "Tuvalu",
+      "Vatican City",
+      "Maldives"
+    ],
+    "answerIndex": 2,
+    "explanation": "Vatican City. The country with the smallest land area in the world is Vatican City."
+  },
+  {
+    "id": "q104",
+    "question": "[Historical Trivia] Ancient Romans cared a lot about white teeth. What shocking thing did they use to clean their mouths and teeth?",
+    "options": [
+      "High-purity sea salt",
+      "Urine",
+      "Special charcoal powder",
+      "Wild honey"
+    ],
+    "answerIndex": 1,
+    "explanation": "Urine. The ammonia in urine was used for cleaning and whitening; this was an ancient custom and isn't advisable today."
+  },
+  {
+    "id": "q105",
+    "question": "[Astronomy & Geography] Because of the long-term effect of tidal friction caused by the Moon's gravity, what is happening to the Earth's rotation speed?",
+    "options": [
+      "It is gradually speeding up",
+      "It is gradually slowing down",
+      "It isn't changing at all",
+      "It changes erratically every day"
+    ],
+    "answerIndex": 1,
+    "explanation": "It is gradually slowing down. Tidal friction slows the Earth's rotation little by little; fossil records also show that a day on ancient Earth was shorter than today's."
+  },
+  {
+    "id": "q106",
+    "question": "[Environmental Geography] Comparing the Earth's polar environments, which place has the colder average temperature, the Antarctic or the Arctic?",
+    "options": [
+      "The Arctic is colder",
+      "The Antarctic is colder",
+      "They are exactly equally cold",
+      "They swap completely with the seasons as the Earth orbits"
+    ],
+    "answerIndex": 1,
+    "explanation": "The Antarctic is colder. The answer is the Antarctic. Antarctica is a landmass at very high elevation (which loses heat quickly), while the Arctic is ice floating over the ocean, and sea water moderates temperature very well."
+  },
+  {
+    "id": "q107",
+    "question": "[Language & Culture] Not counting the ʻokina, how many basic Latin letters are in the official Hawaiian alphabet?",
+    "options": [
+      "12",
+      "26",
+      "5",
+      "30"
+    ],
+    "answerIndex": 0,
+    "explanation": "12. If the ʻokina is also counted as a letter, Hawaiian is commonly said to have 13 letters."
+  },
+  {
+    "id": "q108",
+    "question": "[History & Humanities] After Japanese writer Natsume Sōseki died, which of his organs was preserved as a medical specimen?",
+    "options": [
+      "Heart",
+      "Brain",
+      "Right arm",
+      "Lungs"
+    ],
+    "answerIndex": 1,
+    "explanation": "The brain. Natsume Sōseki's brain specimen is preserved in a medical collection associated with the University of Tokyo."
+  },
+  {
+    "id": "q109",
+    "question": "[Art History] According to Munch's diary and common interpretations, the figure in The Scream, with hands near the head, is more likely expressing what?",
+    "options": [
+      "Screaming loudly and venting dissatisfaction",
+      "Covering the ears in pain to shut out the violent scream of nature at that time",
+      "Singing loudly to practice pitch",
+      "A sudden severe toothache"
+    ],
+    "answerIndex": 1,
+    "explanation": "Covering the ears in pain to feel or shut out nature's violent scream. Munch's diary describes feeling “an enormous, endless scream passing through nature.”"
+  }
+]

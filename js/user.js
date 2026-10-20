@@ -8,6 +8,7 @@
 // 或 app bridge），其餘畫面邏輯不需更動。
 
 import { getSavedNickname, saveNickname } from "./storage.js";
+import { t } from "./i18n.js";
 
 const MODE_KEY = "christmas_quiz_mockmode"; // "app" | "guest"
 
@@ -40,7 +41,7 @@ export function isAppUser() {
 // app 用戶 → 帶入假的 Letstalk 名字；guest → 帶入已存暱稱（可能為空）。
 export function getUser() {
   if (isAppUser()) {
-    return { isAppUser: true, name: "小明（Letstalk）" };
+    return { isAppUser: true, name: t("user.appName") };
   }
   return { isAppUser: false, name: getSavedNickname() };
 }
@@ -53,5 +54,5 @@ export function setNickname(name) {
 // 取得顯示名稱，沒有則給預設。
 export function getDisplayName() {
   const user = getUser();
-  return user.name && user.name.trim() ? user.name.trim() : "神秘挑戰者";
+  return user.name && user.name.trim() ? user.name.trim() : t("user.anon");
 }

@@ -1,6 +1,8 @@
 // 活動辦法頁
 
 import { renderHeaderNav, bindHeaderNav } from "../header.js";
+import { t } from "../i18n.js";
+import { getLang } from "../lang.js";
 
 // 視差捲動：蘋果、蟲蟲用 fixed 定位釘在畫面上，但跟著捲動以較慢的速度位移，
 // 而不是完全靜止（避免跟卡片內容的捲動速度差太多、看起來像另一個頁面）。
@@ -42,6 +44,25 @@ function bindParallax() {
   );
 }
 
+// 標題圖（含「好誕哩就來」標題字）依語系取 main_title.png（繁中）/ main_title_sch.png / main_title_en.png。
+// 簡中、英文的標題圖還沒有時，圖片載入失敗會自動換成文字版標題（見 css .rules-title-text）。
+function renderTitle() {
+  const lang = getLang();
+  const src =
+    lang === "tch"
+      ? "assets/activity-method/main_title.png"
+      : `assets/activity-method/main_title_${lang}.png`;
+  return `<img class="rules-img" src="${src}" alt="${t("rules.titleAlt")}" data-title-img />`;
+}
+
+function titleFallbackHTML() {
+  return `
+    <div class="rules-img rules-title-text" role="img" aria-label="${t("rules.titleAlt")}">
+      <div class="rules-title-main">${t("rules.titleMain")}</div>
+      <div class="rules-title-sub">${t("rules.titleSub")}</div>
+    </div>`;
+}
+
 export function renderRules(nav) {
   const el = document.getElementById("screen-rules");
 
@@ -53,37 +74,30 @@ export function renderRules(nav) {
         <div class="rules-deco rules-deco--apple"><img src="assets/activity-method/e-apple.svg" alt="" /></div>
         <div class="rules-deco rules-deco--worm"><img src="assets/activity-method/e-worm.svg" alt="" /></div>
 
-        <img class="rules-img" src="assets/activity-method/main_title.png" alt="好誕哩就來，聖你最會，還是剩你不會" />
+        ${renderTitle()}
 
         <div class="rules-card2 rules-card2--content rules-reveal">
           <div class="rules-card2-body">
             <p>
-              叮叮噹～叮叮噹～<br />
-              今年聖誕節<br />
-              喵皇準備很多冷知識挑戰<br />
-              不管你是博學多聞的「知識貓王」<br />
-              還是全靠直覺的「知識蘋困貓」<br />
-              來解鎖你的專屬知識貓<br />
-              今年聖誕<br />
-              你能超越我的貓貓嗎？
+              ${t("rules.intro")}
             </p>
           </div>
         </div>
 
         <div class="rules-card2 rules-card2--event rules-reveal">
-          <span class="rules-card2-badge">活動期間</span>
+          <span class="rules-card2-badge">${t("rules.badgeEvent")}</span>
           <div class="rules-card2-body">
-            <p><span class="rules-card2-subhead">活動時間</span><br /><strong>2026.11.29 ~ 2027.01.02</strong></p>
-            <p><span class="rules-card2-subhead">序號兌換時間</span><br /><strong>2026.11.29 ~ 2027.01.31</strong></p>
+            <p><span class="rules-card2-subhead">${t("rules.eventTime")}</span><br /><strong>2026.11.29 ~ 2027.01.02</strong></p>
+            <p><span class="rules-card2-subhead">${t("rules.redeemTime")}</span><br /><strong>2026.11.29 ~ 2027.01.31</strong></p>
           </div>
         </div>
 
         <div class="rules-card2 rules-card2--rules rules-reveal">
-          <span class="rules-card2-badge">遊玩辦法</span>
+          <span class="rules-card2-badge">${t("rules.badgePlay")}</span>
           <div class="rules-card2-body">
-            <p><span class="rules-card2-subhead">Letstalk用戶</span><br />答題後貼圖將會立即派送給用戶<br />用戶可以於任一聊天室中查看</p>
-            <p><span class="rules-card2-subhead">訪客</span><br />答題後將獲得一組「兌換序號」，下載 Letstalk App 後，至「貼圖商店」輸入序號完成兌換</p>
-            <p><span class="rules-card2-subhead">使用 桌機 挑戰的用戶</span><br />請使用行動裝置安裝並註冊 Letstalk 帳號後，進行兌換</p>
+            <p><span class="rules-card2-subhead">${t("rules.appUser")}</span><br />${t("rules.appUserDesc")}</p>
+            <p><span class="rules-card2-subhead">${t("rules.guest")}</span><br />${t("rules.guestDesc")}</p>
+            <p><span class="rules-card2-subhead">${t("rules.desktop")}</span><br />${t("rules.desktopDesc")}</p>
           </div>
         </div>
       </div>
@@ -93,15 +107,23 @@ export function renderRules(nav) {
       <div class="rules-footer-art"></div>
       <div class="rules-footer-fill">
         <div class="rules-terms">
-          <p>注意事項：</p>
-          <p>1. 每個 Letstalk 帳號限領取一次獎勵。</p>
-          <p>2. 訪客獲得之「兌換序號」請於 2027 年 01 月 31 日前至 Letstalk App 內完成兌換，逾期視同放棄，恕不補發。</p>
-          <p>3. 活動結果及獎勵發放以 App 內系統顯示為準，恕不另行通知。</p>
-          <p>4. 本活動由 Letstalk 主辦，活動內容、獎項及規則如有異動，將以官方公告為準。Letstalk 保留隨時修改、變更、終止本活動及最終解釋權。</p>
+          <p>${t("rules.notesTitle")}</p>
+          <p>${t("rules.note1")}</p>
+          <p>${t("rules.note2")}</p>
+          <p>${t("rules.note3")}</p>
+          <p>${t("rules.note4")}</p>
         </div>
       </div>
     </div>
   `;
+
+  // 這個語系的標題圖不存在 → 換成文字版標題
+  const titleImg = el.querySelector("[data-title-img]");
+  if (titleImg) {
+    titleImg.addEventListener("error", () => {
+      titleImg.outerHTML = titleFallbackHTML();
+    });
+  }
 
   bindHeaderNav(el, nav);
   bindParallax();

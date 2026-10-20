@@ -1,17 +1,18 @@
 // 兌換序號 popup：app 用戶輸入序號，匯入曾以訪客身份玩過的紀錄。
 
 import { addRecord, setRedeemed } from "../storage.js";
-import { getTitle } from "../../data/titles.js";
+import { getTitleName } from "../../data/titles.js";
+import { t } from "../i18n.js";
 
 // 以訪客序號換出的模擬紀錄（正式接後端時改為 fetch API）。
 function buildRedeemedRecord(code) {
   const mockScore = 7; // 後端實際回傳分數時替換
   return {
     playedAt: new Date().toISOString(),
-    name: "訪客玩家",
+    name: t("redeem.guestName"),
     score: mockScore,
     total: 10,
-    title: getTitle(mockScore).name,
+    title: getTitleName(mockScore),
     redeemed: true,
     redeemedCode: code,
     questions: [],
@@ -32,13 +33,12 @@ export function openRedeemModal(nav) {
 
   overlay.innerHTML = `
     <div class="modal redeem-modal" role="dialog" aria-modal="true" aria-labelledby="redeem-title">
-      <button class="modal-close" id="redeem-close" type="button" aria-label="關閉">×</button>
+      <button class="modal-close" id="redeem-close" type="button" aria-label="${t("redeem.close")}">×</button>
 
-      <h2 class="redeem-title" id="redeem-title">兌換貼圖</h2>
+      <h2 class="redeem-title" id="redeem-title">${t("redeem.title")}</h2>
 
       <p class="redeem-desc">
-        曾以訪客身份完成答題？<br>
-        輸入活動序號，即可將該次成績匯入你的帳號。
+        ${t("redeem.desc")}
       </p>
 
       <div class="redeem-field">
@@ -47,7 +47,7 @@ export function openRedeemModal(nav) {
           class="redeem-input"
           type="text"
           maxlength="20"
-          placeholder="請輸入兌換序號"
+          placeholder="${t("redeem.placeholder")}"
           autocomplete="off"
           autocapitalize="characters"
         />
@@ -55,7 +55,7 @@ export function openRedeemModal(nav) {
       </div>
 
       <button id="redeem-btn" class="btn btn-primary redeem-btn" type="button">
-        立即兌換
+        ${t("redeem.btn")}
       </button>
     </div>
   `;
@@ -84,11 +84,11 @@ export function openRedeemModal(nav) {
     const code = input.value.trim().toUpperCase();
     if (!code) {
       input.focus();
-      setInputState("error", "請輸入序號");
+      setInputState("error", t("redeem.errEmpty"));
       return;
     }
     if (!validateCode(code)) {
-      setInputState("error", "序號格式不正確，請再確認");
+      setInputState("error", t("redeem.errFormat"));
       return;
     }
 

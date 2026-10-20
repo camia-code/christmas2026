@@ -4,17 +4,19 @@ import { getUser, isAppUser, setNickname } from "../user.js";
 import { getLastRecord, getRecords, hasRedeemed } from "../storage.js";
 import { getLang } from "../lang.js";
 import { renderHeaderNav, bindHeaderNav } from "../header.js";
+import { t } from "../i18n.js";
+import { getTitleName } from "../../data/titles.js";
 
 // 首頁禮包輪播的貼圖（assets/stickers/）
 const STICKERS = [
-  "assets/stickers/sticker-1.png", // 加油
+  "assets/stickers/sticker-1.png", // 你真棒
   "assets/stickers/sticker-2.png", // 收到
-  "assets/stickers/sticker-3.png", // 你真棒
+  "assets/stickers/sticker-3.png", // 原來如此
   "assets/stickers/sticker-4.png", // 我沒了
-  "assets/stickers/sticker-5.png", // 原來如此
-  "assets/stickers/sticker-6.png", // 探頭
-  "assets/stickers/sticker-7.png", // 蛋雕
-  "assets/stickers/sticker-8.png", // 貓咪問號
+  "assets/stickers/sticker-5.png", // 加油
+  "assets/stickers/sticker-6.png", // 蛋雕
+  "assets/stickers/sticker-7.png", // 貓咪問號
+  "assets/stickers/sticker-8.png", // 探頭
 ];
 
 export function renderWelcome(nav) {
@@ -24,7 +26,6 @@ export function renderWelcome(nav) {
   const hasPlayed = !!last;
   const attemptNo = getRecords().length + 1; // 第幾次挑戰
   const lang = getLang(); // 依語系載入 KV 主視覺（tch/sch/en）
-  const kvExt = lang === "tch" ? "svg" : "png"; // 繁中改用 svg
   const showRedeem = isAppUser() && !hasRedeemed(); // 兌換入口：只有 app 用戶且未兌換過才顯示
 
   el.innerHTML = `
@@ -32,14 +33,21 @@ export function renderWelcome(nav) {
       ${renderHeaderNav({ logo: true })}
 
       <div class="lobby-kv-wrap">
-        <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.${kvExt}" alt="活動主視覺"
+        <img class="lobby-kv" src="assets/2026mainpage_kv_${lang}.svg" alt="${t("welcome.kvAlt")}"
           onerror="this.onerror=null;this.src='assets/2026mainpage_kv.png'" />
       </div>
 
+      ${
+        user.isAppUser
+          ? ""
+          : `<input id="nickname" class="nickname-input" type="text"
+               maxlength="12" placeholder="${t("welcome.nicknamePh")}" value="${user.name || ""}" />`
+      }
+
       <div class="start-wrap">
-        <span class="attempt-count">第${attemptNo}次挑戰</span>
+        <span class="attempt-count">${t("welcome.attempt", { n: attemptNo })}</span>
         <button id="start-btn" class="btn btn-primary lobby-start">
-          開始挑戰
+          ${t("welcome.start")}
         </button>
       </div>
 
@@ -47,38 +55,31 @@ export function renderWelcome(nav) {
         <div class="gift-card">
           ${
             showRedeem
-              ? `<button id="redeem-entry" class="redeem-entry" type="button" aria-label="兌換序號">
+              ? `<button id="redeem-entry" class="redeem-entry" type="button" aria-label="${t("welcome.redeemAria")}">
                    <img src="assets/changesticker.svg" alt="" />
-                   <span class="redeem-entry-text"><span>序號</span><span>兌換</span></span>
+                   <span class="redeem-entry-text"><span>${t("welcome.redeemLine1")}</span><span>${t("welcome.redeemLine2")}</span></span>
                  </button>`
               : ""
           }
           <div class="gift-carousel" id="gift-carousel">
             ${STICKERS.map(
               (src, i) =>
-                `<div class="gift-item"><img src="${src}" alt="貼圖 ${i + 1}" draggable="false"${i >= 3 ? ' loading="lazy"' : ""} /></div>`
+                `<div class="gift-item"><img src="${src}" alt="${t("welcome.stickerAlt", { n: i + 1 })}" draggable="false"${i >= 3 ? ' loading="lazy"' : ""} /></div>`
             ).join("")}
           </div>
-          <p class="gift-hint">左右滑動查看全部禮物</p>
-          <p class="gift-desc">完成答題就送你超萌限定動態貼圖</p>
+          <p class="gift-hint">${t("welcome.hint")}</p>
+          <p class="gift-desc">${t("welcome.desc")}</p>
         </div>
       </div>
-
-      ${
-        user.isAppUser
-          ? ""
-          : `<input id="nickname" class="nickname-input" type="text"
-               maxlength="12" placeholder="輸入你的暱稱" value="${user.name || ""}" />`
-      }
 
       ${
         hasPlayed
           ? `<div class="last-record" id="last-record" role="button" tabindex="0">
                <div class="lr-left">
-                 <span class="lr-label">上次紀錄</span>
-                 <span class="lr-title">${last.title}</span>
+                 <span class="lr-label">${t("welcome.lastRecord")}</span>
+                 <span class="lr-title">${getTitleName(last.score)}</span>
                </div>
-               <span class="lr-score">${last.score} / ${last.total} 題答對 ›</span>
+               <span class="lr-score">${t("welcome.lastScore", { s: last.score, t: last.total })}</span>
              </div>`
           : ""
       }

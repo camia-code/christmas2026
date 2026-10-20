@@ -4,6 +4,7 @@ import { resultCardHTML, resultCardClass, openShareModal } from "../share.js";
 import { isAppUser } from "../user.js";
 import { getRecords } from "../storage.js";
 import { getTitle } from "../../data/titles.js";
+import { t } from "../i18n.js";
 
 // 彩帶底色 + 同色系深色文字（依稱號分級輪流）
 const RIBBON_COLORS = [
@@ -44,7 +45,7 @@ export function openResultModal(record, nav) {
         <!-- 左上角彩帶：答對數的百分位 -->
         <div class="result-ribbon">
           <div class="ribbon-inner" style="background:${ribbon.bg};color:${ribbon.text}">
-            <span class="r2">前${topPercent}%</span>
+            <span class="r2">${t("result.top", { p: topPercent })}</span>
           </div>
         </div>
         <!-- 蓋章：只顯示在畫面上，不會進分享/下載的 PNG（PNG 由 share.js 另外產生，不含此章） -->
@@ -53,10 +54,10 @@ export function openResultModal(record, nav) {
 
       ${
         guest
-          ? `<div class="sticker-code">你的貼圖序號
+          ? `<div class="sticker-code">${t("result.codeLabel")}
                <span class="sticker-code-row">
                  <b>${stickerCode}</b>
-                 <button class="copy-btn" id="sticker-copy" type="button" aria-label="複製序號">
+                 <button class="copy-btn" id="sticker-copy" type="button" aria-label="${t("result.copyAria")}">
                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                      <rect x="9" y="9" width="11" height="11" rx="2" />
@@ -68,9 +69,9 @@ export function openResultModal(record, nav) {
           : ""
       }
 
-      <button id="btn-app" class="btn btn-secondary">領取貼圖</button>
-      <button id="btn-share" class="btn btn-primary">分享結果</button>
-      <button id="btn-history" class="btn">查看答題紀錄</button>
+      <button id="btn-app" class="btn btn-secondary">${t("result.claim")}</button>
+      <button id="btn-share" class="btn btn-primary">${t("result.share")}</button>
+      <button id="btn-history" class="btn">${t("result.history")}</button>
     </div>
   `;
 

@@ -1,9 +1,16 @@
 // 題庫載入與抽題、計分、稱號判定。
 
 import { getTitle } from "../data/titles.js";
+import { getLang } from "./lang.js";
 
 const QUESTION_COUNT = 10;
-const QUESTIONS_URL = "data/questions/questions.json";
+// 題庫依語系分檔：questions.json（繁中）、questions.sch.json、questions.en.json。
+// 三份用相同的 id 與 answerIndex；某語系檔案缺漏時退回繁中。
+const QUESTIONS_URLS = {
+  tch: "data/questions/questions.json",
+  sch: "data/questions/questions.sch.json",
+  en: "data/questions/questions.en.json",
+};
 
 // 題目滿版背景（放在 assets/quiz-bg/）。新增圖片時把檔名加進來即可。
 const QUIZ_BG_DIR = "assets/quiz-bg/";
@@ -24,15 +31,29 @@ export function pickBackgrounds(count) {
   return seq;
 }
 
-let cachedPool = null;
+const cachedPools = {};
 
-// 載入題庫（含快取）。
-export async function loadQuestionPool() {
-  if (cachedPool) return cachedPool;
-  const res = await fetch(QUESTIONS_URL);
+// 載入目前語系的題庫（含快取；該語系檔案載入失敗就退回繁中）。
+export async function loadQuestionPool(lang = getLang()) {
+  if (cachedPools[lang]) return cachedPools[lang];
+  let res = await fetch(QUESTIONS_URLS[lang] || QUESTIONS_URLS.tch);
+  if (!res.ok && lang !== "tch") return loadQuestionPool("tch");
   if (!res.ok) throw new Error(`載入題庫失敗：${res.status}`);
-  cachedPool = await res.json();
-  return cachedPool;
+  cachedPools[lang] = await res.json();
+  return cachedPools[lang];
+}
+
+// 把題目（同 id）換成目前語系的版本；找不到對應就保留原樣。切換語系時用。
+export async function localizeQuestions(questions) {
+  const pool = await loadQuestionPool();
+  const byId = new Map(pool.map((q) => [q.id, q]));
+  return questions.map((q) => byId.get(q.id) || q);
+}
+
+// 紀錄裡存的題目是當時語系的快照；顯示紀錄頁時換成目前語系。
+export async function localizeRecord(record) {
+  if (!record || !record.questions) return record;
+  return { ...record, questions: await localizeQuestions(record.questions) };
 }
 
 // Fisher–Yates 洗牌（不改動原陣列）。
