@@ -288,6 +288,22 @@ body.on-rules .mock-toggle {
 .lobby-nav-link:hover {
   color: #ffaa5a;
 }
+/* 綠色按鈕 hover 變深綠（只在有滑鼠的裝置，避免手機點完停在 hover 狀態） */
+.lobby-nav-cta,
+.lobby-start {
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+@media (hover: hover) {
+  .lobby-nav-cta:hover {
+    background: #4eae63;
+  }
+  .lobby-start:hover {
+    background: #4eae63;
+    border-color: #4eae63;
+    box-shadow: 0 5px 0 #378c4c;
+  }
+}
 .lobby-nav-cta {
   display: inline-flex;
   align-items: center;
@@ -366,6 +382,7 @@ body.on-rules .mock-toggle {
   }
   .lobby-nav-link {
     font-size: 16px;
+    text-align: center; /* 展開的選單文字置中 */
   }
   .lobby-nav-cta {
     width: 100%;
@@ -1262,6 +1279,8 @@ body.on-rules .mock-toggle {
   position: absolute;
   top: -43.75px;
   right: -62.5px;
+  /* 往卡片右側外凸最多 62.5px；手機卡片離裝置邊緣只有 16px，外凸量自動縮到「邊緣空間 − 8px」，不會被裁掉 */
+  right: calc(min(62.5px, (100vw - 100%) / 2 - 8px) * -1);
   z-index: 2;
   padding: 0;
   border: none;
@@ -1354,7 +1373,7 @@ body.on-rules .app {
 
 .rules-img {
   display: block;
-  width: 475px;
+  width: 408px; /* 桌機實際顯示寬度（.app 欄寬 448px 扣掉原本的 20px 左右留白） */
   max-width: 100%;
   height: auto;
   margin: 0 auto 25px;
@@ -1364,7 +1383,7 @@ body.on-rules .app {
 .rules-card2 {
   position: relative;
   z-index: 2;
-  width: 475px;
+  width: 408px; /* 桌機實際顯示寬度；手機縮到 100%（裝置寬 − 32px） */
   max-width: 100%;
   container-type: inline-size; /* 卡片內文字用 cqw 跟著卡片寬度等比縮放，手機不會爆出卡片 */
   margin: 0 auto 25px;
@@ -1478,10 +1497,10 @@ body.on-rules .app {
 .rules-terms p {
   margin: 0 0 10px;
 }
-/* 注意事項字級跟著畫面寬度縮放：寬螢幕 15px，手機最小 12px */
+/* 注意事項字級：手機 14px，畫面變寬時逐漸放大到桌機的 15px */
 @supports (width: 1cqw) {
   .rules-terms {
-    font-size: clamp(12px, 3.2cqw, 15px);
+    font-size: clamp(14px, 3.2cqw, 15px);
   }
 }
 
@@ -1512,10 +1531,17 @@ body.on-rules .app {
   max-width: 480px;
   margin: 0 auto;
 }
-/* 活動辦法頁整體放大 1.25 倍；兌換序號頁的 .redeem-page 維持原尺寸不受影響 */
+/* 活動辦法頁：左右不再額外留白，卡片寬度 = 裝置寬 − .app 的 16px 邊距（手機卡片更寬、文字更大） */
 body.on-rules .redeem-page {
-  padding: 20px;
+  padding: 20px 0;
   max-width: 600px;
+}
+/* 手機：卡片左右離裝置邊緣 8px（.app 本身有 16px 邊距，用 -8px 抵銷一半）。
+   卡片最寬 408px，裝置寬 ≥ 440px 時不需要再往外撐 */
+@media (max-width: 439px) {
+  body.on-rules .redeem-page {
+    margin-inline: -8px;
+  }
 }
 
 .redeem-title {
