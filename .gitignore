@@ -1,2 +1,5 @@
 .DS_Store
 **/.DS_Store
+
+# 本機預覽用伺服器（不進版控）
+.devserver.py

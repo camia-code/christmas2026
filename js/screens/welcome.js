@@ -5,7 +5,17 @@ import { getLastRecord, getRecords, hasRedeemed } from "../storage.js";
 import { getLang } from "../lang.js";
 import { renderHeaderNav, bindHeaderNav } from "../header.js";
 
-const GIFT_COUNT = 8;
+// 首頁禮包輪播的貼圖（assets/stickers/）
+const STICKERS = [
+  "assets/stickers/sticker-1.png", // 加油
+  "assets/stickers/sticker-2.png", // 收到
+  "assets/stickers/sticker-3.png", // 你真棒
+  "assets/stickers/sticker-4.png", // 我沒了
+  "assets/stickers/sticker-5.png", // 原來如此
+  "assets/stickers/sticker-6.png", // 探頭
+  "assets/stickers/sticker-7.png", // 蛋雕
+  "assets/stickers/sticker-8.png", // 貓咪問號
+];
 
 export function renderWelcome(nav) {
   const el = document.getElementById("screen-welcome");
@@ -44,11 +54,10 @@ export function renderWelcome(nav) {
               : ""
           }
           <div class="gift-carousel" id="gift-carousel">
-            ${Array.from({ length: GIFT_COUNT })
-              .map(
-                (_, i) => `<div class="placeholder gift-item">貼圖 ${i + 1}</div>`
-              )
-              .join("")}
+            ${STICKERS.map(
+              (src, i) =>
+                `<div class="gift-item"><img src="${src}" alt="貼圖 ${i + 1}" draggable="false"${i >= 3 ? ' loading="lazy"' : ""} /></div>`
+            ).join("")}
           </div>
           <p class="gift-hint">左右滑動查看全部禮物</p>
           <p class="gift-desc">完成答題就送你超萌限定動態貼圖</p>
