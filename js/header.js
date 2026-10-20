@@ -9,6 +9,8 @@ export function renderHeaderNav(options = {}) {
   return `
     <div class="lobby-nav-wrap">
       <nav class="lobby-nav">
+        <!-- 背景音樂鈕：絕對定位在膠囊左側 16px，不影響膠囊位置 -->
+        <button type="button" class="bgm-toggle" aria-label="背景音樂">${window.__soundOn === false ? "🔇" : "🔊"}</button>
         ${
           options.logo
             ? `<img class="lobby-nav-logo" src="assets/logo.svg" alt="Letstalk" />

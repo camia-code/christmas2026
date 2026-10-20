@@ -209,14 +209,13 @@ body.on-history .app {
   color: var(--muted);
   cursor: pointer;
 }
-/* 首頁／活動辦法頁：header nav 變寬後會佔滿頂部，這兩顆固定按鈕改移到 nav 下方，避免疊在一起 */
-body.on-welcome .bgm-toggle,
-body.on-rules .bgm-toggle {
-  top: 66px;
-  left: 10px;
-  width: 36px;
-  height: 36px;
-  font-size: 16px;
+/* 首頁／活動辦法頁：mock 切換鈕移到 nav 下方，避免跟 header 疊在一起 */
+/* 首頁／活動辦法頁的音樂鈕改放在 header 膠囊左側（見 .lobby-nav .bgm-toggle），
+   答題頁改放在進度條左側（見 .play-top），全域固定那顆在這些頁面隱藏 */
+body.on-welcome .bgm-toggle--global,
+body.on-rules .bgm-toggle--global,
+body.on-play .bgm-toggle--global {
+  display: none;
 }
 body.on-welcome .mock-toggle,
 body.on-rules .mock-toggle {
@@ -261,6 +260,17 @@ body.on-rules .mock-toggle {
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
   pointer-events: auto;
+}
+/* 音樂鈕：貼在膠囊左側、垂直置中，與膠囊間距 16px（含 1px 邊框）；絕對定位不佔版面，膠囊位置不變 */
+.lobby-nav .bgm-toggle {
+  position: absolute;
+  top: 50%;
+  left: auto;
+  right: calc(100% + 17px);
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
 }
 .lobby-nav-links {
   display: flex;
@@ -317,11 +327,17 @@ body.on-rules .mock-toggle {
 }
 
 /* 斷點：選單項目收進漢堡選單，點擊後以同樣玻璃效果的面板展開。
-   610px 是含 LOGO 版本完整選單自然寬度(約574px)+左右各16px，確保切換漢堡選單前，
-   選單膠囊跟裝置邊緣一定保有至少 16px 間距，不會被裁切 */
-@media (max-width: 610px) {
+   690px = 含 LOGO 版本完整選單自然寬度(約554px) + 左右各 68px（音樂鈕 36px + 間距 16px + 裝置邊緣 16px），
+   確保切換漢堡選單前，膠囊（置中）左側的音樂鈕跟裝置邊緣至少還有 16px */
+@media (max-width: 690px) {
   .lobby-nav {
     gap: 12px;
+    padding: 12.5px 16px;
+  }
+  /* 手機膠囊較窄，LOGO／分隔線間距縮小，讓左側音樂鈕離裝置邊緣保有空間 */
+  .lobby-nav .lobby-nav-logo,
+  .lobby-nav .lobby-nav-divider {
+    margin-right: 12px;
   }
   .lobby-nav-links {
     position: absolute;
@@ -356,6 +372,12 @@ body.on-rules .mock-toggle {
   }
   .lobby-nav-burger {
     display: flex;
+  }
+}
+/* 極窄螢幕（≤360px）：拿掉分隔線，避免左側音樂鈕被擠出裝置邊緣 */
+@media (max-width: 360px) {
+  .lobby-nav .lobby-nav-divider {
+    display: none;
   }
 }
 
@@ -581,6 +603,22 @@ body.on-rules .mock-toggle {
 }
 
 /* ---------- 步驟2 答題頁 ---------- */
+/* 答題頁頂部：音樂鈕 + 進度區塊同一列，進度條寬度 = 剩下的空間 */
+.play-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.play-top .bgm-toggle {
+  position: static;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+}
+.play-top-main {
+  flex: 1;
+  min-width: 0;
+}
 .progress {
   font-size: 14px;
   color: #000000;
@@ -1276,11 +1314,12 @@ body.on-rules .app {
   text-align: center;
 }
 
-/* 背景裝飾（蘋果、蟲蟲）：獨立於卡片版面之外，當作頁面背景的一部分，
-   用 fixed 定位釘在畫面邊緣（不受 .rules-content 的窄版寬度限制，不會被卡片蓋住） */
+/* 背景裝飾（蘋果、蟲蟲）：當作頁面背景的一部分，用 fixed 定位釘在畫面邊緣。
+   z-index:-1 讓它們在星星背景之上、所有內容（標題、卡片、文字）之下，
+   窄螢幕與卡片重疊時只會被內容蓋住，不會擋到文字 */
 .rules-deco {
   position: fixed;
-  z-index: 3;
+  z-index: -1;
   pointer-events: none;
 }
 .rules-deco--apple {
@@ -1327,6 +1366,7 @@ body.on-rules .app {
   z-index: 2;
   width: 475px;
   max-width: 100%;
+  container-type: inline-size; /* 卡片內文字用 cqw 跟著卡片寬度等比縮放，手機不會爆出卡片 */
   margin: 0 auto 25px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -1367,6 +1407,14 @@ body.on-rules .app {
   font-size: 17.5px;
   line-height: 1.5;
 }
+/* 桌機卡片實際寬 408px（.app 欄寬限制）時文字 17.5px；卡片變窄（手機）時依卡片寬度等比縮小，
+   卡片變寬不會超過原本大小 */
+@supports (width: 1cqw) {
+  .rules-card2-body {
+    gap: min(12.5px, 3.064cqw); /* 12.5 / 408 */
+    font-size: min(17.5px, 4.289cqw); /* 17.5 / 408 */
+  }
+}
 .rules-card2-body p {
   margin: 0;
 }
@@ -1390,6 +1438,12 @@ body.on-rules .app {
   gap: 22.5px;
   color: #fffce7;
 }
+@supports (width: 1cqw) {
+  .rules-card2--event .rules-card2-body,
+  .rules-card2--rules .rules-card2-body {
+    gap: min(22.5px, 5.515cqw); /* 22.5 / 408 */
+  }
+}
 
 .rules-card2-badge {
   position: absolute;
@@ -1399,6 +1453,11 @@ body.on-rules .app {
   font-weight: 700;
   color: #d35a35;
   white-space: nowrap;
+}
+@supports (width: 1cqw) {
+  .rules-card2-badge {
+    font-size: min(18.75px, 4.596cqw); /* 18.75 / 408 */
+  }
 }
 .rules-card2--event .rules-card2-badge {
   top: 5%;
@@ -1418,6 +1477,12 @@ body.on-rules .app {
 }
 .rules-terms p {
   margin: 0 0 10px;
+}
+/* 注意事項字級跟著畫面寬度縮放：寬螢幕 15px，手機最小 12px */
+@supports (width: 1cqw) {
+  .rules-terms {
+    font-size: clamp(12px, 3.2cqw, 15px);
+  }
 }
 
 /* 注意事項底部的草地背景：草地圖本身是圓弧造型（透明區露出頁面藍底），
@@ -1439,6 +1504,7 @@ body.on-rules .app {
 }
 .rules-footer-fill {
   background-color: #eeceb1;
+  container-type: inline-size; /* 讓注意事項用 cqw 依寬度調整字級 */
 }
 
 .redeem-page {

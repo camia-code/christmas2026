@@ -78,11 +78,17 @@ export function renderPlay(nav) {
   document.body.style.backgroundImage = bg ? `url("${bg}")` : "";
 
   el.innerHTML = `
-    <div class="progress">第 ${num} / ${total} 題 · 答對 <span id="correct-count">${getScore()}</span> 題</div>
-    <div class="progress-wrap">
-      <div class="progress-bar"><span style="width:${(num / total) * 100}%"></span></div>
-      <img class="progress-apple" src="assets/quiz-deco/${appleImg}.png" alt=""
-        style="left:${(num / total) * 100}%" />
+    <!-- 音樂鈕放在進度條左側（不再浮在畫面上遮住進度條），進度條自動吃剩下的寬度 -->
+    <div class="play-top">
+      <button type="button" class="bgm-toggle" aria-label="背景音樂">${window.__soundOn === false ? "🔇" : "🔊"}</button>
+      <div class="play-top-main">
+        <div class="progress">第 ${num} / ${total} 題 · 答對 <span id="correct-count">${getScore()}</span> 題</div>
+        <div class="progress-wrap">
+          <div class="progress-bar"><span style="width:${(num / total) * 100}%"></span></div>
+          <img class="progress-apple" src="assets/quiz-deco/${appleImg}.png" alt=""
+            style="left:${(num / total) * 100}%" />
+        </div>
+      </div>
     </div>
 
     <div class="quiz-frame">

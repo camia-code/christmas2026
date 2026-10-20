@@ -105,7 +105,6 @@ mockBtn.addEventListener("click", () => {
 // 背景音樂：播放清單（bg_music → bg_music_2 → 循環），低音量；
 // 瀏覽器擋自動播放 → 第一次互動時啟動；可靜音切換
 const bgm = document.getElementById("bgm");
-const bgmToggle = document.getElementById("bgm-toggle");
 const BGM_TRACKS = [
   "assets/audio/bg_music.m4a",
   "assets/audio/bg_music_2.m4a",
@@ -133,8 +132,11 @@ bgm.addEventListener("error", () => {
 });
 let bgmOn = true;
 window.__soundOn = true; // 全域聲音開關（背景音樂 + 音效共用）
+// 音樂鈕可能有多顆（全域固定那顆＋首頁／活動辦法頁放在 header 前面那顆），一起更新
 function refreshBgmIcon() {
-  bgmToggle.textContent = bgmOn ? "🔊" : "🔇";
+  document.querySelectorAll(".bgm-toggle").forEach((b) => {
+    b.textContent = bgmOn ? "🔊" : "🔇";
+  });
 }
 function playBgm() {
   if (bgmOn) bgm.play().catch(() => {});
@@ -145,8 +147,9 @@ const startBgmOnce = () => {
   document.removeEventListener("pointerdown", startBgmOnce);
 };
 document.addEventListener("pointerdown", startBgmOnce);
-bgmToggle.addEventListener("click", (e) => {
-  e.stopPropagation();
+// 事件代理：header 每次重繪都會重建音樂鈕，所以掛在 document 上
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".bgm-toggle")) return;
   bgmOn = !bgmOn;
   window.__soundOn = bgmOn; // 音效跟著一起開關
   if (bgmOn) playBgm();
@@ -161,7 +164,7 @@ clickSfx.volume = 0.5;
 document.addEventListener("click", (e) => {
   if (!window.__soundOn) return; // 靜音時不播點擊音效
   const btn = e.target.closest("button");
-  if (!btn || btn.classList.contains("option")) return;
+  if (!btn || btn.classList.contains("option") || btn.classList.contains("bgm-toggle")) return;
   const a = clickSfx.cloneNode();
   // 「下一題」音效比一般大一倍（0.5 → 1.0）
   a.volume =
