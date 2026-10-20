@@ -30,9 +30,29 @@ export function renderHeaderNav(options = {}) {
   `;
 }
 
+// 手機展開的選單：點選選單以外的空白處（或按 Esc）收合。
+// bindHeaderNav 每次畫面重繪都會呼叫，所以全域監聽只掛一次。
+let outsideCloseBound = false;
+function bindOutsideClose() {
+  if (outsideCloseBound) return;
+  outsideCloseBound = true;
+  const closeAll = (except) => {
+    document.querySelectorAll(".lobby-nav.is-open").forEach((n) => {
+      if (except && n.contains(except)) return;
+      n.classList.remove("is-open");
+      n.querySelector(".lobby-nav-burger")?.setAttribute("aria-expanded", "false");
+    });
+  };
+  document.addEventListener("click", (e) => closeAll(e.target));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll(null);
+  });
+}
+
 // 掛上 header 的點擊行為；el 為包含 .lobby-nav 的容器。
 // options.onStart 可覆寫「開始挑戰」按鈕行為（例如歡迎頁要沿用暱稱驗證邏輯）。
 export function bindHeaderNav(el, nav, options = {}) {
+  bindOutsideClose();
   const navEl = el.querySelector(".lobby-nav");
   const burger = el.querySelector(".lobby-nav-burger");
 
