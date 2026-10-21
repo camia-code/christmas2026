@@ -1112,54 +1112,43 @@ body.on-play .bgm-toggle--global {
   border-radius: 999px;
 }
 
-/* 訪客的貼圖領取序號 */
-.sticker-code {
-  text-align: center;
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 12px;
+/* 訪客「複製序號並下載 App」按鈕：複製成功／失敗的回饋色 */
+#btn-app {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
-.sticker-code-row {
+/* 兩行文字：第一行（含複製 icon）「複製序號」，第二行「並下載 App 進行兌換貼圖」 */
+#btn-app {
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.35;
+}
+#btn-app .claim-line1 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 2px;
+  font-weight: 700;
 }
-.sticker-code b {
-  font-size: 18px;
-  letter-spacing: 1px;
-  color: var(--accent);
+#btn-app .claim-line2 {
+  font-size: 14px;
 }
-/* 複製按鈕 */
-.copy-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
-  color: var(--muted);
-  cursor: pointer;
+#btn-app.is-copied {
+  background: var(--accent);
+  border-color: var(--accent);
 }
-.copy-btn:active {
-  background: #f0ece0;
+#btn-app.is-copy-failed {
+  background: var(--wrong);
+  border-color: var(--wrong);
 }
-/* 複製成功提示 */
-.copy-btn.copied::after {
-  content: "已複製";
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 11px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.75);
-  padding: 2px 6px;
-  border-radius: 4px;
+
+/* app 用戶結果頁：取代「領取貼圖」按鈕位置的說明文字 */
+.sticker-got {
+  margin: 0 0 10px;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--text);
 }
 
 /* 【開發用】稱號預覽切換（正式發佈前移除） */
