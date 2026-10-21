@@ -37,6 +37,35 @@ function showScreen(id) {
 // 目前在看的答題紀錄（切換語系時要重繪）
 let historyRecord = null;
 
+// ---------- 展示用：跳過答題（交給工程師時連同 index.html 的 #demo-bar 一起移除）----------
+const skipToggle = document.getElementById("skip-toggle");
+const skipScore = document.getElementById("skip-score");
+if (skipToggle && skipScore) {
+  skipToggle.addEventListener("change", () => {
+    skipScore.hidden = !skipToggle.checked;
+  });
+}
+
+// 用本輪抽到的題目捏出作答結果（前 N 題答對、其餘答錯，位置隨機），直接進成績 dialog。
+// 走一般的 finishRound，所以會存紀錄、累計第幾次挑戰，也能接著看答題紀錄、分享。
+function demoSkipToResult() {
+  const qs = state.questions;
+  const pick = skipScore ? skipScore.value : "random";
+  const score = pick === "random" ? Math.floor(Math.random() * (qs.length + 1)) : Math.min(Number(pick), qs.length);
+  const correctIdx = new Set(
+    qs.map((_, i) => i).sort(() => Math.random() - 0.5).slice(0, score)
+  );
+  state.answers = qs.map((q, i) => {
+    const right = correctIdx.has(i);
+    return {
+      questionId: q.id,
+      selectedIndex: right ? q.answerIndex : (q.answerIndex + 1) % q.options.length,
+      isCorrect: right,
+    };
+  });
+  nav.finishRound(score);
+}
+
 // 導頁 API：傳給各畫面使用。
 const nav = {
   welcome() {
@@ -54,6 +83,11 @@ const nav = {
         return;
       }
       startRound(questions, pickBackgrounds(questions.length));
+      // 展示用：「跳過答題」開著時，不進答題頁，直接用假作答結果開成績 dialog
+      if (skipToggle && skipToggle.checked) {
+        demoSkipToResult();
+        return;
+      }
       renderPlay(nav);
       showScreen("screen-play");
     } catch (e) {

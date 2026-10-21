@@ -20,6 +20,25 @@
     <!-- 展示用切換列：給工程師時整段移除（連同 css 的 .demo-bar / .mock-toggle、main.js 的 mock-toggle 段落） -->
     <div id="demo-bar" class="demo-bar">
       <span>展示切換</span>
+      <label class="demo-field demo-switch">
+        <input type="checkbox" id="skip-toggle" />
+        <span class="demo-switch-track" aria-hidden="true"></span>
+        跳過答題
+      </label>
+      <select id="skip-score" class="demo-select" aria-label="跳過答題時的答對題數" hidden>
+        <option value="random">答對題數：隨機</option>
+        <option value="0">答對 0 題</option>
+        <option value="1">答對 1 題</option>
+        <option value="2">答對 2 題</option>
+        <option value="3">答對 3 題</option>
+        <option value="4">答對 4 題</option>
+        <option value="5">答對 5 題</option>
+        <option value="6">答對 6 題</option>
+        <option value="7">答對 7 題</option>
+        <option value="8">答對 8 題</option>
+        <option value="9">答對 9 題</option>
+        <option value="10">答對 10 題</option>
+      </select>
       <label class="demo-field">語言 / Language
         <select id="lang-select" class="demo-select">
           <option value="tch">繁體中文</option>

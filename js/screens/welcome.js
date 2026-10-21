@@ -114,7 +114,9 @@ export function renderWelcome(nav) {
     if (!isAppUser()) {
       const input = el.querySelector("#nickname");
       const name = (input.value || "").trim();
-      if (!name) {
+      // 展示用：「跳過答題」開著時，訪客不輸入暱稱也能直接進成績畫面
+      const skipping = document.getElementById("skip-toggle")?.checked;
+      if (!name && !skipping) {
         input.focus();
         input.style.borderColor = "var(--wrong)";
         return;
