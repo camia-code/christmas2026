@@ -4,6 +4,23 @@
 import { getTitle, getTitleName } from "../data/titles.js";
 import { t, localizeName } from "./i18n.js";
 
+// 彩帶底色 + 同色系深色文字（依稱號分級輪流）
+const RIBBON_COLORS = [
+  { bg: "#75d3ff", text: "#10567a" }, // 藍
+  { bg: "#5ec272", text: "#1f6b39" }, // 綠
+  { bg: "#fff07b", text: "#7a6a12" }, // 黃
+];
+
+// 左上角彩帶：答對題數在所有人中的百分位（前 X%）
+// （目前為分數換算的 demo，正式版需由後端統計所有玩家答對數）
+function getTopPercent(record) {
+  const total = record.total || 10;
+  return Math.max(
+    1,
+    Math.min(99, Math.round(((total - record.score) / total) * 40) + 1)
+  );
+}
+
 // 成績卡片的 class（含依稱號分級的背景）。
 export function resultCardClass(record) {
   const title = getTitle(record.score);
@@ -17,7 +34,15 @@ export function resultCardHTML(record) {
     record.score === 0
       ? t("result.zero")
       : t("result.score", { s: record.score, t: record.total });
+  const ribbon =
+    RIBBON_COLORS[(title.idx - 1) % RIBBON_COLORS.length];
   return `
+    <!-- 左上角彩帶（前 X%）：放在卡片內，畫面與分享圖共用 -->
+    <div class="result-ribbon">
+      <div class="ribbon-inner" style="background:${ribbon.bg};color:${ribbon.text}">
+        <span class="r2">${t("result.top", { p: getTopPercent(record) })}</span>
+      </div>
+    </div>
     <div class="rc-username">${localizeName(record.name) || t("user.anon")}</div>
     <div class="rc-mid">
       <img class="rc-cat" src="assets/result/result_cat_${title.idx}.png" alt=""

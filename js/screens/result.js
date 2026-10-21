@@ -3,15 +3,7 @@
 import { resultCardHTML, resultCardClass, openShareModal } from "../share.js";
 import { isAppUser } from "../user.js";
 import { getRecords } from "../storage.js";
-import { getTitle } from "../../data/titles.js";
 import { t } from "../i18n.js";
-
-// 彩帶底色 + 同色系深色文字（依稱號分級輪流）
-const RIBBON_COLORS = [
-  { bg: "#75d3ff", text: "#10567a" }, // 藍
-  { bg: "#5ec272", text: "#1f6b39" }, // 綠
-  { bg: "#fff07b", text: "#7a6a12" }, // 黃
-];
 
 // 開啟成績 modal。
 // record：要顯示的那一輪結果。
@@ -26,28 +18,12 @@ export function openResultModal(record, nav) {
   const playerNo = getRecords().length || 1;
   const stickerCode = `merrychristmas${String(playerNo).padStart(3, "0")}`;
 
-  // 左上角彩帶：答對題數在所有人中的百分位（前 X%）
-  // （目前為分數換算的 demo，正式版需由後端統計所有玩家答對數）
-  const total = record.total || 10;
-  const topPercent = Math.max(
-    1,
-    Math.min(99, Math.round(((total - record.score) / total) * 40) + 1)
-  );
-  const ribbon =
-    RIBBON_COLORS[(getTitle(record.score).idx - 1) % RIBBON_COLORS.length];
-
   overlay.innerHTML = `
     <div class="modal">
       <button class="modal-close" id="result-close" type="button">×</button>
 
       <div class="result-card-wrap">
         <div id="result-card-slot" class="${resultCardClass(record)}">${resultCardHTML(record)}</div>
-        <!-- 左上角彩帶：答對數的百分位 -->
-        <div class="result-ribbon">
-          <div class="ribbon-inner" style="background:${ribbon.bg};color:${ribbon.text}">
-            <span class="r2">${t("result.top", { p: topPercent })}</span>
-          </div>
-        </div>
         <!-- 蓋章：只顯示在畫面上，不會進分享/下載的 PNG（PNG 由 share.js 另外產生，不含此章） -->
         <img class="result-stamp" src="assets/result/stamp.png" alt="" />
       </div>
