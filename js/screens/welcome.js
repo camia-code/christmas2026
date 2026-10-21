@@ -4,7 +4,7 @@ import { getUser, isAppUser, setNickname } from "../user.js";
 import { getLastRecord, getRecords, hasRedeemed } from "../storage.js";
 import { getLang } from "../lang.js";
 import { renderHeaderNav, bindHeaderNav } from "../header.js";
-import { t } from "../i18n.js";
+import { t, ordinal } from "../i18n.js";
 import { getTitleName } from "../../data/titles.js";
 
 // 首頁禮包輪播的貼圖（assets/stickers/）
@@ -45,7 +45,7 @@ export function renderWelcome(nav) {
       }
 
       <div class="start-wrap">
-        <span class="attempt-count">${t("welcome.attempt", { n: attemptNo })}</span>
+        <span class="attempt-count">${t("welcome.attempt", { n: attemptNo, ord: ordinal(attemptNo) })}</span>
         <button id="start-btn" class="btn btn-primary lobby-start">
           ${t("welcome.start")}
         </button>

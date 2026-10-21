@@ -27,6 +27,13 @@ export function t(key, vars) {
   return s;
 }
 
+// 英文序數：1st、2nd、3rd、4th…11th、12th、13th、21st…（用在「第 N 次挑戰」→ "1st Challenge"）
+export function ordinal(n) {
+  const mod100 = n % 100;
+  if (mod100 >= 11 && mod100 <= 13) return `${n}th`;
+  return `${n}${{ 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th"}`;
+}
+
 // 紀錄裡存的是「當時語系」的預設名稱（神秘挑戰者／訪客玩家／示範用 app 名字），
 // 顯示時換成目前語系；使用者自己輸入的暱稱不動。
 const DEFAULT_NAME_KEYS = ["user.anon", "user.appName", "redeem.guestName"];

@@ -7,7 +7,7 @@ export default {
   "nav.menu": "Menu",
   "bgm.aria": "Background music",
   "welcome.kvAlt": "Event key visual",
-  "welcome.attempt": "Try #{n}",
+  "welcome.attempt": "{ord} Challenge",
   "welcome.start": "Start the Challenge",
   "welcome.redeemAria": "Redeem code",
   "welcome.redeemLine1": "Redeem",
