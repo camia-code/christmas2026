@@ -44,14 +44,10 @@ function bindParallax() {
   );
 }
 
-// 標題圖（含「好誕哩就來」標題字）依語系取 main_title.png（繁中）/ main_title_sch.png / main_title_en.png。
-// 簡中、英文的標題圖還沒有時，圖片載入失敗會自動換成文字版標題（見 css .rules-title-text）。
+// 標題圖（含「好誕哩就來」標題字）：assets/activity-method/main_title_kv_{tch,sch,en}.svg。
+// 該語系的圖不存在時，圖片載入失敗會自動換成文字版標題（見 css .rules-title-text）。
 function renderTitle() {
-  const lang = getLang();
-  const src =
-    lang === "tch"
-      ? "assets/activity-method/main_title.png"
-      : `assets/activity-method/main_title_${lang}.png`;
+  const src = `assets/activity-method/main_title_kv_${getLang()}.svg`;
   return `<img class="rules-img" src="${src}" alt="${t("rules.titleAlt")}" data-title-img />`;
 }
 

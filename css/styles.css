@@ -1516,15 +1516,15 @@ body.lang-en .redeem-entry-text {
   }
 }
 
-/* 英文文案較長：卡片內文字級縮小（卡片文字區高度固定，不縮會超出卡片） */
+/* 英文文案較長：卡片內文字級比中文小一些（文字區高度固定，字太大會超出卡片） */
 body.lang-en .rules-card2-body {
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 16.5px;
+  line-height: 1.35;
   gap: 10px;
 }
 @supports (width: 1cqw) {
   body.lang-en .rules-card2-body {
-    font-size: min(13.5px, 3.31cqw); /* 13.5 / 408 */
+    font-size: min(16.5px, 4.04cqw); /* 16.5 / 408 */
     gap: min(10px, 2.45cqw);
   }
   body.lang-en .rules-card2--event .rules-card2-body,
