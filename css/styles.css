@@ -961,42 +961,16 @@ body.on-play .bgm-toggle--global {
 .result-card-wrap {
   position: relative;
 }
-/* 左上角彩帶：顯示答對數百分位 */
+/* 左上角彩帶：顯示答對數百分位（內嵌 SVG，見 share.js 的 ribbonSVG） */
 .result-ribbon {
   position: absolute;
   top: 0;
   left: 0;
   width: 132px;
   height: 132px;
-  overflow: hidden;
   z-index: 9;
   pointer-events: none;
-  border-top-left-radius: 8px; /* 跟卡片圓角一致 */
-}
-.result-ribbon .ribbon-inner {
-  position: absolute;
-  top: 30px;
-  left: -46px;
-  width: 190px;
-  transform: rotate(-45deg);
-  /* 底色與文字色由 JS 依分級套（藍/綠/黃三色 + 同色系深色字） */
-  background: #75d3ff;
-  color: #10567a;
-  text-align: center;
-  padding: 6px 0; /* 帶寬加高 2px */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 1.05;
-}
-.ribbon-inner .r1 {
-  font-size: 10px;
-}
-.ribbon-inner .r2 {
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+  display: block;
 }
 /* 蓋章：卡片出現後才「蓋」下來，壓在右下角最上層 */
 .result-stamp {

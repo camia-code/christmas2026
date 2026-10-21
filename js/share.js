@@ -21,6 +21,30 @@ function getTopPercent(record) {
   );
 }
 
+// 左上角彩帶（前 X%）。用內嵌 SVG 畫：轉成分享圖時，HTML 的「旋轉 + overflow:hidden 裁切」
+// 在部分瀏覽器會失效（彩帶沒被裁成角落三角形、整條蓋滿卡片），SVG 自帶裁切就不會有這個問題。
+// 尺寸 132×132、帶寬/字級與原 CSS 版本相同（原：寬 190、上下 padding 6、字 15px）。
+let ribbonSeq = 0;
+function ribbonSVG(record, title) {
+  const c = RIBBON_COLORS[(title.idx - 1) % RIBBON_COLORS.length];
+  const id = `rib${++ribbonSeq}`;
+  const label = t("result.top", { p: getTopPercent(record) });
+  return `
+    <svg class="result-ribbon" viewBox="0 0 132 132" width="132" height="132" aria-hidden="true">
+      <defs>
+        <clipPath id="${id}"><path d="M8 0H132V132H0V8A8 8 0 0 1 8 0Z" /></clipPath>
+      </defs>
+      <g clip-path="url(#${id})">
+        <g transform="translate(49 47) rotate(-45)">
+          <rect x="-95" y="-15" width="190" height="34" fill="rgba(0,0,0,0.22)" />
+          <rect x="-95" y="-17" width="190" height="34" fill="${c.bg}" />
+          <text x="0" y="1" text-anchor="middle" dominant-baseline="central"
+            font-size="15" font-weight="800" letter-spacing="0.5" fill="${c.text}">${label}</text>
+        </g>
+      </g>
+    </svg>`;
+}
+
 // 成績卡片的 class（含依稱號分級的背景）。
 export function resultCardClass(record) {
   const title = getTitle(record.score);
@@ -34,15 +58,8 @@ export function resultCardHTML(record) {
     record.score === 0
       ? t("result.zero")
       : t("result.score", { s: record.score, t: record.total });
-  const ribbon =
-    RIBBON_COLORS[(title.idx - 1) % RIBBON_COLORS.length];
   return `
-    <!-- 左上角彩帶（前 X%）：放在卡片內，畫面與分享圖共用 -->
-    <div class="result-ribbon">
-      <div class="ribbon-inner" style="background:${ribbon.bg};color:${ribbon.text}">
-        <span class="r2">${t("result.top", { p: getTopPercent(record) })}</span>
-      </div>
-    </div>
+    ${ribbonSVG(record, title)}
     <div class="rc-username">${localizeName(record.name) || t("user.anon")}</div>
     <div class="rc-mid">
       <img class="rc-cat" src="assets/result/result_cat_${title.idx}.png" alt=""
@@ -116,6 +133,9 @@ export async function openShareModal(record, onClose) {
       backgroundColor: "#ffffff",
       cacheBust: true,
       skipFonts: true, // 略過嵌入 4.9MB 粉圓字型，避免產圖卡住/失敗
+      // 截圖用的卡片放在畫面外（left:-9999px），html-to-image 會把這個位置一起複製進圖裡，
+      // 結果卡片被推到圖外面 → 產出空白圖。截圖時把位置歸零。
+      style: { position: "static", left: "0", top: "0" },
     });
     previewBox.innerHTML = `<img class="share-preview" src="${dataUrl}" alt="${t("share.imgAlt")}" />`;
     actions.classList.remove("hidden");
