@@ -2,7 +2,7 @@
 
 在 Letstalk app 內以 webview 開啟的答題小遊戲（也可用一般瀏覽器以訪客身份遊玩）。純 HTML/CSS/JS（ES Modules，無建置工具）。
 
-> 最後更新：vr26（2026-10-22）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)。
+> 最後更新：vr28（2026-10-22）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
 
 ## 如何跑起來
 需用本機 http server（因 ES Modules / fetch JSON 不能用 file://）：
@@ -20,6 +20,7 @@ python3 .devserver.py 8000      # 推薦：回應加 no-store，不會快取到�
 
 ## 檔案結構
 ```
+CHANGELOG.md          逐版更新紀錄（vr01～，日期＋一句說明）
 API_SPEC.md           後端 API 規格草案（給工程師；含錯誤碼與待確認事項）
 index.html            單頁殼；展示用切換列 #demo-bar、bgm audio、各 screen/modal 容器
 css/styles.css        全站樣式
@@ -92,6 +93,6 @@ assets/
 - 上線前移除展示用元件（見上）。
 
 ## 版本
-- commit 訊息以 `vrXX: 說明` 命名，目前到 vr26。
+- commit 訊息以 `vrXX: 說明` 命名，目前到 vr28。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
 - git tag 只打到 `vr06_result_ribbon_stamp_0709`，之後的里程碑只有 commit。
 - 遠端：`camia`（camia-code/christmas2026，主要，含 GitHub Pages）；`origin`（zenorchen/Christmas-2026-latest，停在 7/31 的版本）。
