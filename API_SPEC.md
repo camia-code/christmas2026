@@ -217,13 +217,13 @@ Success response
 | 409 `ROUND_FINISHED` | 已結算後再作答 | 回首頁 |
 | 400 `CODE_EMPTY` | 序號空白 | 「請輸入序號」 |
 | 400 `CODE_FORMAT` | 序號格式不符 | 「序號格式不正確，請再確認」 |
-| 404 `CODE_NOT_FOUND` | 序號不存在 | **【待確認】** 文案（建議與格式錯誤同一句，避免被探測） |
-| 409 `CODE_USED` | 序號已被使用 | **【待確認】** 文案 |
-| 410 `CODE_EXPIRED` | 序號已過期（> 2027-01-31） | **【待確認】** 文案 |
-| 409 `ACCOUNT_ALREADY_REDEEMED` | 此帳號已兌換過 | **【待確認】** 文案 |
-| 429 | 兌換序號嘗試次數過多 | 請稍後再試 |
+| 404 `CODE_NOT_FOUND` | 序號不存在 | 「查無此序號，請再確認」 |
+| 409 `CODE_USED` | 序號已被使用 | 「此序號已被使用」 |
+| 410 `CODE_EXPIRED` | 序號已過期（> 2027-01-31） | 「此序號已過期（兌換期限至 2027/01/31）」 |
+| 409 `ACCOUNT_ALREADY_REDEEMED` | 此帳號已兌換過 | 「你的帳號已兌換過，每個帳號限兌換一次」 |
+| 429 `TOO_MANY_ATTEMPTS` | 兌換序號嘗試次數過多 | 「嘗試次數過多，請稍後再試」 |
 
-目前前端只有「請輸入序號」「序號格式不正確，請再確認」兩種訊息（三語言都有，在 `js/i18n/`）；其餘需要補文案與翻譯。
+序號相關錯誤文案三語言都已備妥（`js/i18n/` 的 `redeem.err*`），前端以錯誤碼對應文案（`js/screens/redeem.js` 的 `REDEEM_ERRORS`）；錯誤皆顯示在輸入框下方（紅框＋紅字），popup 不關閉。活動期間外的文案仍待確認。
 
 ## 10. 分享圖
 
@@ -258,7 +258,7 @@ Success response
 | 題庫與計分 | `js/quiz.js`、`js/state.js` | 整份題庫下載到瀏覽器，前端判分 |
 | 前 X% | `js/share.js` `getTopPercent` | 用分數換算的假公式 |
 | 貼圖序號 | `js/screens/result.js` | `merrychristmas` + 本機計數 |
-| 序號兌換 | `js/screens/redeem.js` | 只檢查格式，成績是寫死的假資料 |
+| 序號兌換 | `js/screens/redeem.js` | 格式檢查 + 測試序號（`TEST-NOTFOUND` 等）模擬錯誤碼，成績是寫死的假資料 |
 | 紀錄 | `js/storage.js` | localStorage，且**每次重新整理都清空**（`resetAll()`） |
 | 展示用工具 | `index.html` 的 `#demo-bar`、`js/main.js` 的「展示用」段落 | 語言下拉、身份切換、跳過答題；交付時整段移除（語言切換的重繪邏輯可留） |
 | 導向 App 下載頁 | `js/main.js` `nav.backToApp()` | 示意用提醒框，待接 deep link / 商店連結 |

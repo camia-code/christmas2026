@@ -26,6 +26,25 @@ function validateCode(code) {
   return /^[A-Za-z0-9\-]{4,20}$/.test(code);
 }
 
+// 後端錯誤碼 → 文案 key（對應 API_SPEC.md §9）
+const REDEEM_ERRORS = {
+  CODE_NOT_FOUND: "redeem.errNotFound",
+  CODE_USED: "redeem.errUsed",
+  CODE_EXPIRED: "redeem.errExpired",
+  ACCOUNT_ALREADY_REDEEMED: "redeem.errAccountRedeemed",
+  TOO_MANY_ATTEMPTS: "redeem.errTooMany",
+};
+
+// 展示用：輸入這些測試序號可看到對應的錯誤反饋，其餘格式正確的序號一律兌換成功。
+// 正式接後端時，改用 POST /api/redeem 回傳的錯誤碼。
+const DEMO_ERROR_CODES = {
+  "TEST-NOTFOUND": "CODE_NOT_FOUND",
+  "TEST-USED": "CODE_USED",
+  "TEST-EXPIRED": "CODE_EXPIRED",
+  "TEST-REDEEMED": "ACCOUNT_ALREADY_REDEEMED",
+  "TEST-TOOMANY": "TOO_MANY_ATTEMPTS",
+};
+
 // 兌換成功後 popup 改顯示完成訊息；切換語言重繪時也要維持在這個狀態
 let showingSuccess = false;
 
@@ -98,6 +117,11 @@ export function openRedeemModal(nav) {
     }
     if (!validateCode(code)) {
       setInputState("error", t("redeem.errFormat"));
+      return;
+    }
+    const errorCode = DEMO_ERROR_CODES[code];
+    if (errorCode) {
+      setInputState("error", t(REDEEM_ERRORS[errorCode]));
       return;
     }
 
