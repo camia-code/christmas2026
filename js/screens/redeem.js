@@ -1,6 +1,6 @@
 // 兌換序號 popup：app 用戶輸入序號，匯入曾以訪客身份玩過的紀錄。
 
-import { addRecord, setRedeemed } from "../storage.js";
+import { addRecord, setRedeemed, setClaimedSticker } from "../storage.js";
 import { getTitleName } from "../../data/titles.js";
 import { t } from "../i18n.js";
 
@@ -104,6 +104,7 @@ export function openRedeemModal(nav) {
     // 兌換成功：存紀錄 → 重繪首頁（兌換入口會依 hasRedeemed 自動隱藏）→ popup 改顯示完成訊息
     addRecord(buildRedeemedRecord(code));
     setRedeemed(code);
+    setClaimedSticker(); // 兌換即派送貼圖，之後再玩視為已領取過
     nav.welcome(); // 會一併關閉 popup，下面再以完成狀態重新打開
     showingSuccess = true;
     openRedeemModal(nav);

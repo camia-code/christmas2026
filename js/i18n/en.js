@@ -65,6 +65,7 @@ export default {
   "history.correctMark": " (Correct)",
   "result.top": "Top {p}%",
   "result.gotStickers": "You've received your stickers! Head to the Sticker Shop to download them.",
+  "result.alreadyClaimed": "You've already claimed your stickers! Find them in the Sticker Shop in your chat.",
   "result.claimLine1": "Copy Code",
   "result.claimLine2": "& Download the App to Redeem Stickers",
   "result.copied": "✓ Code copied",

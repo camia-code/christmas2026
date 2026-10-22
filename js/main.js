@@ -1,7 +1,7 @@
 // 進入點：screen 路由與導頁 API。
 
-import { getMockMode, toggleMockMode, getDisplayName } from "./user.js";
-import { addRecord, resetAll } from "./storage.js";
+import { getMockMode, toggleMockMode, getDisplayName, isAppUser } from "./user.js";
+import { addRecord, resetAll, hasClaimedSticker, setClaimedSticker } from "./storage.js";
 import { state, startRound } from "./state.js";
 import {
   pickQuestions,
@@ -103,6 +103,11 @@ const nav = {
       answers: state.answers,
       questions: state.questions,
     });
+    // app 用戶：第一輪派送貼圖，之後的輪次標記為已領取過（結果頁顯示不同文案）
+    if (isAppUser()) {
+      record.alreadyClaimed = hasClaimedSticker();
+      setClaimedSticker();
+    }
     addRecord(record);
     state.viewingRecord = record;
     openResultModal(record, nav);

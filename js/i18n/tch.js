@@ -65,6 +65,7 @@ export default {
   "history.correctMark": "（正解）",
   "result.top": "前{p}%",
   "result.gotStickers": "你已獲得貼圖，請前往貼圖商城下載",
+  "result.alreadyClaimed": "貼圖已領取過囉！可至聊天室貼圖商城查看",
   "result.claimLine1": "複製序號",
   "result.claimLine2": "並下載 App 進行兌換貼圖",
   "result.copied": "✓ 已複製序號",

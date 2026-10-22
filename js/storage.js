@@ -4,6 +4,7 @@
 const RECORDS_KEY = "christmas_quiz_records";
 const NICKNAME_KEY = "christmas_quiz_nickname";
 const REDEEMED_KEY = "christmas_quiz_redeemed";
+const CLAIMED_KEY = "christmas_quiz_sticker_claimed";
 const STORAGE_PREFIX = "christmas_quiz_";
 
 // 開發用：清掉所有本遊戲的 localStorage 資料，讓每次重整都回到 default 狀態。
@@ -30,6 +31,23 @@ export function hasRedeemed() {
 export function setRedeemed(code) {
   try {
     localStorage.setItem(REDEEMED_KEY, code);
+  } catch (e) {
+    /* ignore */
+  }
+}
+
+// 是否已領取過貼圖（每個帳號限領一次；正式版由後端回 reward.type = "already_claimed" 判斷）。
+export function hasClaimedSticker() {
+  try {
+    return !!localStorage.getItem(CLAIMED_KEY);
+  } catch (e) {
+    return false;
+  }
+}
+
+export function setClaimedSticker() {
+  try {
+    localStorage.setItem(CLAIMED_KEY, "1");
   } catch (e) {
     /* ignore */
   }

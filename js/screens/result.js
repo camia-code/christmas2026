@@ -41,7 +41,7 @@ export function openResultModal(record, nav) {
                </span>
                <span class="claim-line2">${t("result.claimLine2")}</span>
              </button>`
-          : `<p class="sticker-got">${t("result.gotStickers")}</p>`
+          : `<p class="sticker-got">${t(record.alreadyClaimed ? "result.alreadyClaimed" : "result.gotStickers")}</p>`
       }
       <button id="btn-share" class="btn btn-primary">${t("result.share")}</button>
       <button id="btn-history" class="btn">${t("result.history")}</button>
