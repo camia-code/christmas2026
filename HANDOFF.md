@@ -2,7 +2,7 @@
 
 在 Letstalk app 內以 webview 開啟的答題小遊戲（也可用一般瀏覽器以訪客身份遊玩）。純 HTML/CSS/JS（ES Modules，無建置工具）。
 
-> 最後更新：vr28（2026-10-22）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
+> 最後更新：vr31（2026-10-23）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
 
 ## 如何跑起來
 需用本機 http server（因 ES Modules / fetch JSON 不能用 file://）：
@@ -15,7 +15,7 @@ python3 .devserver.py 8000      # 推薦：回應加 no-store，不會快取到�
 ```
 - `.devserver.py` 是本機用的無快取伺服器，已列入 `.gitignore`，不進版控。
 - 手機實機測試：同網段用 `http://<電腦 IP>:8000` 開。
-- 線上展示：GitHub Pages `https://camia-code.github.io/christmas2026/`（push 到 `camia` 遠端的 `main` 後自動部署；Pages 有 10 分鐘快取，剛部署完可能要等一下或開無痕）。
+- 線上展示：GitHub Pages `https://camia-code.github.io/christmas2026/`（push 到 `origin` 的 `main` 後自動部署；Pages 有 10 分鐘快取，剛部署完可能要等一下或開無痕）。
 - 網址可加 `?lang=tch|sch|en` 指定語系（方便測試）。
 
 ## 檔案結構
@@ -62,7 +62,7 @@ assets/
 
 ## 使用者身份與流程
 - **app 用戶**：名字由 App 帶入。答完題貼圖直接派送，結果頁顯示「你已獲得貼圖，請前往貼圖商城下載」；第 2 輪起（或兌換過序號）顯示「貼圖已領取過囉！可至聊天室貼圖商城查看」。每個帳號限領一次。
-- **訪客**：需輸入暱稱。結果頁按鈕「複製序號／並下載 App 進行兌換貼圖」：複製成功顯示「✓ 已複製序號」（綠）1 秒後導向 App 下載頁；失敗顯示「複製失敗，請稍後再試」（紅），2.5 秒後恢復、不導頁。序號不顯示在畫面上。
+- **訪客**：需輸入暱稱。暱稱規則：最多 12 個字，只能是文字／數字／空白（不含特殊符號、表情符號）；輸入中即時檢查，不合法就顯示紅框＋「暱稱最多 12 個字，且不能含特殊符號」，按開始時若為空顯示「請輸入暱稱」（三語言，key：`welcome.nicknameEmpty` / `welcome.nicknameInvalid`）。結果頁按鈕「複製序號／並下載 App 進行兌換貼圖」：複製成功顯示「✓ 已複製序號」（綠）1 秒後導向 App 下載頁；失敗顯示「複製失敗，請稍後再試」（紅），2.5 秒後恢復、不導頁。序號不顯示在畫面上。
 - **序號兌換**（首頁右下圓章，只有「app 用戶且未兌換過」才顯示）：以 popup 開啟。空白 →「請輸入序號」、格式錯（4～20 字，英數與 `-`）→「序號格式不正確，請再確認」，輸入框紅框 + 紅字。後端錯誤（不存在 / 已使用 / 已過期 / 帳號已兌換 / 嘗試過多）也以同樣方式顯示，展示時輸入測試序號 `TEST-NOTFOUND`、`TEST-USED`、`TEST-EXPIRED`、`TEST-REDEEMED`、`TEST-TOOMANY` 即可看到；其他格式正確的序號一律成功。成功 → popup 顯示「兌換完成／請前往聊天室貼圖商城進行下載」＋確定。
 
 ## 重要設定 / 現況
@@ -93,6 +93,6 @@ assets/
 - 上線前移除展示用元件（見上）。
 
 ## 版本
-- commit 訊息以 `vrXX: 說明` 命名，目前到 vr28。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
+- commit 訊息以 `vrXX: 說明` 命名，目前到 vr31。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
 - git tag 只打到 `vr06_result_ribbon_stamp_0709`，之後的里程碑只有 commit。
-- 遠端：`camia`（camia-code/christmas2026，主要，含 GitHub Pages）；`origin`（zenorchen/Christmas-2026-latest，停在 7/31 的版本）。
+- 遠端：只有 `origin`（camia-code/christmas2026，含 GitHub Pages）。
