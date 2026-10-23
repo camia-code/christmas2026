@@ -46,6 +46,13 @@
           <option value="en">English</option>
         </select>
       </label>
+      <label class="demo-field">活動狀態
+        <select id="event-select" class="demo-select">
+          <option value="live">進行中</option>
+          <option value="upcoming">尚未開始</option>
+          <option value="ended">已結束</option>
+        </select>
+      </label>
       <button id="mock-toggle" class="mock-toggle" type="button">身份: app</button>
     </div>
 
@@ -55,6 +62,9 @@
 
       <!-- 步驟2 答題頁 -->
       <section id="screen-play" class="screen hidden"></section>
+
+      <!-- 活動尚未開始／已結束 -->
+      <section id="screen-event" class="screen hidden"></section>
 
       <!-- 活動辦法頁 -->
       <section id="screen-rules" class="screen hidden"></section>

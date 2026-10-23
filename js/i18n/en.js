@@ -6,6 +6,8 @@ export default {
   "nav.start": "Start GO!",
   "nav.menu": "Menu",
   "bgm.aria": "Background music",
+  "event.upcoming": "The event hasn't started yet. Stay tuned!",
+  "event.ended": "The event has ended. Thank you for participating!",
   "welcome.kvAlt": "Event key visual",
   "welcome.attempt": "{ord} Challenge",
   "welcome.start": "Start the Challenge",

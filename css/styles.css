@@ -45,11 +45,13 @@ body {
 }
 
 /* 首頁（大廳）背景：底色 + 飄移無縫圖案 */
-body.on-welcome {
+body.on-welcome,
+body.on-event {
   position: relative;
   background: #ffe7a5;
 }
-body.on-welcome::before {
+body.on-welcome::before,
+body.on-event::before {
   content: "";
   position: fixed;
   top: -499px;
@@ -62,7 +64,8 @@ body.on-welcome::before {
   pointer-events: none;
   z-index: 0;
 }
-body.on-welcome .app {
+body.on-welcome .app,
+body.on-event .app {
   position: relative;
   background: transparent;
   z-index: 1;
@@ -74,6 +77,32 @@ body.on-welcome .app {
   to {
     transform: translate3d(-1010px, -499px, 0);
   }
+}
+
+/* 活動尚未開始／已結束：滿版置中訊息（背景沿用首頁） */
+.event-status {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+}
+.event-status-kv {
+  display: block;
+  width: min(537.6px, calc(100vw - 32px));
+  height: auto;
+  border-radius: 10px;
+}
+.event-status-msg {
+  margin: 0;
+  padding: 16px 28px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
 }
 
 /* 答題頁滿版背景（每題一張，由 JS 設 background-image） */

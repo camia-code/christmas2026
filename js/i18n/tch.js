@@ -6,6 +6,8 @@ export default {
   "nav.start": "開始挑戰 GO！",
   "nav.menu": "選單",
   "bgm.aria": "背景音樂",
+  "event.upcoming": "活動尚未開始，敬請期待！",
+  "event.ended": "活動已結束，感謝參與！",
   "welcome.kvAlt": "活動主視覺",
   "welcome.attempt": "第{n}次挑戰",
   "welcome.start": "開始挑戰",

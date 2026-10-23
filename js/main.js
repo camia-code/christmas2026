@@ -16,9 +16,10 @@ import { renderPlay } from "./screens/play.js";
 import { renderHistory } from "./screens/history.js";
 import { openRedeemModal, closeRedeemModal } from "./screens/redeem.js";
 import { renderRules } from "./screens/rules.js";
+import { renderEventStatus } from "./screens/event-status.js";
 import { openResultModal, closeResultModal } from "./screens/result.js";
 
-const SCREENS = ["screen-welcome", "screen-play", "screen-rules", "screen-history"];
+const SCREENS = ["screen-welcome", "screen-play", "screen-rules", "screen-history", "screen-event"];
 
 function showScreen(id) {
   SCREENS.forEach((s) =>
@@ -29,6 +30,7 @@ function showScreen(id) {
   document.body.classList.toggle("on-play", id === "screen-play");
   document.body.classList.toggle("on-history", id === "screen-history");
   document.body.classList.toggle("on-rules", id === "screen-rules");
+  document.body.classList.toggle("on-event", id === "screen-event");
   // 離開答題頁時清掉滿版背景圖
   if (id !== "screen-play") document.body.style.backgroundImage = "";
   window.scrollTo(0, 0);
@@ -36,6 +38,18 @@ function showScreen(id) {
 
 // 目前在看的答題紀錄（切換語系時要重繪）
 let historyRecord = null;
+
+// ---------- 展示用：活動狀態（交給工程師時連同 index.html 的 #demo-bar 一起移除）----------
+// "live" 進行中 | "upcoming" 尚未開始 | "ended" 已結束。
+// 正式版改由活動時間（2026.11.29 ~ 2027.01.02）或後端判斷，尚未開始／已結束時不進遊戲。
+let eventStatus = "live";
+const eventSelect = document.getElementById("event-select");
+if (eventSelect) {
+  eventSelect.addEventListener("change", () => {
+    eventStatus = eventSelect.value;
+    nav.welcome(); // 依新狀態重繪（進行中 → 首頁；其餘 → 訊息畫面）
+  });
+}
 
 // ---------- 展示用：跳過答題（交給工程師時連同 index.html 的 #demo-bar 一起移除）----------
 const skipToggle = document.getElementById("skip-toggle");
@@ -71,6 +85,11 @@ const nav = {
   welcome() {
     closeResultModal();
     closeRedeemModal();
+    if (eventStatus !== "live") {
+      renderEventStatus(eventStatus);
+      showScreen("screen-event");
+      return;
+    }
     renderWelcome(nav);
     showScreen("screen-welcome");
   },
@@ -168,7 +187,9 @@ async function rerenderForLang() {
   const resultOpen = !document.getElementById("result-modal").classList.contains("hidden");
   const redeemOpen = !document.getElementById("redeem-modal").classList.contains("hidden");
 
-  if (visible === "screen-welcome") {
+  if (visible === "screen-event") {
+    renderEventStatus(eventStatus);
+  } else if (visible === "screen-welcome") {
     renderWelcome(nav);
   } else if (visible === "screen-rules") {
     renderRules(nav);
