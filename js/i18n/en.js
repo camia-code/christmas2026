@@ -16,6 +16,8 @@ export default {
   "welcome.hint": "Swipe left or right to see all the gifts",
   "welcome.desc": "Finish the quiz and get adorable animated stickers!",
   "welcome.nicknamePh": "Enter your nickname",
+  "welcome.nicknameEmpty": "Please enter a nickname",
+  "welcome.nicknameInvalid": "Nickname must be 12 characters or fewer, with no special characters",
   "welcome.lastRecord": "Last result",
   "welcome.lastScore": "{s} / {t} correct ›",
   "user.anon": "Mystery Challenger",

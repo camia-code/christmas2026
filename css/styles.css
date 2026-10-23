@@ -664,14 +664,37 @@ body.on-play .bgm-toggle--global {
   color: var(--accent);
 }
 
+/* 在「開始挑戰」按鈕上方；「第 N 次挑戰」泡泡會往上凸出約 20px 並上下跳動 7.5px，所以留 40px */
+.nickname-field {
+  position: relative;
+  margin-bottom: 40px;
+}
 .nickname-input {
   width: 100%;
   padding: 15px;
   font-size: 20px;
   border: 1px solid var(--line-strong);
   border-radius: 10px;
-  /* 在「開始挑戰」按鈕上方；「第 N 次挑戰」泡泡會往上凸出約 20px 並上下跳動 7.5px，所以留 40px */
-  margin-bottom: 40px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.nickname-input:focus {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(94, 148, 163, 0.18);
+}
+.nickname-input.is-error {
+  border-color: var(--wrong);
+  box-shadow: 0 0 0 3px rgba(197, 82, 59, 0.15);
+}
+/* 錯誤文案浮在輸入框下方的留白裡，不推動版面 */
+.nickname-error-msg {
+  position: absolute;
+  top: 100%;
+  left: 4px;
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--wrong);
+  font-weight: 500;
 }
 
 .user-greeting {

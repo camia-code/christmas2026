@@ -16,6 +16,8 @@ export default {
   "welcome.hint": "左右滑動查看全部禮物",
   "welcome.desc": "完成答題就送你超萌限定動態貼圖",
   "welcome.nicknamePh": "輸入你的暱稱",
+  "welcome.nicknameEmpty": "請輸入暱稱",
+  "welcome.nicknameInvalid": "暱稱最多 12 個字，且不能含特殊符號",
   "welcome.lastRecord": "上次紀錄",
   "welcome.lastScore": "{s} / {t} 題答對 ›",
   "user.anon": "神秘挑戰者",

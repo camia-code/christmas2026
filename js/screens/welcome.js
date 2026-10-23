@@ -19,6 +19,13 @@ const STICKERS = [
   "assets/stickers/sticker-8.png", // 探頭
 ];
 
+// 暱稱規則：最多 12 個字，只能是文字／數字／空白（不含特殊符號、表情符號）
+const NICKNAME_MAX = 12;
+const NICKNAME_RE = /^[\p{L}\p{N} ]+$/u;
+function isValidNickname(name) {
+  return [...name].length <= NICKNAME_MAX && NICKNAME_RE.test(name);
+}
+
 export function renderWelcome(nav) {
   const el = document.getElementById("screen-welcome");
   const user = getUser();
@@ -40,8 +47,11 @@ export function renderWelcome(nav) {
       ${
         user.isAppUser
           ? ""
-          : `<input id="nickname" class="nickname-input" type="text"
-               maxlength="12" placeholder="${t("welcome.nicknamePh")}" value="${user.name || ""}" />`
+          : `<div class="nickname-field">
+               <input id="nickname" class="nickname-input" type="text"
+                 placeholder="${t("welcome.nicknamePh")}" value="${user.name || ""}" />
+               <p class="nickname-error-msg" id="nickname-error-msg" role="alert"></p>
+             </div>`
       }
 
       <div class="start-wrap">
@@ -110,15 +120,38 @@ export function renderWelcome(nav) {
     onStart: () => el.querySelector("#start-btn").click(),
   });
 
+  const nicknameInput = el.querySelector("#nickname");
+  const nicknameError = el.querySelector("#nickname-error-msg");
+  const showNicknameError = (key) => {
+    nicknameInput.classList.add("is-error");
+    nicknameError.textContent = t(key);
+  };
+  const clearNicknameError = () => {
+    nicknameInput.classList.remove("is-error");
+    nicknameError.textContent = "";
+  };
+  // 輸入中即時檢查：不合法就立刻提示，合法或清空則清掉（空白提示只在按開始時出現）
+  if (nicknameInput) {
+    nicknameInput.addEventListener("input", () => {
+      const name = nicknameInput.value.trim();
+      if (name && !isValidNickname(name)) showNicknameError("welcome.nicknameInvalid");
+      else clearNicknameError();
+    });
+  }
+
   el.querySelector("#start-btn").addEventListener("click", () => {
     if (!isAppUser()) {
-      const input = el.querySelector("#nickname");
-      const name = (input.value || "").trim();
+      const name = (nicknameInput.value || "").trim();
       // 展示用：「跳過答題」開著時，訪客不輸入暱稱也能直接進成績畫面
       const skipping = document.getElementById("skip-toggle")?.checked;
       if (!name && !skipping) {
-        input.focus();
-        input.style.borderColor = "var(--wrong)";
+        nicknameInput.focus();
+        showNicknameError("welcome.nicknameEmpty");
+        return;
+      }
+      if (name && !isValidNickname(name)) {
+        nicknameInput.focus();
+        showNicknameError("welcome.nicknameInvalid");
         return;
       }
       setNickname(name);
