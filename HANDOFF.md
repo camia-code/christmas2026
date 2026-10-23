@@ -2,7 +2,7 @@
 
 在 Letstalk app 內以 webview 開啟的答題小遊戲（也可用一般瀏覽器以訪客身份遊玩）。純 HTML/CSS/JS（ES Modules，無建置工具）。
 
-> 最後更新：vr31（2026-10-23）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
+> 最後更新：vr33（2026-10-23）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
 
 ## 如何跑起來
 需用本機 http server（因 ES Modules / fetch JSON 不能用 file://）：
@@ -41,6 +41,7 @@ js/
     result.js         成績 modal（卡片、蓋章、訪客複製序號按鈕 / app 用戶貼圖說明、分享、答題紀錄）
     redeem.js         序號兌換 popup（app 用戶匯入訪客時期的成績）
     rules.js          活動辦法頁
+    event-status.js   活動尚未開始／已結束畫面（取代整個遊戲入口，無導覽列）
     history.js        答題紀錄（折疊式）
 data/
   questions/questions.json      題庫繁中（109 題；來源 assets/2026_quiz.html）
@@ -75,7 +76,7 @@ assets/
 - **三語系**：繁中 / 簡中 / 英文，含題庫、稱號、KV、活動辦法標題圖；英文「第 N 次挑戰」用序數（1st/2nd/3rd Challenge）。切換語系會重繪目前畫面與開著的 popup。
 
 ## 展示用（正式上線前移除）
-- 上方 `#demo-bar` 展示切換列：跳過答題開關 + 答對題數（直接開成績 dialog）、語言下拉、身份 app/guest 切換。移除時連同 css 的 `.demo-bar` / `.mock-toggle` 與 main.js 對應段落。
+- 上方 `#demo-bar` 展示切換列：跳過答題開關 + 答對題數（直接開成績 dialog）、語言下拉、活動狀態下拉（進行中／尚未開始／已結束，後兩者整頁換成「活動尚未開始，敬請期待！」「活動已結束，感謝參與！」，文案 key：`event.upcoming` / `event.ended`；正式版應依活動時間 2026.11.29 ~ 2027.01.02 或後端判斷，邏輯在 main.js 的 `eventStatus`）、身份 app/guest 切換。移除時連同 css 的 `.demo-bar` / `.mock-toggle` 與 main.js 對應段落。
 - **每次重新整理都會清空本機資料**（main.js 最後的 `resetAll()`），方便反覆展示「第一次」的狀態。正式版要拿掉。
 
 ## 目前是假資料 / 待接後端（詳見 API_SPEC.md）
@@ -93,6 +94,6 @@ assets/
 - 上線前移除展示用元件（見上）。
 
 ## 版本
-- commit 訊息以 `vrXX: 說明` 命名，目前到 vr31。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
+- commit 訊息以 `vrXX: 說明` 命名，目前到 vr33。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
 - git tag 只打到 `vr06_result_ribbon_stamp_0709`，之後的里程碑只有 commit。
 - 遠端：只有 `origin`（camia-code/christmas2026，含 GitHub Pages）。

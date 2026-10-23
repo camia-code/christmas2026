@@ -7,7 +7,9 @@
 
 | 版本 | 日期 | commit | 說明 |
 |---|---|---|---|
-| vr31 | 10/23 | — | CHANGELOG／HANDOFF 更新到 vr31；HANDOFF 遠端說明改為只有 `origin`（camia-code/christmas2026） |
+| vr33 | 10/23 | — | CHANGELOG／HANDOFF 補上 vr31 hash、vr32 紀錄與活動狀態畫面說明 |
+| vr32 | 10/23 | `64eee48` | 新增「活動尚未開始」「活動已結束」兩種畫面（三語言），展示列新增「活動狀態」下拉可切換 |
+| vr31 | 10/23 | `bffa91b` | CHANGELOG／HANDOFF 更新到 vr31；HANDOFF 遠端說明改為只有 `origin`（camia-code/christmas2026） |
 | vr30 | 10/23 | `d900a35` | 訪客暱稱輸入框新增反饋：空白「請輸入暱稱」、輸入中即時檢查「暱稱最多 12 個字，且不能含特殊符號」，錯誤時紅框＋提示（三語言） |
 | vr29 | 10/22 | `af8e62f` | 新增 CHANGELOG.md 逐版更新紀錄，HANDOFF 連到 CHANGELOG |
 | vr28 | 10/22 | `7b6254f` | 兌換貼圖新增 5 種錯誤反饋（不存在／已使用／已過期／帳號已兌換／嘗試過多，三語言）與展示用測試序號；API_SPEC.md 搬到根目錄 |
