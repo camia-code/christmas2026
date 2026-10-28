@@ -57,7 +57,7 @@ export default {
   "redeem.errTooMany": "尝试次数过多，请稍后再试",
   "redeem.guestName": "访客玩家",
   "redeem.successTitle": "兑换完成",
-  "redeem.successDesc": "请前往聊天室贴图商城进行下载",
+  "redeem.successDesc": "🎉 你已获得贴图！<br>下载路径：<span class=\"nobr\">聊天室 ➔</span> <span class=\"nobr\">贴图商城 ➔</span> <span class=\"nobr\">猫王的日常语录</span>",
   "redeem.successBtn": "确定",
   "redeem.copiedTitle": "已复制序号",
   "redeem.copiedDesc": "贴图兑换 3 步骤：<br>❶ 下载 Letstalk App<br>❷ 进入 活动页面或官方账号菜单“序号兑换”<br>❸ 输入 序号，即可领取贴图！",

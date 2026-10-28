@@ -171,7 +171,7 @@ Response
 {
   "attemptCount": 2,                       // 已完成輪數；首頁顯示「第 {attemptCount+1} 次挑戰」
   "last": { "roundId": "r_…", "score": 7, "total": 10, "titleId": "t4" },
-  "redeemed": false                        // app 用戶是否已兌換過（決定首頁「序號兌換」入口要不要顯示）
+  "redeemed": false                        // app 用戶是否已兌換過（首頁「序號兌換」入口一律顯示；已兌換時輸入序號回 `ACCOUNT_ALREADY_REDEEMED`）
 }
 ```
 - 訪客以 cookie / deviceId 對應自己的輪次。
@@ -191,7 +191,7 @@ Response
 ## 8. 序號兌換
 
 ### `POST /api/redeem`
-（需 app 用戶登入；首頁「序號兌換」入口只對「app 用戶且尚未兌換」顯示，以 popup 呈現。）
+（需 app 用戶登入；首頁「序號兌換」入口對所有 app 用戶一律顯示（兌換過也保留），以 popup 呈現。）
 
 Request
 ```json
@@ -205,7 +205,7 @@ Success response
 }
 ```
 - 兌換成功：把該訪客那輪成績**匯入此帳號**，並派送貼圖；之後該帳號視為已兌換（`/api/me/rounds` 回 `redeemed: true`）。
-- 前端成功後重繪首頁（出現「上次紀錄」、隱藏兌換入口），popup 改顯示「兌換完成／請前往聊天室貼圖商城進行下載」與「確定」按鈕，按下關閉。
+- 前端成功後重繪首頁（出現「上次紀錄」，兌換入口保留），popup 標題「兌換完成」、內容「🎉 你已獲得貼圖！／下載路徑：聊天室 ➔ 貼圖商城 ➔ 貓王的日常語錄」與「確定」按鈕，按下關閉。
 
 ## 9. 錯誤碼（建議）
 

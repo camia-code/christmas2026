@@ -1185,7 +1185,8 @@ body.on-play .bgm-toggle--global {
 }
 
 /* 路徑文字（聊天室 ➔ 貼圖商城 ➔ …）只在箭頭處換行，不會把一個詞拆開 */
-.sticker-got .nobr {
+.sticker-got .nobr,
+.redeem-desc .nobr {
   white-space: nowrap;
 }
 

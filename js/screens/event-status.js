@@ -2,16 +2,15 @@
 
 import { getLang } from "../lang.js";
 import { isAppUser } from "../user.js";
-import { hasRedeemed } from "../storage.js";
 import { t } from "../i18n.js";
 
 // status："upcoming"（尚未開始）| "ended"（已結束）
-// 已結束時，app 用戶若還沒兌換過，仍保留「序號兌換」入口（給活動結束前已複製序號的訪客兌換貼圖；
+// 已結束時，app 用戶仍保留「序號兌換」入口（給活動結束前已複製序號的訪客兌換貼圖；
 // 序號兌換期間比活動期間長，到 2027.01.31）
 export function renderEventStatus(status, nav) {
   const el = document.getElementById("screen-event");
   const lang = getLang();
-  const showRedeem = status === "ended" && isAppUser() && !hasRedeemed();
+  const showRedeem = status === "ended" && isAppUser();
   el.innerHTML = `
     <div class="event-status">
       <img class="event-status-kv" src="assets/2026mainpage_kv_${lang}.svg" alt="${t("welcome.kvAlt")}"

@@ -1,7 +1,7 @@
 // 步驟1 歡迎頁
 
 import { getUser, isAppUser, setNickname } from "../user.js";
-import { getLastRecord, getRecords, hasRedeemed } from "../storage.js";
+import { getLastRecord, getRecords } from "../storage.js";
 import { getLang } from "../lang.js";
 import { renderHeaderNav, bindHeaderNav } from "../header.js";
 import { t, ordinal } from "../i18n.js";
@@ -33,7 +33,7 @@ export function renderWelcome(nav) {
   const hasPlayed = !!last;
   const attemptNo = getRecords().length + 1; // 第幾次挑戰
   const lang = getLang(); // 依語系載入 KV 主視覺（tch/sch/en）
-  const showRedeem = isAppUser() && !hasRedeemed(); // 兌換入口：只有 app 用戶且未兌換過才顯示
+  const showRedeem = isAppUser(); // 兌換入口：只有 app 用戶才顯示（兌換過也保留，輸入序號時才回饋「帳號已兌換過」）
 
   el.innerHTML = `
     <div class="lobby">

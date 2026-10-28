@@ -57,7 +57,7 @@ export default {
   "redeem.errTooMany": "Too many attempts. Please try again later.",
   "redeem.guestName": "Guest Player",
   "redeem.successTitle": "Redemption Complete",
-  "redeem.successDesc": "Go to the Sticker Shop in your chat to download your stickers.",
+  "redeem.successDesc": "🎉 You've received your stickers!<br>Download path: <span class=\"nobr\">Chat ➔</span> <span class=\"nobr\">Sticker Shop ➔</span> <span class=\"nobr\">The Daily Quotes of Cat King</span>",
   "redeem.successBtn": "OK",
   "redeem.copiedTitle": "Code Copied",
   "redeem.copiedDesc": "Redeem your stickers in 3 steps:<br>❶ Download the Letstalk App<br>❷ Go to the event page or the official account menu and tap “Redeem Code”<br>❸ Enter your code to claim the stickers!",

@@ -1,6 +1,6 @@
 // 兌換序號 popup：app 用戶輸入序號，匯入曾以訪客身份玩過的紀錄。
 
-import { addRecord, setRedeemed, setClaimedSticker } from "../storage.js";
+import { addRecord, setRedeemed, setClaimedSticker, hasRedeemed } from "../storage.js";
 import { getTitleName } from "../../data/titles.js";
 import { t } from "../i18n.js";
 
@@ -136,8 +136,13 @@ export function openRedeemModal(nav) {
       setInputState("error", t(REDEEM_ERRORS[errorCode]));
       return;
     }
+    // 此帳號已兌換過：入口一直保留，輸入序號後才在輸入框回饋（正式版由後端回 ACCOUNT_ALREADY_REDEEMED）
+    if (hasRedeemed()) {
+      setInputState("error", t(REDEEM_ERRORS.ACCOUNT_ALREADY_REDEEMED));
+      return;
+    }
 
-    // 兌換成功：存紀錄 → 重繪首頁（兌換入口會依 hasRedeemed 自動隱藏）→ popup 改顯示完成訊息
+    // 兌換成功：存紀錄 → 重繪首頁 → popup 改顯示完成訊息
     addRecord(buildRedeemedRecord(code));
     setRedeemed(code);
     setClaimedSticker(); // 兌換即派送貼圖，之後再玩視為已領取過

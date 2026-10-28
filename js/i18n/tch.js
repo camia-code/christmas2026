@@ -57,7 +57,7 @@ export default {
   "redeem.errTooMany": "嘗試次數過多，請稍後再試",
   "redeem.guestName": "訪客玩家",
   "redeem.successTitle": "兌換完成",
-  "redeem.successDesc": "請前往聊天室貼圖商城進行下載",
+  "redeem.successDesc": "🎉 你已獲得貼圖！<br>下載路徑：<span class=\"nobr\">聊天室 ➔</span> <span class=\"nobr\">貼圖商城 ➔</span> <span class=\"nobr\">貓王的日常語錄</span>",
   "redeem.successBtn": "確定",
   "redeem.copiedTitle": "已複製序號",
   "redeem.copiedDesc": "貼圖兌換 3 步驟：<br>❶ 下載 Letstalk App<br>❷ 進入 活動頁面或官方帳號選單「序號兌換」<br>❸ 輸入 序號，即可領取貼圖！",
