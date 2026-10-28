@@ -2,7 +2,7 @@
 
 在 Letstalk app 內以 webview 開啟的答題小遊戲（也可用一般瀏覽器以訪客身份遊玩）。純 HTML/CSS/JS（ES Modules，無建置工具）。
 
-> 最後更新：vr35（2026-10-28）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
+> 最後更新：vr36（2026-10-28）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
 
 ## 如何跑起來
 需用本機 http server（因 ES Modules / fetch JSON 不能用 file://）：
@@ -62,7 +62,7 @@ assets/
 ```
 
 ## 使用者身份與流程
-- **app 用戶**：名字由 App 帶入。答完題貼圖直接派送，結果頁顯示「你已獲得貼圖，請前往貼圖商城下載」；第 2 輪起（或兌換過序號）顯示「貼圖已領取過囉！可至聊天室貼圖商城查看」。每個帳號限領一次。
+- **app 用戶**：名字由 App 帶入。答完題貼圖直接派送，結果頁顯示「🎉 你已獲得貼圖！下載路徑：聊天室 ➔ 貼圖商城 ➔ 貓王的日常語錄」；第 2 輪起（或兌換過序號）顯示「貼圖已領取過囉！查看路徑：聊天室 ➔ 貼圖商城 ➔ 貓王的日常語錄」（路徑只在箭頭處換行；英文版第一句與路徑各自獨立一行）。每個帳號限領一次。
 - **訪客**：需輸入暱稱。暱稱規則：最多 12 個字，只能是文字／數字／空白（不含特殊符號、表情符號）；輸入中即時檢查，不合法就顯示紅框＋「暱稱最多 12 個字，且不能含特殊符號」，按開始時若為空顯示「請輸入暱稱」（三語言，key：`welcome.nicknameEmpty` / `welcome.nicknameInvalid`）。結果頁顯示「你的貼圖序號 merrychristmasNNN」＋「複製序號」按鈕：複製成功不在按鈕上給回饋，直接跳「已複製序號」dialog（樣式同兌換貼圖 popup，說明貼圖兌換 3 步驟，按「前往下載」導向 App 下載頁；dialog 在 redeem.js 的 `openCopiedModal`）；失敗顯示「複製失敗，請稍後再試」（紅），2.5 秒後恢復、不跳 dialog。
 - **序號兌換**（首頁右下圓章，只有「app 用戶且未兌換過」才顯示）：以 popup 開啟。空白 →「請輸入序號」、格式錯（4～20 字，英數與 `-`）→「序號格式不正確，請再確認」，輸入框紅框 + 紅字。後端錯誤（不存在 / 已使用 / 已過期 / 帳號已兌換 / 嘗試過多）也以同樣方式顯示，展示時輸入測試序號 `TEST-NOTFOUND`、`TEST-USED`、`TEST-EXPIRED`、`TEST-REDEEMED`、`TEST-TOOMANY` 即可看到；其他格式正確的序號一律成功。成功 → popup 顯示「兌換完成／請前往聊天室貼圖商城進行下載」＋確定。
 
@@ -89,11 +89,10 @@ assets/
 
 ## 尚未完成 / 待辦
 - 上述後端串接；活動期間外的文案（三語言）待確認。
-- 375px 寬手機上「貼圖已領取過囉！…」最後兩字會單獨換行。
 - 分享圖尺寸目前依畫面，未固定 1080×1080（若需標準尺寸再調 share.js）。
 - 上線前移除展示用元件（見上）。
 
 ## 版本
-- commit 訊息以 `vrXX: 說明` 命名，目前到 vr35。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
+- commit 訊息以 `vrXX: 說明` 命名，目前到 vr36。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
 - git tag 只打到 `vr06_result_ribbon_stamp_0709`，之後的里程碑只有 commit。
 - 遠端：只有 `origin`（camia-code/christmas2026，含 GitHub Pages）。

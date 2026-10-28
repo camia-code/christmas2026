@@ -1177,6 +1177,11 @@ body.on-play .bgm-toggle--global {
   color: var(--text);
 }
 
+/* 路徑文字（聊天室 ➔ 貼圖商城 ➔ …）只在箭頭處換行，不會把一個詞拆開 */
+.sticker-got .nobr {
+  white-space: nowrap;
+}
+
 /* 【開發用】稱號預覽切換（正式發佈前移除） */
 .dev-tier-nav {
   display: flex;
