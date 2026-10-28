@@ -29,10 +29,11 @@ function validateCode(code) {
 // 後端錯誤碼 → 文案 key（對應 API_SPEC.md §9）
 const REDEEM_ERRORS = {
   CODE_NOT_FOUND: "redeem.errNotFound",
-  CODE_USED: "redeem.errUsed",
+  CODE_USED: "redeem.errNotFound", // 序號已被使用，文案與「序號不存在」統一為「查無此序號」
   CODE_EXPIRED: "redeem.errExpired",
   ACCOUNT_ALREADY_REDEEMED: "redeem.errAccountRedeemed",
-  TOO_MANY_ATTEMPTS: "redeem.errTooMany",
+  SERVER_ERROR: "redeem.errSystem",
+  TOO_MANY_ATTEMPTS: "redeem.errTooMany", // 鎖定規則（錯 10 次鎖一天）由工程師另行判定，見 API_SPEC.md §9
 };
 
 // 展示用：輸入這些測試序號可看到對應的錯誤反饋，其餘格式正確的序號一律兌換成功。
@@ -42,6 +43,7 @@ const DEMO_ERROR_CODES = {
   "TEST-USED": "CODE_USED",
   "TEST-EXPIRED": "CODE_EXPIRED",
   "TEST-REDEEMED": "ACCOUNT_ALREADY_REDEEMED",
+  "TEST-ERROR": "SERVER_ERROR",
   "TEST-TOOMANY": "TOO_MANY_ATTEMPTS",
 };
 
