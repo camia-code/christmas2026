@@ -86,7 +86,7 @@ const nav = {
     closeResultModal();
     closeRedeemModal();
     if (eventStatus !== "live") {
-      renderEventStatus(eventStatus);
+      renderEventStatus(eventStatus, nav);
       showScreen("screen-event");
       return;
     }
@@ -188,7 +188,7 @@ async function rerenderForLang() {
   const redeemOpen = !document.getElementById("redeem-modal").classList.contains("hidden");
 
   if (visible === "screen-event") {
-    renderEventStatus(eventStatus);
+    renderEventStatus(eventStatus, nav);
   } else if (visible === "screen-welcome") {
     renderWelcome(nav);
   } else if (visible === "screen-rules") {

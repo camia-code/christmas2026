@@ -105,6 +105,13 @@ body.on-event .app {
   color: var(--text);
 }
 
+/* 已結束畫面的序號兌換入口：不浮在卡片角落，改排在訊息下方 */
+.event-status .redeem-entry {
+  position: relative; /* 圓章上的文字以按鈕本身定位 */
+  top: auto;
+  right: auto;
+}
+
 /* 答題頁滿版背景（每題一張，由 JS 設 background-image） */
 body.on-play {
   background-size: cover;
