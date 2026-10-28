@@ -47,6 +47,14 @@ const DEMO_ERROR_CODES = {
 
 // 兌換成功後 popup 改顯示完成訊息；切換語言重繪時也要維持在這個狀態
 let showingSuccess = false;
+// 訪客複製序號後的「已複製序號」dialog（同樣用 #redeem-modal 呈現）
+let showingCopied = false;
+
+// 訪客在成績頁按「複製序號」成功後開啟：說明兌換步驟，「前往下載」導去 App 下載頁。
+export function openCopiedModal(nav) {
+  showingCopied = true;
+  openRedeemModal(nav);
+}
 
 // 兌換序號以「當頁 popup」呈現（開在首頁上，不切換頁面）。
 export function openRedeemModal(nav) {
@@ -54,6 +62,10 @@ export function openRedeemModal(nav) {
   overlay.classList.remove("hidden");
   bindCloseHandlers(overlay);
 
+  if (showingCopied) {
+    renderCopied(overlay, nav);
+    return;
+  }
   if (showingSuccess) {
     renderSuccess(overlay);
     return;
@@ -158,7 +170,30 @@ function renderSuccess(overlay) {
   `;
   overlay.querySelector("#redeem-close").addEventListener("click", closeRedeemModal);
   overlay.querySelector("#redeem-done").addEventListener("click", closeRedeemModal);
-  overlay.querySelector("#redeem-done").focus();
+}
+
+// 已複製序號：× 關閉；「前往下載」關閉後導去 App 下載頁
+function renderCopied(overlay, nav) {
+  overlay.innerHTML = `
+    <div class="modal redeem-modal" role="dialog" aria-modal="true" aria-labelledby="redeem-title">
+      <button class="modal-close" id="redeem-close" type="button" aria-label="${t("redeem.close")}">×</button>
+
+      <h2 class="redeem-title" id="redeem-title">${t("redeem.copiedTitle")}</h2>
+
+      <p class="redeem-desc redeem-steps">
+        ${t("redeem.copiedDesc")}
+      </p>
+
+      <button id="redeem-go" class="btn btn-primary redeem-btn" type="button">
+        ${t("redeem.copiedBtn")}
+      </button>
+    </div>
+  `;
+  overlay.querySelector("#redeem-close").addEventListener("click", closeRedeemModal);
+  overlay.querySelector("#redeem-go").addEventListener("click", () => {
+    closeRedeemModal();
+    nav.backToApp();
+  });
 }
 
 // 點擊遮罩（popup 以外）或按 Esc 也可關閉。overlay 元素會重複使用，只綁一次。
@@ -182,5 +217,6 @@ export function closeRedeemModal() {
   overlay.classList.add("hidden");
   overlay.innerHTML = "";
   showingSuccess = false;
+  showingCopied = false;
   document.removeEventListener("keydown", onEscClose);
 }

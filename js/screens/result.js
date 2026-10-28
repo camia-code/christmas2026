@@ -3,6 +3,7 @@
 import { resultCardHTML, resultCardClass, openShareModal } from "../share.js";
 import { isAppUser } from "../user.js";
 import { getRecords } from "../storage.js";
+import { openCopiedModal } from "./redeem.js";
 import { t } from "../i18n.js";
 
 // 開啟成績 modal。
@@ -30,16 +31,16 @@ export function openResultModal(record, nav) {
 
       ${
         guest
-          ? `<button id="btn-app" class="btn btn-secondary">
+          ? `<p class="sticker-code">${t("result.codeLabel")} <b>${stickerCode}</b></p>
+             <button id="btn-app" class="btn btn-secondary">
                <span class="claim-line1">
                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"
                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                    <rect x="9" y="9" width="11" height="11" rx="2" />
                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                  </svg>
-                 ${t("result.claimLine1")}
+                 ${t("result.copyBtn")}
                </span>
-               <span class="claim-line2">${t("result.claimLine2")}</span>
              </button>`
           : `<p class="sticker-got">${t(record.alreadyClaimed ? "result.alreadyClaimed" : "result.gotStickers")}</p>`
       }
@@ -48,9 +49,9 @@ export function openResultModal(record, nav) {
     </div>
   `;
 
-  // 訪客：序號不再顯示在畫面上。按「複製序號並下載 App 進行兌換貼圖」時：
-  //   成功 → 按鈕變成「✓ 已複製序號」(綠色)，停 1 秒讓人看到回饋，再導去 App 下載頁
-  //   失敗 → 按鈕顯示「複製失敗」(紅色)，不導頁，2.5 秒後恢復
+  // 訪客：畫面上顯示貼圖序號。按「複製序號」時：
+  //   成功 → 不在按鈕上給回饋，直接跳「已複製序號」dialog（兌換步驟＋「前往下載」）
+  //   失敗 → 按鈕顯示「複製失敗」(紅色)，不跳 dialog，2.5 秒後恢復
   async function copyStickerCode() {
     try {
       if (navigator.clipboard) {
@@ -86,22 +87,18 @@ export function openResultModal(record, nav) {
       if (busy) return; // 回饋顯示期間不重複觸發
       busy = true;
       const ok = await copyStickerCode();
-      claimBtn.classList.toggle("is-copied", ok);
-      claimBtn.classList.toggle("is-copy-failed", !ok);
-      claimBtn.textContent = ok ? t("result.copied") : t("result.copyFailed");
-      const reset = () => {
-        claimBtn.classList.remove("is-copied", "is-copy-failed");
+      if (ok) {
+        openCopiedModal(nav);
+        busy = false;
+        return;
+      }
+      claimBtn.classList.add("is-copy-failed");
+      claimBtn.textContent = t("result.copyFailed");
+      setTimeout(() => {
+        claimBtn.classList.remove("is-copy-failed");
         claimBtn.innerHTML = idleHTML;
         busy = false;
-      };
-      if (ok) {
-        setTimeout(() => {
-          nav.backToApp();
-          reset();
-        }, 1000);
-      } else {
-        setTimeout(reset, 2500);
-      }
+      }, 2500);
     });
   }
 

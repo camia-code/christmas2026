@@ -979,6 +979,7 @@ body.on-play .bgm-toggle--global {
   border-radius: 50%;
   border: 1px solid var(--line);
   background: var(--card);
+  color: var(--text); /* iOS Safari 的 button 預設字色是系統藍，要明確指定 */
   font-size: 18px;
   cursor: pointer;
   line-height: 1;
@@ -1138,28 +1139,27 @@ body.on-play .bgm-toggle--global {
   border-radius: 999px;
 }
 
-/* 訪客「複製序號並下載 App」按鈕：複製成功／失敗的回饋色 */
+/* 訪客的貼圖領取序號 */
+.sticker-code {
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+.sticker-code b {
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+/* 訪客「複製序號」按鈕（含複製 icon）；複製失敗時變紅 */
 #btn-app {
   transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-/* 兩行文字：第一行（含複製 icon）「複製序號」，第二行「並下載 App 進行兌換貼圖」 */
-#btn-app {
-  flex-direction: column;
-  gap: 2px;
-  line-height: 1.35;
 }
 #btn-app .claim-line1 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-weight: 700;
-}
-#btn-app .claim-line2 {
-  font-size: 14px;
-}
-#btn-app.is-copied {
-  background: var(--accent);
-  border-color: var(--accent);
 }
 #btn-app.is-copy-failed {
   background: var(--wrong);
@@ -1726,4 +1726,9 @@ body.on-rules .redeem-page {
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 0 #3f9a55;
+}
+
+/* 「已複製序號」dialog 的兌換步驟：靠左、一步一行 */
+.redeem-steps {
+  text-align: left;
 }
