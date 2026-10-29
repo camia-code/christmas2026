@@ -2,7 +2,7 @@
 
 在 Letstalk app 內以 webview 開啟的答題小遊戲（也可用一般瀏覽器以訪客身份遊玩）。純 HTML/CSS/JS（ES Modules，無建置工具）。
 
-> 最後更新：vr39（2026-10-28）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
+> 最後更新：vr40（2026-10-28）。後端 API 規格另見 [`API_SPEC.md`](API_SPEC.md)，逐版更新紀錄見 [`CHANGELOG.md`](CHANGELOG.md)。
 
 ## 如何跑起來
 需用本機 http server（因 ES Modules / fetch JSON 不能用 file://）：
@@ -73,6 +73,7 @@ assets/
 - **進度條蘋果**：隨題數換圖，最後一題 apple_2；答對時（最後一題除外）播 winwin 幀動畫。
 - **答對特效**：大框換 quiz_bg_right 背景 + 黃色太陽環繞發光動畫；答對貓釘右上（正解選項 ≥2 行改右下）；答錯貓釘左下 + 畫面震動。
 - **成績卡片**：左上「前 X%」彩帶（內嵌 SVG，分享圖也會帶入）、右下蓋章（只在畫面上，不進分享圖）。
+- **活動辦法頁「遊玩辦法」卡片**：背景是固定比例的圖，文字區高度固定（桌機 307px），改文案要檢查放不放得下。目前繁／簡中 308px（已滿）、英文 295px；超出會壓到卡片底部邊框。下方「注意事項」在卡片外，不受此限。
 - **三語系**：繁中 / 簡中 / 英文，含題庫、稱號、KV、活動辦法標題圖；英文「第 N 次挑戰」用序數（1st/2nd/3rd Challenge）。切換語系會重繪目前畫面與開著的 popup。
 
 ## 展示用（正式上線前移除）
@@ -93,6 +94,6 @@ assets/
 - 上線前移除展示用元件（見上）。
 
 ## 版本
-- commit 訊息以 `vrXX: 說明` 命名，目前到 vr39。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
+- commit 訊息以 `vrXX: 說明` 命名，目前到 vr40。每版改了什麼見 [`CHANGELOG.md`](CHANGELOG.md)，新增版本時請一併補上一列。
 - git tag 只打到 `vr06_result_ribbon_stamp_0709`，之後的里程碑只有 commit。
 - 遠端：只有 `origin`（camia-code/christmas2026，含 GitHub Pages）。
